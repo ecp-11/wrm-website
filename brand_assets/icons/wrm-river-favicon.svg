@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100&amp;display=swap');</style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" fill="#1C1A17"/>
+
+  <!-- River lines — Sage, flowing Bézier curves, hero element -->
+  <path d="M 64,196 C 150,168 210,224 256,196 C 302,168 362,224 448,196"
+        fill="none" stroke="#7D8C7A" stroke-width="5" stroke-linecap="round"/>
+  <path d="M 64,234 C 148,212 206,258 256,234 C 306,210 366,256 448,234"
+        fill="none" stroke="#7D8C7A" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- WRM — Josefin Sans Thin, Linen, secondary element (disappears at small sizes, that's intentional) -->
+  <text
+    x="256" y="375"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    font-family="'Josefin Sans', 'Helvetica Neue', Helvetica, sans-serif"
+    font-weight="100"
+    font-size="68"
+    letter-spacing="14"
+    fill="#FAF8F5"
+    dx="-7">WRM</text>
+</svg>

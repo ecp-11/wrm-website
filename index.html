@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Whispering River Media — Documentary Storytelling</title>
+  <meta name="description" content="Documentary storytelling at the intersection of earth science and human experience.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;300;400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── Tokens ────────────────────────────────────── */
+    :root {
+      --parchment: #F2EDE6;
+      --linen:     #FAF8F5;
+      --ash:       #C4BFB8;
+      --stone:     #857F78;
+      --slate:     #44403B;
+      --charcoal:  #1C1A17;
+      --sage:      #7D8C7A;
+
+      --font-display: 'Josefin Sans', sans-serif;
+      --font-body:    'EB Garamond', serif;
+
+      --container: 1280px;
+      --side-padding: 56px;
+    }
+
+    /* ─── Base ──────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--linen);
+      color: var(--charcoal);
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ─── Paper grain (subtle) ──────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 100;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.11  0 0 0 0 0.10  0 0 0 0 0.09  0 0 0 0.05 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      opacity: 0.5;
+      mix-blend-mode: multiply;
+    }
+
+    /* ─── Container ─────────────────────────────────── */
+    .container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 var(--side-padding);
+    }
+
+    /* ─── Reveal animation ──────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal.d1 { transition-delay: 0.1s; }
+    .reveal.d2 { transition-delay: 0.25s; }
+    .reveal.d3 { transition-delay: 0.40s; }
+    .reveal.d4 { transition-delay: 0.55s; }
+
+    /* ─── Type helpers ──────────────────────────────── */
+    .eyebrow {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 10px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--stone);
+    }
+    .caption {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--stone);
+    }
+    .lede {
+      font-family: var(--font-body);
+      font-size: 19px;
+      line-height: 1.7;
+      color: var(--slate);
+      max-width: 540px;
+    }
+
+    /* ─── Header / nav ──────────────────────────────── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      background: rgba(250, 248, 245, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.4s ease, background 0.4s ease;
+    }
+    header.scrolled {
+      border-bottom-color: var(--ash);
+      background: rgba(250, 248, 245, 0.96);
+    }
+    .nav {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 18px var(--side-padding);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand {
+      font-family: var(--font-display);
+      font-weight: 100;
+      font-size: 14px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+    }
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      align-items: center;
+    }
+    .nav-links a {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--slate);
+      position: relative;
+      padding: 4px 0;
+      transition: color 0.2s ease;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: 0;
+      width: 0;
+      height: 1px;
+      background: var(--charcoal);
+      transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .nav-links a:hover { color: var(--charcoal); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ─── Hero ──────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      padding: 160px 0 80px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 64px;
+      align-items: end;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 80px;
+      align-items: end;
+    }
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 48px;
+      height: 1px;
+      background: var(--stone);
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-weight: 100;
+      font-size: clamp(56px, 8.5vw, 124px);
+      letter-spacing: -0.025em;
+      line-height: 0.95;
+      color: var(--charcoal);
+      margin-bottom: 32px;
+    }
+    .hero h1 em {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--sage);
+      letter-spacing: -0.01em;
+    }
+    .hero-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      padding-bottom: 4px;
+    }
+    .hero-meta-row {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 16px;
+      align-items: baseline;
+      border-top: 1px solid var(--ash);
+      padding-top: 14px;
+    }
+    .hero-meta-label {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 9px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--stone);
+    }
+    .hero-meta-value {
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--slate);
+      line-height: 1.55;
+    }
+
+    /* ─── Hero image plate ──────────────────────────── */
+    .hero-plate {
+      margin-top: 72px;
+      position: relative;
+      width: 100%;
+      aspect-ratio: 21/9;
+      overflow: hidden;
+    }
+    .hero-plate img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.7) contrast(1.05);
+    }
+    .hero-plate::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(28, 26, 23, 0.25), transparent 50%);
+      pointer-events: none;
+    }
+    .hero-plate-label {
+      position: absolute;
+      bottom: 24px; left: 24px;
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--linen);
+      mix-blend-mode: difference;
+    }
+
+    /* ─── Section heading ───────────────────────────── */
+    .section-head {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 64px;
+      align-items: end;
+      margin-bottom: 80px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--ash);
+    }
+    .section-num {
+      font-family: var(--font-display);
+      font-weight: 100;
+      font-size: 13px;
+      letter-spacing: 0.3em;
+      color: var(--stone);
+    }
+    .section-head h2 {
+      font-family: var(--font-display);
+      font-weight: 100;
+      font-size: clamp(40px, 5vw, 64px);
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      color: var(--charcoal);
+    }
+    .section-head h2 em {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--sage);
+    }
+    .section-head-aside {
+      grid-column: 2;
+      max-width: 480px;
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--slate);
+      margin-top: 24px;
+    }
+
+    /* ─── Films grid ────────────────────────────────── */
+    .films {
+      padding: 160px 0 120px;
+    }
+    .film-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 56px 32px;
+    }
+    .film {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      group: film;
+    }
+    .film-1 { grid-column: 1 / span 7; }
+    .film-2 { grid-column: 8 / span 5; margin-top: 80px; }
+    .film-3 { grid-column: 1 / span 5; margin-top: 32px; }
+    .film-4 { grid-column: 6 / span 7; }
+
+    .film-plate {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+    }
+    .film-plate img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.7) contrast(1.04);
+      transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 0.8s ease;
+    }
+    .film:hover .film-plate img {
+      transform: scale(1.03);
+      filter: saturate(0.85) contrast(1.04);
+    }
+    .film-plate::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(28, 26, 23, 0.2), transparent 60%);
+      pointer-events: none;
+    }
+    .film-meta {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: baseline;
+    }
+    .film-num {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      color: var(--ash);
+    }
+    .film-title {
+      font-family: var(--font-display);
+      font-weight: 100;
+      font-size: 28px;
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+      color: var(--charcoal);
+      margin-bottom: 8px;
+    }
+    .film-year {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      color: var(--stone);
+    }
+    .film-desc {
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--slate);
+      max-width: 420px;
+    }
+    .film-link {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--charcoal);
+      transition: gap 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                  color 0.2s ease;
+      align-self: flex-start;
+      margin-top: 4px;
+    }
+    .film-link:hover { gap: 16px; color: var(--sage); border-bottom-color: var(--sage); }
+    .film-link span { font-size: 12px; }
+
+    /* ─── Contracted work ───────────────────────────── */
+    .contracted {
+      background: var(--parchment);
+      padding: 160px 0;
+      position: relative;
+    }
+    .contracted-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 48px 56px;
+    }
+    .contracted-item {
+      padding: 32px 0;
+      border-top: 1px solid var(--stone);
+    }
+    .contracted-num {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      color: var(--stone);
+      margin-bottom: 14px;
+    }
+    .contracted-title {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 24px;
+      letter-spacing: -0.005em;
+      line-height: 1.25;
+      color: var(--charcoal);
+      margin-bottom: 14px;
+    }
+    .contracted-client {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 15px;
+      color: var(--slate);
+      margin-bottom: 20px;
+    }
+    .contracted-link {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: gap 0.3s ease;
+    }
+    .contracted-link:hover { gap: 14px; }
+
+    /* ─── About ─────────────────────────────────────── */
+    .about {
+      padding: 200px 0;
+    }
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 96px;
+      align-items: center;
+    }
+    .about-plate {
+      aspect-ratio: 4/5;
+      overflow: hidden;
+    }
+    .about-plate img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.6) contrast(1.05);
+    }
+    .about-content { max-width: 460px; }
+    .about-eyebrow { margin-bottom: 32px; }
+    .about h3 {
+      font-family: var(--font-display);
+      font-weight: 100;
+      font-size: clamp(36px, 4vw, 48px);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: var(--charcoal);
+      margin-bottom: 32px;
+    }
+    .about h3 em {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--sage);
+    }
+    .about p {
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.8;
+      color: var(--slate);
+      margin-bottom: 20px;
+    }
+    .about p + p { margin-top: 0; }
+
+    /* ─── Contact ───────────────────────────────────── */
+    .contact {
+      background: var(--charcoal);
+      color: var(--parchment);
+      padding: 160px 0;
+      position: relative;
+    }
+    .contact .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 96px;
+      align-items: end;
+    }
+    .contact-eyebrow {
+      color: var(--stone);
+      margin-bottom: 28px;
+    }
+    .contact h2 {
+      font-family: var(--font-display);
+      font-weight: 100;
+      font-size: clamp(48px, 7vw, 96px);
+      letter-spacing: -0.025em;
+      line-height: 0.98;
+      color: var(--parchment);
+      margin-bottom: 32px;
+    }
+    .contact h2 em {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--sage);
+    }
+    .contact-aside {
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--ash);
+      max-width: 420px;
+      margin-bottom: 32px;
+    }
+    .contact-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 28px;
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--parchment);
+      border: 1px solid var(--stone);
+      background: transparent;
+      transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, gap 0.3s ease;
+    }
+    .contact-cta:hover {
+      background: var(--parchment);
+      color: var(--charcoal);
+      border-color: var(--parchment);
+      gap: 22px;
+    }
+    .contact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .contact-list li {
+      padding: 22px 0;
+      border-top: 1px solid var(--slate);
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 24px;
+      align-items: baseline;
+    }
+    .contact-list li:last-child { border-bottom: 1px solid var(--slate); }
+    .contact-list-label {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--stone);
+    }
+    .contact-list-value {
+      font-family: var(--font-body);
+      font-size: 17px;
+      color: var(--parchment);
+    }
+    .contact-list-value a {
+      transition: color 0.2s ease;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 2px;
+    }
+    .contact-list-value a:hover {
+      color: var(--sage);
+      border-bottom-color: var(--sage);
+    }
+
+    /* ─── Footer ────────────────────────────────────── */
+    footer {
+      background: var(--charcoal);
+      color: var(--stone);
+      padding: 48px 0 64px;
+      border-top: 1px solid var(--slate);
+    }
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--stone);
+    }
+
+    /* ─── Responsive ────────────────────────────────── */
+    @media (max-width: 920px) {
+      :root { --side-padding: 28px; }
+      .hero-grid,
+      .about-inner,
+      .contact .container { grid-template-columns: 1fr; gap: 56px; }
+      .section-head { grid-template-columns: 1fr; gap: 24px; }
+      .section-head-aside { grid-column: 1; }
+      .film-1, .film-2, .film-3, .film-4 {
+        grid-column: 1 / -1;
+        margin-top: 0;
+      }
+      .contracted-grid { grid-template-columns: 1fr; }
+      .nav-links { gap: 20px; }
+      .nav-links a:not(.nav-cta) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── Header ─────────────────────────────── -->
+  <header id="header">
+    <div class="nav">
+      <a href="#" class="nav-brand">Whispering River</a>
+      <div class="nav-links">
+        <a href="#films">Films</a>
+        <a href="#contracted">Contracted</a>
+        <a href="#about">About</a>
+        <a href="#contact" class="nav-cta">Get in Touch</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ─── Hero ───────────────────────────────── -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-eyebrow reveal">
+            <span class="eyebrow">Whispering River Media</span>
+          </div>
+          <h1 class="reveal d1">
+            Earth as<br>
+            <em>witness.</em>
+          </h1>
+        </div>
+
+        <div class="hero-meta reveal d2">
+          <p class="lede" style="font-size:17px; margin-bottom:8px;">
+            Documentary storytelling at the intersection of earth science and human experience.
+          </p>
+          <div class="hero-meta-row">
+            <div class="hero-meta-label">Practice</div>
+            <div class="hero-meta-value">Long-form documentary, field cinematography, contracted client work.</div>
+          </div>
+          <div class="hero-meta-row">
+            <div class="hero-meta-label">Based</div>
+            <div class="hero-meta-value">Working across the American West.</div>
+          </div>
+          <div class="hero-meta-row">
+            <div class="hero-meta-label">Est.</div>
+            <div class="hero-meta-value">A patient archive, accumulated since 2019.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-plate reveal d3">
+        <img src="https://placehold.co/2100x900/857F78/F2EDE6?text=+" alt="Field plate">
+        <div class="hero-plate-label">Plate I · River bend, late autumn</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Films ──────────────────────────────── -->
+  <section class="films" id="films">
+    <div class="container">
+
+      <div class="section-head reveal">
+        <div class="section-num">I.</div>
+        <div>
+          <h2>Selected<br><em>films.</em></h2>
+        </div>
+        <p class="section-head-aside">
+          Independent documentary projects undertaken across multiple seasons. Each begins with a question about a place and proceeds at the patient pace of its subject.
+        </p>
+      </div>
+
+      <div class="film-grid">
+
+        <article class="film film-1 reveal">
+          <div class="film-plate">
+            <img src="https://placehold.co/1200x900/44403B/F2EDE6?text=+" alt="What Is a Name?">
+          </div>
+          <div class="film-meta">
+            <div>
+              <div class="film-num">No. 01</div>
+              <h3 class="film-title">What Is a Name?</h3>
+            </div>
+            <div class="film-year">2024 · Feature</div>
+          </div>
+          <p class="film-desc">A reckoning with the place-names of the American West — what they remember, what they erase, and the people who live within both.</p>
+          <a href="#" class="film-link">Watch the film <span>→</span></a>
+        </article>
+
+        <article class="film film-2 reveal d1">
+          <div class="film-plate">
+            <img src="https://placehold.co/900x720/7D8C7A/F2EDE6?text=+" alt="Death of a Lake?">
+          </div>
+          <div class="film-meta">
+            <div>
+              <div class="film-num">No. 02</div>
+              <h3 class="film-title">Death of a Lake?</h3>
+            </div>
+            <div class="film-year">2023 · Short</div>
+          </div>
+          <p class="film-desc">A salt lake disappears. The people who depend on its breath remain. A meditation on slow disaster and shared inheritance.</p>
+          <a href="#" class="film-link">Watch the film <span>→</span></a>
+        </article>
+
+        <article class="film film-3 reveal d1">
+          <div class="film-plate">
+            <img src="https://placehold.co/900x720/857F78/F2EDE6?text=+" alt="Generations">
+          </div>
+          <div class="film-meta">
+            <div>
+              <div class="film-num">No. 03</div>
+              <h3 class="film-title">Generations</h3>
+            </div>
+            <div class="film-year">2022 · Series</div>
+          </div>
+          <p class="film-desc">Three generations of one Western family, the land they have tended, and what it means to inherit a place that is changing under your feet.</p>
+          <a href="#" class="film-link">Watch the film <span>→</span></a>
+        </article>
+
+        <article class="film film-4 reveal d2">
+          <div class="film-plate">
+            <img src="https://placehold.co/1200x900/1C1A17/F2EDE6?text=+" alt="Live Like a River">
+          </div>
+          <div class="film-meta">
+            <div>
+              <div class="film-num">No. 04</div>
+              <h3 class="film-title">Live Like a River</h3>
+            </div>
+            <div class="film-year">2021 · Short</div>
+          </div>
+          <p class="film-desc">An essayistic portrait of one watershed, told through the rhythms of the water and the people who have made their lives along it.</p>
+          <a href="#" class="film-link">Watch the film <span>→</span></a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Contracted Work ────────────────────── -->
+  <section class="contracted" id="contracted">
+    <div class="container">
+
+      <div class="section-head reveal">
+        <div class="section-num">II.</div>
+        <div>
+          <h2>Contracted<br><em>work.</em></h2>
+        </div>
+        <p class="section-head-aside">
+          Commissioned cinematography and storytelling for organizations whose work aligns with the values of the studio: stewardship, longevity, attention to place.
+        </p>
+      </div>
+
+      <div class="contracted-grid">
+
+        <div class="contracted-item reveal">
+          <div class="contracted-num">No. 01</div>
+          <h4 class="contracted-title">Working with Nature</h4>
+          <div class="contracted-client">A film for National Recreation, 2024</div>
+          <a href="#" class="contracted-link">Watch <span>→</span></a>
+        </div>
+
+        <div class="contracted-item reveal d1">
+          <div class="contracted-num">No. 02</div>
+          <h4 class="contracted-title">Celebrating Life</h4>
+          <div class="contracted-client">A film for Aspinet Productions, 2023</div>
+          <a href="#" class="contracted-link">Watch <span>→</span></a>
+        </div>
+
+        <div class="contracted-item reveal d1">
+          <div class="contracted-num">No. 03</div>
+          <h4 class="contracted-title">Developing Snow</h4>
+          <div class="contracted-client">A film for Aspinet Productions, 2023</div>
+          <a href="#" class="contracted-link">Watch <span>→</span></a>
+        </div>
+
+        <div class="contracted-item reveal d2">
+          <div class="contracted-num">No. 04</div>
+          <h4 class="contracted-title">Urban Scrap</h4>
+          <div class="contracted-client">A film for Aspinet Productions, 2022</div>
+          <a href="#" class="contracted-link">Watch <span>→</span></a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── About ──────────────────────────────── -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-inner">
+
+        <div class="about-plate reveal">
+          <img src="https://placehold.co/720x900/44403B/F2EDE6?text=+" alt="Portrait">
+        </div>
+
+        <div class="about-content reveal d1">
+          <div class="eyebrow about-eyebrow">III. — Practice</div>
+          <h3>A studio<br>that <em>listens</em><br>first.</h3>
+          <p>Whispering River Media was founded by Ethan Parrish in 2019, after a decade spent moving between fieldwork and the editing room. The work attempts to bridge two disciplines that rarely speak the same language: the precision of earth science and the patience of documentary observation.</p>
+          <p>Every project begins with a question rooted in a specific place. The camera follows. Editing is a slow accumulation. Nothing is forced into resolution it does not have.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Contact ────────────────────────────── -->
+  <section class="contact" id="contact">
+    <div class="container">
+
+      <div>
+        <div class="eyebrow contact-eyebrow">IV. — Begin a conversation</div>
+        <h2>Have a place<br>worth <em>witnessing?</em></h2>
+        <p class="contact-aside">Conversations about new documentary subjects, contracted work for stewardship-aligned organizations, and screening inquiries are welcome.</p>
+        <a href="mailto:ethancparrish@gmail.com" class="contact-cta">Write to the studio <span>→</span></a>
+      </div>
+
+      <ul class="contact-list">
+        <li>
+          <span class="contact-list-label">Email</span>
+          <span class="contact-list-value"><a href="mailto:ethancparrish@gmail.com">ethancparrish@gmail.com</a></span>
+        </li>
+        <li>
+          <span class="contact-list-label">Location</span>
+          <span class="contact-list-value">American West</span>
+        </li>
+        <li>
+          <span class="contact-list-label">Available</span>
+          <span class="contact-list-value">Commissions, screenings, festival inquiries</span>
+        </li>
+      </ul>
+
+    </div>
+  </section>
+
+  <!-- ─── Footer ─────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <div class="footer-row">
+        <span>Whispering River Media</span>
+        <span>© 2026 · All rights reserved</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─── Scripts ────────────────────────────── -->
+  <script>
+    // Header scrolled state
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 24);
+    }, { passive: true });
+
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -80px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+
+</body>
+</html>

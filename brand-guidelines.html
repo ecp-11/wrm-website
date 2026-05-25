@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WRM — Brand Guidelines</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;300;400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            parchment: '#F2EDE6',
+            linen:     '#FAF8F5',
+            ash:       '#C4BFB8',
+            stone:     '#857F78',
+            slate:     '#44403B',
+            charcoal:  '#1C1A17',
+            sage:      '#7D8C7A',
+          },
+          fontFamily: {
+            josefin:  ['"Josefin Sans"', 'sans-serif'],
+            garamond: ['"EB Garamond"', 'serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ─── Base ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #FAF8F5;
+      color: #1C1A17;
+      font-family: 'EB Garamond', serif;
+      font-size: 17px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── Sidebar nav ───────────────────────────────── */
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 200px;
+      height: 100vh;
+      padding: 48px 0 48px 40px;
+      border-right: 1px solid #C4BFB8;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      background: #FAF8F5;
+      z-index: 10;
+    }
+    .sidebar-brand {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 100;
+      font-size: 13px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #1C1A17;
+      margin-bottom: 40px;
+    }
+    .nav-section-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #C4BFB8;
+      margin-top: 28px;
+      margin-bottom: 8px;
+    }
+    .nav-link {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #857F78;
+      text-decoration: none;
+      display: block;
+      padding: 5px 0 5px 14px;
+      margin-left: -1px;
+      border-left: 1px solid transparent;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+    .nav-link:hover  { color: #1C1A17; border-left-color: #7D8C7A; }
+    .nav-link.active { color: #1C1A17; border-left-color: #1C1A17; }
+
+    /* ─── Main content ──────────────────────────────── */
+    .main {
+      margin-left: 200px;
+      padding: 80px 72px 120px 80px;
+      max-width: 900px;
+    }
+
+    /* ─── Section spacing ───────────────────────────── */
+    section {
+      scroll-margin-top: 64px;
+      padding-bottom: 80px;
+      border-bottom: 1px solid #C4BFB8;
+      margin-bottom: 80px;
+    }
+    section:last-of-type { border-bottom: none; }
+
+    /* ─── Section header ────────────────────────────── */
+    .section-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #857F78;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #C4BFB8;
+    }
+    h2 {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 100;
+      font-size: 36px;
+      letter-spacing: -0.01em;
+      color: #1C1A17;
+      margin: 0 0 8px 0;
+    }
+    .section-intro {
+      font-family: 'EB Garamond', serif;
+      font-size: 17px;
+      color: #44403B;
+      line-height: 1.75;
+      max-width: 560px;
+      margin-bottom: 48px;
+    }
+
+    /* ─── Color swatches ────────────────────────────── */
+    .swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0;
+      border: 1px solid #C4BFB8;
+    }
+    .swatch-col { display: flex; flex-direction: column; }
+    .swatch-block { height: 120px; }
+    .swatch-meta {
+      padding: 14px 14px 16px;
+      border-top: 1px solid #C4BFB8;
+      border-right: 1px solid #C4BFB8;
+    }
+    .swatch-col:last-child .swatch-meta { border-right: none; }
+    .swatch-role {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #857F78;
+      margin-bottom: 4px;
+    }
+    .swatch-name {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 300;
+      color: #1C1A17;
+      margin-bottom: 2px;
+    }
+    .swatch-hex {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      color: #857F78;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── Rules list ────────────────────────────────── */
+    .rule-item {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: #44403B;
+      padding: 12px 0;
+      border-bottom: 1px solid #F2EDE6;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .rule-item::before {
+      content: '—';
+      color: #C4BFB8;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .rule-item:first-child { border-top: 1px solid #F2EDE6; }
+
+    /* ─── Typography specimens ──────────────────────── */
+    .specimen-row {
+      padding: 32px 0;
+      border-bottom: 1px solid #F2EDE6;
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    .specimen-row:first-child { border-top: 1px solid #F2EDE6; }
+    .specimen-level {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #857F78;
+      margin-bottom: 6px;
+      padding-top: 8px;
+    }
+    .specimen-detail {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 300;
+      color: #C4BFB8;
+      line-height: 1.7;
+    }
+
+    /* ─── Logo section ──────────────────────────────── */
+    .logo-display {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: #C4BFB8;
+      border: 1px solid #C4BFB8;
+      margin-bottom: 48px;
+    }
+    .logo-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 40px 52px;
+      gap: 24px;
+      position: relative;
+    }
+    .logo-cell img { width: 140px; height: auto; }
+    .logo-cell-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      position: absolute;
+      bottom: 16px;
+      left: 0; right: 0;
+      text-align: center;
+    }
+    .dont-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #C4BFB8;
+      margin-bottom: 12px;
+      margin-top: 28px;
+    }
+    .dont-item {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      color: #44403B;
+      padding: 11px 0;
+      border-bottom: 1px solid #F2EDE6;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      letter-spacing: 0.06em;
+    }
+    .dont-item:first-child { border-top: 1px solid #F2EDE6; }
+    .dont-item::before {
+      content: '×';
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 100;
+      font-size: 14px;
+      color: #857F78;
+      flex-shrink: 0;
+      line-height: 1.2;
+    }
+
+    /* ─── Favicon showcase ──────────────────────────── */
+    .favicon-showcase {
+      display: grid;
+      grid-template-columns: repeat(4, auto);
+      gap: 1px;
+      background: #C4BFB8;
+      border: 1px solid #C4BFB8;
+      width: fit-content;
+      margin-bottom: 32px;
+    }
+    .favicon-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 28px 32px;
+      background: #FAF8F5;
+    }
+    .favicon-cell-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #C4BFB8;
+    }
+
+    /* ─── Application table ─────────────────────────── */
+    .app-table { width: 100%; border-collapse: collapse; }
+    .app-table th {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #857F78;
+      text-align: left;
+      padding: 0 16px 12px 0;
+      border-bottom: 1px solid #C4BFB8;
+    }
+    .app-table td {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      color: #44403B;
+      letter-spacing: 0.08em;
+      padding: 14px 16px 14px 0;
+      border-bottom: 1px solid #F2EDE6;
+      vertical-align: top;
+    }
+    .app-table td:first-child { font-weight: 400; color: #1C1A17; }
+    .color-chip { display: inline-flex; align-items: center; gap: 7px; }
+    .color-chip-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+
+    /* ─── Brand essence ─────────────────────────────── */
+    .essence-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1px;
+      background: #C4BFB8;
+      border: 1px solid #C4BFB8;
+      margin-bottom: 40px;
+    }
+    .essence-cell { background: #FAF8F5; padding: 32px 28px; }
+    .essence-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #857F78;
+      margin-bottom: 12px;
+    }
+    .essence-value {
+      font-family: 'EB Garamond', serif;
+      font-size: 16px;
+      line-height: 1.65;
+      color: #1C1A17;
+    }
+
+    /* ─── Page header ────────────────────────────────── */
+    .page-header {
+      margin-bottom: 80px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid #C4BFB8;
+    }
+    .page-header-eyebrow {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #857F78;
+      margin-bottom: 20px;
+    }
+    .page-header h1 {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 100;
+      font-size: 56px;
+      letter-spacing: -0.02em;
+      color: #1C1A17;
+      line-height: 1.1;
+      margin: 0 0 20px 0;
+    }
+    .page-header-meta {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: #857F78;
+    }
+
+    /* ─── Scrollbar ──────────────────────────────────── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #FAF8F5; }
+    ::-webkit-scrollbar-thumb { background: #C4BFB8; border-radius: 2px; }
+  </style>
+</head>
+<body>
+
+  <!-- ─── Sidebar ──────────────────────────────────────── -->
+  <nav class="sidebar">
+    <div class="sidebar-brand">WRM</div>
+
+    <div class="nav-section-label">Guidelines</div>
+    <a href="#essence"     class="nav-link">Brand Essence</a>
+    <a href="#color"       class="nav-link">Color Palette</a>
+    <a href="#typography"  class="nav-link">Typography</a>
+    <a href="#logo"        class="nav-link">Logo</a>
+    <a href="#favicon"     class="nav-link">Favicon</a>
+    <a href="#application" class="nav-link">Application</a>
+
+    <div style="margin-top: auto;">
+      <div class="nav-section-label">Version</div>
+      <span style="font-family:'Josefin Sans',sans-serif; font-size:11px; font-weight:300; color:#C4BFB8; letter-spacing:0.1em;">1.0 · May 2026</span>
+    </div>
+  </nav>
+
+  <!-- ─── Main ─────────────────────────────────────────── -->
+  <main class="main">
+
+    <!-- Page header -->
+    <div class="page-header">
+      <div class="page-header-eyebrow">Whispering River Media</div>
+      <h1>Brand<br>Guidelines</h1>
+      <div class="page-header-meta">Visual identity standards &amp; usage reference</div>
+    </div>
+
+    <!-- ─── Brand Essence ──────────────────────────────── -->
+    <section id="essence">
+      <div class="section-label">01 — Brand Essence</div>
+      <h2>What We Are</h2>
+      <p class="section-intro">Documentary storytelling at the intersection of earth science and human experience. Every visual decision flows from this mission.</p>
+
+      <div class="essence-grid">
+        <div class="essence-cell">
+          <div class="essence-label">Mission</div>
+          <div class="essence-value">Documentary storytelling at the intersection of earth science and human experience.</div>
+        </div>
+        <div class="essence-cell">
+          <div class="essence-label">Character</div>
+          <div class="essence-value">Quiet authority.<br>Natural precision.<br>Earned trust.</div>
+        </div>
+        <div class="essence-cell">
+          <div class="essence-label">Visual Tone</div>
+          <div class="essence-value">Understated, matte, handcrafted-but-rigorous.</div>
+        </div>
+      </div>
+
+      <p style="font-family:'EB Garamond',serif; font-size:17px; color:#44403B; line-height:1.8; max-width:580px; font-style:italic;">
+        "The palette is dug from the earth rather than chosen. These tones are matte, light-absorbing, the opposite of spectacle. Color speaks through restraint: the eye rests, then notices."
+      </p>
+    </section>
+
+    <!-- ─── Color Palette ──────────────────────────────── -->
+    <section id="color">
+      <div class="section-label">02 — Color Palette</div>
+      <h2>Color</h2>
+      <p class="section-intro">Seven tones drawn from the earth. Never pure black or pure white — always Charcoal or Linen. Sage is an accent: one use per layout, maximum.</p>
+
+      <div class="swatch-grid" style="margin-bottom: 40px;">
+        <div class="swatch-col">
+          <div class="swatch-block" style="background:#FAF8F5; box-shadow: inset 0 0 0 1px #E8E3DC;"></div>
+          <div class="swatch-meta">
+            <div class="swatch-role">White</div>
+            <div class="swatch-name">Linen</div>
+            <div class="swatch-hex">#FAF8F5</div>
+          </div>
+        </div>
+        <div class="swatch-col">
+          <div class="swatch-block" style="background:#F2EDE6;"></div>
+          <div class="swatch-meta">
+            <div class="swatch-role">Background</div>
+            <div class="swatch-name">Parchment</div>
+            <div class="swatch-hex">#F2EDE6</div>
+          </div>
+        </div>
+        <div class="swatch-col">
+          <div class="swatch-block" style="background:#C4BFB8;"></div>
+          <div class="swatch-meta">
+            <div class="swatch-role">Light Grey</div>
+            <div class="swatch-name">Ash</div>
+            <div class="swatch-hex">#C4BFB8</div>
+          </div>
+        </div>
+        <div class="swatch-col">
+          <div class="swatch-block" style="background:#857F78;"></div>
+          <div class="swatch-meta">
+            <div class="swatch-role">Mid Grey</div>
+            <div class="swatch-name">Stone</div>
+            <div class="swatch-hex">#857F78</div>
+          </div>
+        </div>
+        <div class="swatch-col">
+          <div class="swatch-block" style="background:#44403B;"></div>
+          <div class="swatch-meta">
+            <div class="swatch-role">Dark Grey</div>
+            <div class="swatch-name">Slate</div>
+            <div class="swatch-hex">#44403B</div>
+          </div>
+        </div>
+        <div class="swatch-col">
+          <div class="swatch-block" style="background:#1C1A17;"></div>
+          <div class="swatch-meta">
+            <div class="swatch-role">Near-Black</div>
+            <div class="swatch-name">Charcoal</div>
+            <div class="swatch-hex">#1C1A17</div>
+          </div>
+        </div>
+        <div class="swatch-col">
+          <div class="swatch-block" style="background:#7D8C7A;"></div>
+          <div class="swatch-meta">
+            <div class="swatch-role">Accent</div>
+            <div class="swatch-name">Sage</div>
+            <div class="swatch-hex">#7D8C7A</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="rule-item">Never use pure black (#000000) or pure white (#FFFFFF) — always use Charcoal or Linen.</div>
+        <div class="rule-item">Sage is an accent only — one use per layout, maximum.</div>
+        <div class="rule-item">Primary text: Charcoal on Parchment or Linen backgrounds.</div>
+        <div class="rule-item">Dark mode / film: Parchment text on Charcoal backgrounds.</div>
+      </div>
+    </section>
+
+    <!-- ─── Typography ─────────────────────────────────── -->
+    <section id="typography">
+      <div class="section-label">03 — Typography</div>
+      <h2>Type</h2>
+      <p class="section-intro">Josefin Sans for structure — thin, geometric, even. EB Garamond for warmth — serif contrast that breathes. Hierarchy through scale, never weight.</p>
+
+      <div>
+        <div class="specimen-row">
+          <div>
+            <div class="specimen-level">Display</div>
+            <div class="specimen-detail">Josefin Sans<br>Thin (100)<br>48–72px</div>
+          </div>
+          <div style="font-family:'Josefin Sans',sans-serif; font-weight:100; font-size:64px; letter-spacing:-0.02em; color:#1C1A17; line-height:1.05;">
+            Alluvial<br>Memory
+          </div>
+        </div>
+        <div class="specimen-row">
+          <div>
+            <div class="specimen-level">Heading 1</div>
+            <div class="specimen-detail">Josefin Sans<br>Light (300)<br>32px</div>
+          </div>
+          <div style="font-family:'Josefin Sans',sans-serif; font-weight:300; font-size:32px; color:#1C1A17; line-height:1.2;">
+            Earth Science &amp; Human Experience
+          </div>
+        </div>
+        <div class="specimen-row">
+          <div>
+            <div class="specimen-level">Heading 2</div>
+            <div class="specimen-detail">Josefin Sans<br>Light (300)<br>24px</div>
+          </div>
+          <div style="font-family:'Josefin Sans',sans-serif; font-weight:300; font-size:24px; color:#1C1A17; line-height:1.3;">
+            Documentary Storytelling
+          </div>
+        </div>
+        <div class="specimen-row">
+          <div>
+            <div class="specimen-level">Body</div>
+            <div class="specimen-detail">EB Garamond<br>Regular (400)<br>16–17px</div>
+          </div>
+          <div style="font-family:'EB Garamond',serif; font-size:17px; color:#44403B; line-height:1.75; max-width:480px;">
+            The composition breathes through studied emptiness. Forms are drawn not filled — outlines only, suggesting mass without claiming it. Space is not negative but active: the dark field between angular peaks is where meaning accumulates.
+          </div>
+        </div>
+        <div class="specimen-row">
+          <div>
+            <div class="specimen-level">Caption</div>
+            <div class="specimen-detail">Josefin Sans<br>Regular (400)<br>11–12px, +200 tracking</div>
+          </div>
+          <div style="font-family:'Josefin Sans',sans-serif; font-weight:400; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:#857F78; line-height:1.7;">
+            Whispering River Media · Documentary Film · 2026
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 40px;">
+        <div class="rule-item">Headlines: Josefin Sans Thin or Light, sentence case — never bold, never italic.</div>
+        <div class="rule-item">Use size hierarchy, not weight, to establish visual priority.</div>
+        <div class="rule-item">Body: EB Garamond Regular — warm serif contrasts intentionally with the geometric sans.</div>
+        <div class="rule-item">Captions and labels: Josefin Sans Regular, uppercase, wide letter-spacing (+200).</div>
+        <div class="rule-item">Film title cards: Josefin Sans Thin — fade-in only, no slide or zoom.</div>
+      </div>
+    </section>
+
+    <!-- ─── Logo ───────────────────────────────────────── -->
+    <section id="logo">
+      <div class="section-label">04 — Logo</div>
+      <h2>Logo</h2>
+      <p class="section-intro">The WRM mark used on light and dark surfaces. Maintain clear space equal to the cap-height of the "W" on all four sides. Minimum digital size: 200px wide.</p>
+
+      <div class="logo-display">
+        <div class="logo-cell" style="background:#FAF8F5;">
+          <img src="brand_assets/Simple_trsnprnt_Square.png" alt="WRM Logo — light background">
+          <div class="logo-cell-label" style="color:#857F78;">On Linen / Parchment</div>
+        </div>
+        <div class="logo-cell" style="background:#1C1A17;">
+          <img src="brand_assets/Simple_trsnprnt_Square.png" alt="WRM Logo — dark background" style="filter: invert(1) brightness(0.93);">
+          <div class="logo-cell-label" style="color:#857F78;">On Charcoal</div>
+        </div>
+      </div>
+
+      <div class="dont-label">Do Not</div>
+      <div>
+        <div class="dont-item">Stretch or distort the mark</div>
+        <div class="dont-item">Add drop shadows or glow effects</div>
+        <div class="dont-item">Fill the illustration or letterforms with color</div>
+        <div class="dont-item">Place in a background box or container shape</div>
+        <div class="dont-item">Add outlines to the letterforms</div>
+        <div class="dont-item">Use on backgrounds that reduce legibility</div>
+      </div>
+    </section>
+
+    <!-- ─── Favicon ─────────────────────────────────────── -->
+    <section id="favicon">
+      <div class="section-label">05 — Favicon</div>
+      <h2>Favicon</h2>
+      <p class="section-intro">A river-focused mark built for browser tab scale. The two Sage Bézier curves carry the brand identity at 16–32px; the WRM text is a detail visible only at larger sizes.</p>
+
+      <div class="favicon-showcase">
+        <div class="favicon-cell">
+          <img src="brand_assets/icons/wrm-river-favicon.svg" width="64" height="64" alt="Favicon at 64px">
+          <div class="favicon-cell-label">64px</div>
+        </div>
+        <div class="favicon-cell">
+          <img src="brand_assets/icons/wrm-river-favicon.svg" width="32" height="32" alt="Favicon at 32px">
+          <div class="favicon-cell-label">32px</div>
+        </div>
+        <div class="favicon-cell">
+          <img src="brand_assets/icons/wrm-river-favicon.svg" width="24" height="24" alt="Favicon at 24px">
+          <div class="favicon-cell-label">24px</div>
+        </div>
+        <div class="favicon-cell">
+          <img src="brand_assets/icons/wrm-river-favicon.svg" width="16" height="16" alt="Favicon at 16px">
+          <div class="favicon-cell-label">16px</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="rule-item">River lines in Sage — the sole accent color use in the mark.</div>
+        <div class="rule-item">Charcoal background reads clearly in both light and dark browser chrome.</div>
+        <div class="rule-item">No mountains — complexity collapses at 16px; the curves carry the identity alone.</div>
+        <div class="rule-item">File: <code style="font-family:monospace; font-size:11px; color:#857F78;">favicon.svg</code> at project root — modern browsers (Chrome, Firefox, Edge, Safari 14+) load SVG favicons natively.</div>
+      </div>
+    </section>
+
+    <!-- ─── Application Reference ──────────────────────── -->
+    <section id="application">
+      <div class="section-label">06 — Application</div>
+      <h2>Application</h2>
+      <p class="section-intro">Surface-by-surface reference for background, text, and logo color pairings across all WRM touchpoints.</p>
+
+      <table class="app-table">
+        <thead>
+          <tr>
+            <th style="width:22%;">Surface</th>
+            <th style="width:26%;">Background</th>
+            <th style="width:26%;">Text</th>
+            <th style="width:26%;">Logo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Film title cards</td>
+            <td><span class="color-chip"><span class="color-chip-dot" style="background:#1C1A17;"></span>Charcoal #1C1A17</span></td>
+            <td><span class="color-chip"><span class="color-chip-dot" style="background:#F2EDE6;"></span>Parchment</span></td>
+            <td>White reversed</td>
+          </tr>
+          <tr>
+            <td>Film end cards</td>
+            <td>Charcoal or Parchment</td>
+            <td>Opposite of background</td>
+            <td>Match background</td>
+          </tr>
+          <tr>
+            <td>Instagram</td>
+            <td><span class="color-chip"><span class="color-chip-dot" style="background:#F2EDE6; border-color:#C4BFB8;"></span>Parchment or Linen</span></td>
+            <td><span class="color-chip"><span class="color-chip-dot" style="background:#1C1A17;"></span>Charcoal</span></td>
+            <td>Black</td>
+          </tr>
+          <tr>
+            <td>YouTube channel art</td>
+            <td><span class="color-chip"><span class="color-chip-dot" style="background:#1C1A17;"></span>Charcoal</span></td>
+            <td><span class="color-chip"><span class="color-chip-dot" style="background:#F2EDE6;"></span>Parchment</span></td>
+            <td>White reversed</td>
+          </tr>
+          <tr>
+            <td>Website</td>
+            <td><span class="color-chip"><span class="color-chip-dot" style="background:#FAF8F5; border-color:#C4BFB8;"></span>Linen #FAF8F5</span></td>
+            <td><span class="color-chip"><span class="color-chip-dot" style="background:#1C1A17;"></span>Charcoal</span></td>
+            <td>Black</td>
+          </tr>
+          <tr>
+            <td>Pitch decks / print</td>
+            <td><span class="color-chip"><span class="color-chip-dot" style="background:#F2EDE6; border-color:#C4BFB8;"></span>Parchment</span></td>
+            <td><span class="color-chip"><span class="color-chip-dot" style="background:#1C1A17;"></span>Charcoal</span></td>
+            <td>Black</td>
+          </tr>
+          <tr>
+            <td>Email signature</td>
+            <td>White (email default)</td>
+            <td><span class="color-chip"><span class="color-chip-dot" style="background:#1C1A17;"></span>Charcoal</span></td>
+            <td>Black, min 200px wide</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <script>
+    const links = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('section[id]');
+    function setActive() {
+      let current = '';
+      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+      links.forEach(l => { l.classList.toggle('active', l.getAttribute('href') === '#' + current); });
+    }
+    window.addEventListener('scroll', setActive, { passive: true });
+    setActive();
+  </script>
+
+</body>
+</html>
