@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Info — Whispering River Media</title>
+  <meta name="description" content="Services and contact information for Whispering River Media.">
+  <link rel="icon" href="brand_assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;300;400&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --parchment: #F2EDE6;
+      --linen:     #FAF8F5;
+      --ash:       #C4BFB8;
+      --stone:     #857F78;
+      --slate:     #44403B;
+      --charcoal:  #1C1A17;
+      --sage:      #7D8C7A;
+      --font-display: 'Josefin Sans', sans-serif;
+      --font-body:    'EB Garamond', serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { overflow-y: scroll; }
+    body {
+      background: var(--parchment);
+      color: var(--charcoal);
+      font-family: var(--font-display);
+      -webkit-font-smoothing: antialiased;
+    }
+    a   { color: inherit; text-decoration: none; }
+    img { display: block; }
+
+    /* ─── Grain overlay ───────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 200;
+      opacity: 0.3;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.11 0 0 0 0 0.10 0 0 0 0 0.09 0 0 0 0.045 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      mix-blend-mode: multiply;
+    }
+
+    /* ─── Navigation ──────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 36px;
+      background: rgba(250, 248, 245, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--ash);
+    }
+
+    .nav-brand {
+      font-family: var(--font-display);
+      font-weight: 100;
+      font-size: 13px;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      transition: opacity 0.3s ease;
+    }
+    .nav-brand:hover { opacity: 0.6; }
+
+    .nav-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 36px;
+    }
+
+    .nav-link {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--stone);
+      transition: color 0.3s ease;
+    }
+    .nav-link:hover  { color: var(--charcoal); }
+
+    .nav-info {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      transition: color 0.3s ease;
+    }
+    .nav-info:hover { color: var(--stone); }
+
+    /* ─── Layout ──────────────────────────────────── */
+    main {
+      padding-top: 132px;
+      padding-bottom: 80px;
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 96px;
+      padding-left: 48px;
+      padding-right: 48px;
+    }
+
+    @media (max-width: 880px) {
+      main { grid-template-columns: 1fr; gap: 64px; }
+    }
+
+    /* ─── Left column ─────────────────────────────── */
+    .col-left h1 {
+      font-family: var(--font-display);
+      font-weight: 100;
+      font-size: clamp(30px, 4.4vw, 46px);
+      letter-spacing: 0.04em;
+      line-height: 1.15;
+      color: var(--charcoal);
+      margin-bottom: 36px;
+    }
+
+    .col-left p {
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--slate);
+      margin-bottom: 22px;
+      max-width: 56ch;
+    }
+
+    .figure {
+      margin-top: 44px;
+      max-width: 420px;
+    }
+
+    .figure img {
+      width: 100%;
+      height: auto;
+      filter: grayscale(1) contrast(1.05);
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 14px 28px;
+      border: 1px solid var(--charcoal);
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      background: transparent;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn:hover {
+      background: var(--charcoal);
+      color: var(--parchment);
+      transform: translateY(-1px);
+    }
+
+    .btn:focus-visible {
+      outline: 2px solid var(--sage);
+      outline-offset: 3px;
+    }
+
+    .btn:active { transform: translateY(0); }
+
+    /* ─── Right column ────────────────────────────── */
+    .get-in-touch {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 22px;
+    }
+
+    .intro-row {
+      display: flex;
+      gap: 28px;
+      align-items: flex-start;
+      margin-bottom: 44px;
+    }
+
+    .intro-text p {
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--slate);
+      margin-bottom: 16px;
+    }
+
+    .intro-text a {
+      color: var(--charcoal);
+      text-decoration: underline;
+      text-decoration-color: var(--ash);
+      text-underline-offset: 3px;
+      transition: text-decoration-color 0.3s ease;
+    }
+    .intro-text a:hover { text-decoration-color: var(--charcoal); }
+
+    .portrait {
+      flex-shrink: 0;
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      object-fit: cover;
+      filter: grayscale(0.25) sepia(0.12) saturate(0.9);
+      box-shadow:
+        0 12px 28px -10px rgba(28, 26, 23, 0.35),
+        0 2px 6px rgba(28, 26, 23, 0.18);
+    }
+
+    /* ─── Form ────────────────────────────────────── */
+    form { margin-top: 8px; }
+
+    .field-group {
+      margin-bottom: 28px;
+    }
+
+    .field-group-label {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      color: var(--charcoal);
+      margin-bottom: 14px;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 560px) {
+      .field-row { grid-template-columns: 1fr; }
+    }
+
+    label {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      color: var(--slate);
+      margin-bottom: 10px;
+    }
+
+    label .req {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 13px;
+      color: var(--stone);
+      letter-spacing: 0;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 14px 16px;
+      background: var(--linen);
+      border: 1px solid var(--ash);
+      font-family: var(--font-body);
+      font-size: 16px;
+      color: var(--charcoal);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input::placeholder, textarea::placeholder { color: var(--ash); }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--sage);
+      box-shadow: 0 0 0 3px rgba(125, 140, 122, 0.16);
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .send-btn {
+      margin-top: 6px;
+      padding: 16px 40px;
+      border: 1px solid var(--charcoal);
+      background: transparent;
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .send-btn:hover {
+      background: var(--charcoal);
+      color: var(--parchment);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px -12px rgba(28, 26, 23, 0.45);
+    }
+
+    .send-btn:focus-visible {
+      outline: 2px solid var(--sage);
+      outline-offset: 3px;
+    }
+
+    .send-btn:active { transform: translateY(0); box-shadow: none; }
+
+    /* ─── Footer ──────────────────────────────────── */
+    footer {
+      background: var(--charcoal);
+      padding: 36px 48px;
+      text-align: center;
+    }
+
+    .footer-links {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ash);
+    }
+
+    .footer-links a { transition: color 0.3s ease; }
+    .footer-links a:hover { color: var(--parchment); }
+
+    .footer-divider {
+      margin: 0 14px;
+      color: var(--slate);
+    }
+
+    /* ─── Reveal animation ────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .reveal-1 { animation-delay: 0.05s; }
+    .reveal-2 { animation-delay: 0.18s; }
+    .reveal-3 { animation-delay: 0.3s; }
+
+    @keyframes rise {
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-brand">WRM</a>
+    <div class="nav-center">
+      <a href="film.html" class="nav-link">Film</a>
+      <a href="#" class="nav-link">Photo</a>
+    </div>
+    <a href="info.html" class="nav-info">Info</a>
+  </nav>
+
+  <main>
+    <div class="col-left reveal reveal-1">
+      <h1>What Whispering River Media does</h1>
+
+      <p>Your research is important, that's why you do it. I want to help you share it.</p>
+
+      <p>One of the many things my background in academia taught me is that much of the incredible research that institutions around the world pursue never sees the light of day in the public's eye. More often than not, this is a function of the academic workload and the unfortunate fact that "public outreach", however important, is understandably not a priority relative to the actual research. That's where I come in. I'll work closely with you and your team to understand your work, why and how you do it, and its impact so that I can tell honest and authentic stories about you and your work.</p>
+
+      <p>Given the nature of the myriad sources of funding, project scales, outreach objectives, etc., I'll work with you to define and execute projects in a way that makes sense for you, your research, and your vision. From smaller web shorts to feature-length documentaries, I have the skill and/or collaborator connections to execute across multiple scales.</p>
+
+      <p>So, if you're looking for video production services for public outreach or any other reasons related to your research, please don't hesitate to drop me a line. I'd love to chat!</p>
+
+      <figure class="figure">
+        <img src="https://placehold.co/420x520/1c1a17/c4bfb8?text=" alt="Behind the scenes on location">
+      </figure>
+
+      <a href="about.html" class="btn">About Me</a>
+    </div>
+
+    <div class="col-right reveal reveal-2">
+      <p class="get-in-touch">Get in touch</p>
+
+      <div class="intro-row">
+        <div class="intro-text">
+          <p>You can find me on Instagram at <a href="#">@ethancparrish</a></p>
+          <p>Or, fill out the form below for some good old-fashioned email correspondence.</p>
+        </div>
+        <img class="portrait" src="https://placehold.co/224x224/c4bfb8/44403b?text=" alt="Portrait of Ethan Parrish">
+      </div>
+
+      <form action="https://formspree.io/f/your-form-id" method="POST">
+        <div class="field-group">
+          <p class="field-group-label">Name</p>
+          <div class="field-row">
+            <div>
+              <label for="first-name">First Name <span class="req">(required)</span></label>
+              <input type="text" id="first-name" name="firstName" required>
+            </div>
+            <div>
+              <label for="last-name">Last Name <span class="req">(required)</span></label>
+              <input type="text" id="last-name" name="lastName" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="email">Email Address <span class="req">(required)</span></label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="field-group">
+          <label for="subject">Subject <span class="req">(required)</span></label>
+          <input type="text" id="subject" name="subject" required>
+        </div>
+
+        <div class="field-group">
+          <label for="message">Message <span class="req">(required)</span></label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+
+        <button type="submit" class="send-btn">Send</button>
+      </form>
+    </div>
+  </main>
+
+  <footer class="reveal reveal-3">
+    <p class="footer-links">
+      <a href="https://www.instagram.com/ethancparrish/" target="_blank" rel="noopener">Instagram</a><span class="footer-divider">|</span><a href="https://www.youtube.com/@ethancparrish" target="_blank" rel="noopener">Youtube</a><span class="footer-divider">|</span><a href="https://www.linkedin.com/in/ethancparrish/" target="_blank" rel="noopener">LinkedIn</a>
+    </p>
+  </footer>
+
+</body>
+</html>

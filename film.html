@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Film — Whispering River Media</title>
+  <meta name="description" content="Film projects by Whispering River Media — documentary and commissioned work.">
+  <link rel="icon" href="brand_assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;300;400&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --parchment: #F2EDE6;
+      --linen:     #FAF8F5;
+      --ash:       #C4BFB8;
+      --stone:     #857F78;
+      --slate:     #44403B;
+      --charcoal:  #1C1A17;
+      --sage:      #7D8C7A;
+      --font-display: 'Josefin Sans', sans-serif;
+      --font-body:    'EB Garamond', serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { overflow-y: scroll; }
+    body {
+      background: var(--parchment);
+      color: var(--charcoal);
+      font-family: var(--font-display);
+      -webkit-font-smoothing: antialiased;
+    }
+    a   { color: inherit; text-decoration: none; }
+    img { display: block; }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 200;
+      opacity: 0.3;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.11 0 0 0 0 0.10 0 0 0 0 0.09 0 0 0 0.045 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      mix-blend-mode: multiply;
+    }
+
+    /* ─── Navigation ──────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 36px;
+      background: rgba(250, 248, 245, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--ash);
+    }
+    .nav-brand {
+      font-family: var(--font-display);
+      font-weight: 100;
+      font-size: 13px;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      transition: opacity 0.3s ease;
+    }
+    .nav-brand:hover { opacity: 0.6; }
+    .nav-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 36px;
+    }
+    .nav-link {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--stone);
+      transition: color 0.3s ease;
+    }
+    .nav-link:hover  { color: var(--charcoal); }
+    .nav-link.active { color: var(--charcoal); }
+    .nav-info {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--stone);
+      transition: color 0.3s ease;
+    }
+    .nav-info:hover { color: var(--charcoal); }
+
+    /* ─── Intro ───────────────────────────────────── */
+    .intro {
+      padding: 200px 32px 80px;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .eyebrow {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 22px;
+    }
+    .intro h1 {
+      font-family: var(--font-display);
+      font-weight: 100;
+      font-size: clamp(28px, 5vw, 48px);
+      letter-spacing: 0.04em;
+      line-height: 1.4;
+      color: var(--charcoal);
+    }
+    .intro p {
+      margin-top: 20px;
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--slate);
+      max-width: 56ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ─── Radial gallery ──────────────────────────── */
+    .wheel-section {
+      position: relative;
+      height: 340vh;
+    }
+    .wheel-pin {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .wheel-mask {
+      position: relative;
+      width: 100%;
+      height: 68vh;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(to top, transparent 0%, black 38%, black 100%);
+      mask-image: linear-gradient(to top, transparent 0%, black 38%, black 100%);
+    }
+    .wheel {
+      position: absolute;
+      left: 50%;
+      will-change: transform;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    .wheel.mounted { opacity: 1; }
+    .wheel-item {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+
+    /* ─── Cards ───────────────────────────────────── */
+    .wheel-card {
+      position: relative;
+      display: block;
+      cursor: pointer;
+      outline: none;
+      border-radius: 10px;
+      overflow: hidden;
+      width: var(--card-w, 148px);
+      height: var(--card-h, 210px);
+      transform: scale(0);
+      opacity: 0;
+      transition:
+        transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.5s ease,
+        opacity 0.5s ease,
+        box-shadow 0.5s ease;
+      box-shadow:
+        0 18px 40px -16px rgba(28, 26, 23, 0.42),
+        0 4px 10px rgba(28, 26, 23, 0.2);
+    }
+    .wheel-card.in      { opacity: 1; transform: scale(1); }
+    .wheel-card.hovered { transform: scale(1.18) translateY(-24px); box-shadow: 0 28px 60px -16px rgba(28,26,23,0.5), 0 8px 18px rgba(28,26,23,0.28); }
+    .wheel-card.dimmed  { opacity: 0.4; filter: blur(2px) grayscale(1); }
+
+    .wheel-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(0.55) sepia(0.06) saturate(0.9) contrast(1.06);
+    }
+    .wheel-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(28,26,23,0.72) 0%, rgba(28,26,23,0.08) 55%, transparent 75%);
+      pointer-events: none;
+    }
+    .wheel-card-title {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      right: 28px;
+      z-index: 1;
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--linen);
+      opacity: 0.9;
+      line-height: 1.4;
+    }
+    .wheel-card-year {
+      position: absolute;
+      top: 11px;
+      right: 11px;
+      z-index: 1;
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      color: var(--parchment);
+      opacity: 0.55;
+    }
+    .wheel-card-role {
+      position: absolute;
+      bottom: 30px;
+      left: 12px;
+      right: 12px;
+      z-index: 1;
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 11px;
+      color: var(--ash);
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+    .wheel-card.hovered .wheel-card-role {
+      opacity: 0.85;
+      transform: translateY(0);
+    }
+
+    /* ─── Scroll hint ─────────────────────────────── */
+    .wheel-hint {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 6;
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 10px;
+      letter-spacing: 0.36em;
+      text-transform: uppercase;
+      color: var(--stone);
+      opacity: 0.6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.5s ease;
+    }
+    .wheel-hint .line {
+      width: 1px;
+      height: 28px;
+      background: linear-gradient(to bottom, var(--stone), transparent);
+      animation: hint-pulse 1.8s ease-in-out infinite;
+    }
+    @keyframes hint-pulse {
+      0%, 100% { opacity: 0.25; transform: scaleY(0.7); }
+      50%      { opacity: 1;    transform: scaleY(1); }
+    }
+
+    /* ─── Center label ────────────────────────────── */
+    .wheel-center {
+      position: absolute;
+      top: 62%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      text-align: center;
+      pointer-events: none;
+    }
+    .wheel-center-index {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 10px;
+      letter-spacing: 0.36em;
+      text-transform: uppercase;
+      color: var(--stone);
+      opacity: 0.55;
+    }
+    .wheel-center-year {
+      display: block;
+      margin-top: 8px;
+      font-family: var(--font-display);
+      font-weight: 100;
+      font-size: clamp(36px, 6vw, 68px);
+      letter-spacing: 0.06em;
+      color: var(--charcoal);
+      line-height: 1;
+      transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .wheel-center-title {
+      display: block;
+      margin-top: 10px;
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: clamp(14px, 1.6vw, 18px);
+      color: var(--slate);
+      transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .wheel-center-role {
+      display: block;
+      margin-top: 6px;
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(9px, 1vw, 11px);
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--stone);
+      opacity: 0.7;
+      transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .wheel-center-year.fade-out,
+    .wheel-center-title.fade-out,
+    .wheel-center-role.fade-out  { opacity: 0; transform: translateY(-6px); }
+    .wheel-center-year.fade-in,
+    .wheel-center-title.fade-in,
+    .wheel-center-role.fade-in   { opacity: 1; transform: translateY(0); }
+
+    /* ─── Project overlay ─────────────────────────── */
+    .project-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: var(--parchment);
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      transform: translateY(40px);
+      pointer-events: none;
+      transition:
+        opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .project-overlay.open {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+    }
+
+    .project-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 36px;
+      background: rgba(242, 237, 230, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--ash);
+      flex-shrink: 0;
+    }
+    .project-back {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--stone);
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    .project-back:hover { color: var(--charcoal); transform: translateX(-3px); }
+    .project-back:focus-visible { outline: 2px solid var(--sage); outline-offset: 3px; }
+
+    .project-title-bar {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+    }
+    .project-eyebrow {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 9px;
+      letter-spacing: 0.36em;
+      text-transform: uppercase;
+      color: var(--stone);
+      opacity: 0.7;
+      margin-bottom: 3px;
+    }
+    .project-header-name {
+      font-family: var(--font-display);
+      font-weight: 100;
+      font-size: 15px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+    }
+    .project-meta-badge {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: var(--stone);
+      white-space: nowrap;
+    }
+
+    .project-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 56px 48px 80px;
+    }
+
+    .project-content {
+      display: grid;
+      grid-template-columns: 2fr 3fr;
+      gap: 72px;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    @media (max-width: 768px) {
+      .project-content { grid-template-columns: 1fr; gap: 36px; }
+      .project-body { padding: 32px 24px 60px; }
+      .project-header { padding: 18px 20px; }
+      .project-title-bar { display: none; }
+      .project-meta-badge { display: none; }
+    }
+
+    .project-cover {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 24px 56px -20px rgba(28,26,23,0.38), 0 4px 12px rgba(28,26,23,0.18);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.1s, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;
+    }
+    .project-cover.revealed { opacity: 1; transform: translateY(0); }
+    .project-cover img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: grayscale(0.2) sepia(0.06) saturate(0.95) contrast(1.04);
+    }
+
+    .project-details {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.22s, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.22s;
+    }
+    .project-details.revealed { opacity: 1; transform: translateY(0); }
+
+    .project-detail-title {
+      font-family: var(--font-display);
+      font-weight: 100;
+      font-size: clamp(26px, 4vw, 44px);
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+      color: var(--charcoal);
+      margin-bottom: 20px;
+    }
+    .project-detail-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 20px;
+      margin-bottom: 28px;
+    }
+    .project-detail-meta span {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--stone);
+    }
+    .project-detail-meta .dot { color: var(--ash); letter-spacing: 0; }
+    .project-rule {
+      width: 48px;
+      height: 1px;
+      background: var(--ash);
+      margin-bottom: 28px;
+    }
+    .project-description {
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--slate);
+      margin-bottom: 36px;
+      max-width: 58ch;
+    }
+    .watch-btn {
+      display: inline-block;
+      padding: 14px 32px;
+      border: 1px solid var(--charcoal);
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      background: transparent;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .watch-btn:hover {
+      background: var(--charcoal);
+      color: var(--parchment);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px -12px rgba(28,26,23,0.45);
+    }
+    .watch-btn:focus-visible { outline: 2px solid var(--sage); outline-offset: 3px; }
+    .watch-btn:active { transform: translateY(0); box-shadow: none; }
+
+    /* ─── Footer ──────────────────────────────────── */
+    footer {
+      position: relative;
+      z-index: 5;
+      background: var(--charcoal);
+      padding: 36px 48px;
+      text-align: center;
+    }
+    .footer-links {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ash);
+    }
+    .footer-links a { transition: color 0.3s ease; }
+    .footer-links a:hover { color: var(--parchment); }
+    .footer-divider { margin: 0 14px; color: var(--slate); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-brand">WRM</a>
+    <div class="nav-center">
+      <a href="film.html" class="nav-link active">Film</a>
+      <a href="photo.html" class="nav-link">Photo</a>
+    </div>
+    <a href="info.html" class="nav-info">Info</a>
+  </nav>
+
+  <header class="intro">
+    <p class="eyebrow">Film</p>
+    <h1>A body of work shaped by the land</h1>
+    <p>Documentary and commissioned films exploring the intersections of science, place, and the people who inhabit both. Scroll to move through time.</p>
+  </header>
+
+  <section class="wheel-section" id="wheelSection">
+    <div class="wheel-pin">
+      <div class="wheel-mask">
+        <ul class="wheel" id="wheel"></ul>
+      </div>
+      <div class="wheel-center">
+        <span class="wheel-center-index" id="wheelIndex">01 / 08</span>
+        <span class="wheel-center-year fade-in" id="wheelYear">2024</span>
+        <span class="wheel-center-title fade-in" id="wheelTitle">What's in a Name?</span>
+        <span class="wheel-center-role fade-in" id="wheelRole">Director · Producer · Cinematographer · Editor</span>
+      </div>
+      <div class="wheel-hint" id="wheelHint">
+        <span>Scroll</span>
+        <span class="line"></span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p class="footer-links">
+      <a href="https://www.instagram.com/ethancparrish/" target="_blank" rel="noopener">Instagram</a><span class="footer-divider">|</span><a href="https://www.youtube.com/@ethancparrish" target="_blank" rel="noopener">Youtube</a><span class="footer-divider">|</span><a href="https://www.linkedin.com/in/ethancparrish/" target="_blank" rel="noopener">LinkedIn</a>
+    </p>
+  </footer>
+
+  <!-- Project overlay -->
+  <div class="project-overlay" id="projectOverlay" role="dialog" aria-modal="true" aria-label="Project detail">
+    <div class="project-header">
+      <button class="project-back" id="projectBack" aria-label="Back to film gallery">
+        <span>&#8592;</span>
+        <span>Film</span>
+      </button>
+      <div class="project-title-bar">
+        <span class="project-eyebrow">Project</span>
+        <span class="project-header-name" id="overlayName"></span>
+      </div>
+      <span class="project-meta-badge" id="overlayBadge"></span>
+    </div>
+    <div class="project-body">
+      <div class="project-content">
+        <div class="project-cover" id="projectCover">
+          <img id="coverImg" src="" alt="">
+        </div>
+        <div class="project-details" id="projectDetails">
+          <h2 class="project-detail-title" id="detailTitle"></h2>
+          <div class="project-detail-meta" id="detailMeta"></div>
+          <div class="project-rule"></div>
+          <p class="project-description" id="detailDesc"></p>
+          <a href="#" class="watch-btn" id="watchBtn">Watch</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var TOTAL = 8;
+
+      // Newest → oldest
+      var projects = [
+        { title: "What's in a Name?",    year: 2024, type: 'Documentary', client: null,                   role: 'Director · Producer · Cinematographer · Editor', watchUrl: '#' },
+        { title: 'Working with Nature',  year: 2024, type: 'Contracted',  client: 'North Forty',          role: 'Production Team',                                watchUrl: '#' },
+        { title: 'Death of a Glacier',   year: 2023, type: 'Documentary', client: null,                   role: 'Director · Producer · Cinematographer · Editor', watchUrl: '#' },
+        { title: 'Celebrating Life',     year: 2023, type: 'Contracted',  client: 'Rosaland Productions', role: '2nd Unit Cinematography',                        watchUrl: '#' },
+        { title: 'Decolonizing Dinner',  year: 2023, type: 'Contracted',  client: 'Rosaland Productions', role: '2nd Unit Cinematography',                        watchUrl: '#' },
+        { title: 'Decolonizing Science', year: 2022, type: 'Documentary', client: null,                   role: 'Director · Cinematographer',                     watchUrl: '#' },
+        { title: 'Urban Triage',         year: 2022, type: 'Contracted',  client: 'Rosaland Productions', role: '2nd Unit Cinematography',                        watchUrl: '#' },
+        { title: 'Live Like a River',    year: 2021, type: 'Documentary', client: null,                   role: 'Director · Producer · Cinematographer · Editor', watchUrl: '#' }
+      ];
+
+      var palettes = [
+        ['44403b','c4bfb8'], ['1c1a17','857f78'], ['857f78','f2ede6'],
+        ['7d8c7a','f2ede6'], ['44403b','7d8c7a'], ['c4bfb8','44403b'],
+        ['1c1a17','c4bfb8'], ['857f78','1c1a17']
+      ];
+
+      var wheel        = document.getElementById('wheel');
+      var section      = document.getElementById('wheelSection');
+      var hint         = document.getElementById('wheelHint');
+      var wheelIdx     = document.getElementById('wheelIndex');
+      var wheelYear    = document.getElementById('wheelYear');
+      var wheelTitle   = document.getElementById('wheelTitle');
+      var wheelRole    = document.getElementById('wheelRole');
+      var overlay      = document.getElementById('projectOverlay');
+      var overlayName  = document.getElementById('overlayName');
+      var overlayBadge = document.getElementById('overlayBadge');
+      var projectCover = document.getElementById('projectCover');
+      var coverImg     = document.getElementById('coverImg');
+      var projectDet   = document.getElementById('projectDetails');
+      var detailTitle  = document.getElementById('detailTitle');
+      var detailMeta   = document.getElementById('detailMeta');
+      var detailDesc   = document.getElementById('detailDesc');
+      var watchBtn     = document.getElementById('watchBtn');
+      var projectBack  = document.getElementById('projectBack');
+
+      var apexIdx = 0;
+      var items   = [];
+
+      // ── Build wheel cards ────────────────────────────
+      projects.forEach(function (proj, i) {
+        var li   = document.createElement('li');
+        li.className = 'wheel-item';
+
+        var card = document.createElement('div');
+        card.className = 'wheel-card';
+        card.setAttribute('role', 'button');
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('aria-label', 'Open project: ' + proj.title);
+
+        var pal = palettes[i % palettes.length];
+        var img = document.createElement('img');
+        img.src = 'https://placehold.co/420x560/' + pal[0] + '/' + pal[0];
+        img.alt = proj.title;
+        card.appendChild(img);
+
+        var yearTag = document.createElement('span');
+        yearTag.className = 'wheel-card-year';
+        yearTag.textContent = proj.year;
+        card.appendChild(yearTag);
+
+        var roleTag = document.createElement('span');
+        roleTag.className = 'wheel-card-role';
+        roleTag.textContent = proj.role;
+        card.appendChild(roleTag);
+
+        var titleTag = document.createElement('span');
+        titleTag.className = 'wheel-card-title';
+        titleTag.textContent = proj.title;
+        card.appendChild(titleTag);
+
+        li.appendChild(card);
+        wheel.appendChild(li);
+        items.push({ li: li, card: card, proj: proj, index: i });
+
+        (function (idx, cardEl) {
+          function setHover(on) {
+            items.forEach(function (it, j) {
+              if (j === idx) {
+                it.card.classList.toggle('hovered', on);
+                it.card.classList.remove('dimmed');
+              } else {
+                it.card.classList.toggle('dimmed', on);
+                it.card.classList.remove('hovered');
+              }
+            });
+          }
+          cardEl.addEventListener('mouseenter', function () { setHover(true); });
+          cardEl.addEventListener('mouseleave', function () { setHover(false); });
+          cardEl.addEventListener('focus',      function () { setHover(true); });
+          cardEl.addEventListener('blur',       function () { setHover(false); });
+          cardEl.addEventListener('click',      function () { openProject(idx); });
+          cardEl.addEventListener('keydown',    function (e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openProject(idx); }
+          });
+        })(i, card);
+      });
+
+      // ── Layout ───────────────────────────────────────
+      function isMobile()  { return window.innerWidth < 768; }
+      function getRadius() { return isMobile() ? 190 : 460; }
+      function cardSize()  { return isMobile() ? { w: 110, h: 155 } : { w: 148, h: 210 }; }
+
+      function layout() {
+        var r    = getRadius();
+        var d    = r * 2;
+        var size = cardSize();
+
+        wheel.style.width      = d + 'px';
+        wheel.style.height     = d + 'px';
+        wheel.style.marginLeft = (-r) + 'px';
+        wheel.style.bottom     = (-(d * 0.52)) + 'px';
+
+        items.forEach(function (it, index) {
+          var angle    = (index / TOTAL) * 2 * Math.PI;
+          var x        = r * Math.cos(angle);
+          var y        = r * Math.sin(angle);
+          var rotation = (angle * 180 / Math.PI) + 90;
+
+          it.card.style.setProperty('--card-w', size.w + 'px');
+          it.card.style.setProperty('--card-h', size.h + 'px');
+          it.li.style.transform =
+            'translate(-50%, -50%) translate3d(' + x.toFixed(2) + 'px,' + y.toFixed(2) + 'px, 0) rotate(' + rotation.toFixed(2) + 'deg)';
+        });
+      }
+
+      layout();
+      var resizeTimer;
+      window.addEventListener('resize', function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(layout, 120);
+      });
+
+      // ── Entrance stagger ─────────────────────────────
+      wheel.classList.add('mounted');
+      items.forEach(function (it, idx) {
+        setTimeout(function () { it.card.classList.add('in'); }, 500 + idx * 70);
+      });
+
+      // ── Scroll rotation ──────────────────────────────
+      var prefersReduced  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var currentRotation = 0;
+      var targetRotation  = 0;
+
+      function updateTarget() {
+        var rect  = section.getBoundingClientRect();
+        var total = rect.height - window.innerHeight;
+        if (total <= 0) { targetRotation = 0; return; }
+        var progress = (-rect.top) / total;
+        progress = Math.min(Math.max(progress, 0), 1);
+        targetRotation = progress * 360;
+      }
+
+      function updateApex() {
+        var best = 0, bestDist = Infinity;
+        for (var i = 0; i < TOTAL; i++) {
+          var angle = ((i / TOTAL) * 360 + currentRotation) % 360;
+          var dist  = Math.abs(((angle - 270 + 540) % 360) - 180);
+          if (dist < bestDist) { bestDist = dist; best = i; }
+        }
+        if (best !== apexIdx) {
+          apexIdx = best;
+          var proj = projects[best];
+          wheelIdx.textContent = String(best + 1).padStart(2, '0') + ' / ' + String(TOTAL).padStart(2, '0');
+
+          // fade year out → swap → fade in
+          wheelYear.classList.remove('fade-in');
+          wheelYear.classList.add('fade-out');
+          wheelTitle.classList.remove('fade-in');
+          wheelTitle.classList.add('fade-out');
+          wheelRole.classList.remove('fade-in');
+          wheelRole.classList.add('fade-out');
+
+          setTimeout(function () {
+            wheelYear.textContent  = proj.year;
+            wheelTitle.textContent = proj.title;
+            wheelRole.textContent  = proj.role;
+            wheelYear.classList.remove('fade-out');
+            wheelYear.classList.add('fade-in');
+            wheelTitle.classList.remove('fade-out');
+            wheelTitle.classList.add('fade-in');
+            wheelRole.classList.remove('fade-out');
+            wheelRole.classList.add('fade-in');
+          }, 180);
+        }
+      }
+
+      function tick() {
+        updateTarget();
+        currentRotation += (targetRotation - currentRotation) * (prefersReduced ? 1 : 0.12);
+        wheel.style.transform = 'rotate(' + currentRotation.toFixed(2) + 'deg)';
+        hint.style.opacity    = currentRotation < 4 ? '0.6' : '0';
+        updateApex();
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+
+      // ── Project overlay ───────────────────────────────
+      var savedScrollY = 0;
+
+      function openProject(idx) {
+        var proj = projects[idx];
+        var pal  = palettes[idx % palettes.length];
+
+        // header
+        overlayName.textContent  = proj.title;
+        overlayBadge.textContent = proj.year + ' · ' + proj.type + (proj.client ? ' · ' + proj.client : '');
+
+        // cover
+        coverImg.src = 'https://placehold.co/600x800/' + pal[0] + '/' + pal[0];
+        coverImg.alt = proj.title;
+
+        // details
+        detailTitle.textContent = proj.title;
+
+        detailMeta.innerHTML = '';
+        function addMeta(text) {
+          var s = document.createElement('span');
+          s.textContent = text;
+          detailMeta.appendChild(s);
+        }
+        addMeta(proj.year);
+        addMeta('·');
+        addMeta(proj.type);
+        if (proj.client) { addMeta('·'); addMeta(proj.client); }
+
+        detailDesc.textContent = 'A placeholder description for ' + proj.title + '. Replace this with the real synopsis, context, or notes about the project when ready.';
+        watchBtn.href = proj.watchUrl;
+
+        // lock scroll + show overlay
+        savedScrollY = window.scrollY;
+        document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.top      = '-' + savedScrollY + 'px';
+        document.body.style.width    = '100%';
+
+        overlay.classList.add('open');
+        overlay.scrollTop = 0;
+
+        // stagger content in
+        projectCover.classList.remove('revealed');
+        projectDet.classList.remove('revealed');
+        setTimeout(function () { projectCover.classList.add('revealed'); }, 80);
+        setTimeout(function () { projectDet.classList.add('revealed'); }, 180);
+
+        projectBack.focus();
+      }
+
+      function closeProject() {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.top      = '';
+        document.body.style.width    = '';
+        window.scrollTo(0, savedScrollY);
+      }
+
+      projectBack.addEventListener('click', closeProject);
+      overlay.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeProject();
+      });
+    })();
+  </script>
+
+</body>
+</html>

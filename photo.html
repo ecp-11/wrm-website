@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo — Whispering River Media</title>
+  <meta name="description" content="A visual journal from the field — photography by Whispering River Media.">
+  <link rel="icon" href="brand_assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;300;400&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --parchment: #F2EDE6;
+      --linen:     #FAF8F5;
+      --ash:       #C4BFB8;
+      --stone:     #857F78;
+      --slate:     #44403B;
+      --charcoal:  #1C1A17;
+      --sage:      #7D8C7A;
+      --font-display: 'Josefin Sans', sans-serif;
+      --font-body:    'EB Garamond', serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { overflow-y: scroll; }
+    body {
+      background: var(--parchment);
+      color: var(--charcoal);
+      font-family: var(--font-display);
+      -webkit-font-smoothing: antialiased;
+    }
+    a   { color: inherit; text-decoration: none; }
+    img { display: block; }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 200;
+      opacity: 0.3;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.11 0 0 0 0 0.10 0 0 0 0 0.09 0 0 0 0.045 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      mix-blend-mode: multiply;
+    }
+
+    /* ─── Navigation ──────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 36px;
+      background: rgba(250, 248, 245, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--ash);
+    }
+    .nav-brand {
+      font-family: var(--font-display);
+      font-weight: 100;
+      font-size: 13px;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      transition: opacity 0.3s ease;
+    }
+    .nav-brand:hover { opacity: 0.6; }
+    .nav-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 36px;
+    }
+    .nav-link {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--stone);
+      transition: color 0.3s ease;
+    }
+    .nav-link:hover  { color: var(--charcoal); }
+    .nav-link.active { color: var(--charcoal); }
+    .nav-info {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--stone);
+      transition: color 0.3s ease;
+    }
+    .nav-info:hover { color: var(--charcoal); }
+
+    /* ─── Intro ───────────────────────────────────── */
+    .intro {
+      padding: 200px 32px 80px;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .eyebrow {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 22px;
+    }
+    .intro h1 {
+      font-family: var(--font-display);
+      font-weight: 100;
+      font-size: clamp(28px, 5vw, 48px);
+      letter-spacing: 0.04em;
+      line-height: 1.4;
+      color: var(--charcoal);
+    }
+    .intro p {
+      margin-top: 20px;
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--slate);
+      max-width: 56ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ─── Radial gallery ──────────────────────────── */
+    .wheel-section {
+      position: relative;
+      height: 340vh;
+    }
+
+    .wheel-pin {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .wheel-mask {
+      position: relative;
+      width: 100%;
+      height: 68vh;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(to top, transparent 0%, black 38%, black 100%);
+      mask-image: linear-gradient(to top, transparent 0%, black 38%, black 100%);
+    }
+
+    .wheel {
+      position: absolute;
+      left: 50%;
+      will-change: transform;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    .wheel.mounted { opacity: 1; }
+
+    .wheel-item {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+
+    .wheel-card {
+      position: relative;
+      display: block;
+      cursor: pointer;
+      outline: none;
+      border-radius: 12px;
+      overflow: hidden;
+      width: var(--card-w, 132px);
+      height: var(--card-h, 178px);
+      transform: scale(0);
+      opacity: 0;
+      transition:
+        transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.5s ease,
+        opacity 0.5s ease,
+        box-shadow 0.5s ease;
+      box-shadow:
+        0 18px 40px -16px rgba(28, 26, 23, 0.42),
+        0 4px 10px rgba(28, 26, 23, 0.2);
+    }
+    .wheel-card.in { opacity: 1; transform: scale(1); }
+    .wheel-card.hovered {
+      transform: scale(1.22) translateY(-26px);
+      box-shadow: 0 28px 60px -16px rgba(28,26,23,0.5), 0 8px 18px rgba(28,26,23,0.28);
+    }
+    .wheel-card.dimmed { opacity: 0.4; filter: blur(2px) grayscale(1); }
+
+    .wheel-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(0.5) sepia(0.06) saturate(0.95) contrast(1.05);
+    }
+    .wheel-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(28,26,23,0.65) 0%, rgba(28,26,23,0.1) 55%, transparent 75%);
+      pointer-events: none;
+    }
+
+    .wheel-card-title {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      z-index: 1;
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--linen);
+      opacity: 0.85;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .wheel-hint {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 6;
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 10px;
+      letter-spacing: 0.36em;
+      text-transform: uppercase;
+      color: var(--stone);
+      opacity: 0.6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.5s ease;
+    }
+    .wheel-hint .line {
+      width: 1px;
+      height: 28px;
+      background: linear-gradient(to bottom, var(--stone), transparent);
+      animation: hint-pulse 1.8s ease-in-out infinite;
+    }
+    @keyframes hint-pulse {
+      0%, 100% { opacity: 0.25; transform: scaleY(0.7); }
+      50%      { opacity: 1;    transform: scaleY(1); }
+    }
+
+    /* ─── Center label ────────────────────────────── */
+    .wheel-center {
+      position: absolute;
+      top: 38%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      text-align: center;
+      pointer-events: none;
+    }
+    .wheel-center-index {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 10px;
+      letter-spacing: 0.36em;
+      text-transform: uppercase;
+      color: var(--stone);
+      opacity: 0.55;
+    }
+    .wheel-center-label {
+      display: block;
+      margin-top: 10px;
+      font-family: var(--font-display);
+      font-weight: 100;
+      font-size: clamp(22px, 3.6vw, 42px);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .wheel-center-label.fade-out {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+    .wheel-center-label.fade-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── Album overlay ───────────────────────────── */
+    .album-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: var(--parchment);
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      transform: translateY(40px);
+      pointer-events: none;
+      transition:
+        opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .album-overlay.open {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+    }
+
+    .album-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 36px;
+      background: rgba(242, 237, 230, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--ash);
+      flex-shrink: 0;
+    }
+
+    .album-back {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--stone);
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    .album-back:hover { color: var(--charcoal); transform: translateX(-3px); }
+    .album-back:focus-visible { outline: 2px solid var(--sage); outline-offset: 3px; }
+    .album-back-arrow { font-size: 14px; }
+
+    .album-title-bar {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .album-eyebrow {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 9px;
+      letter-spacing: 0.36em;
+      text-transform: uppercase;
+      color: var(--stone);
+      opacity: 0.7;
+    }
+    .album-name {
+      font-family: var(--font-display);
+      font-weight: 100;
+      font-size: 15px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+    }
+
+    .album-counter {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      color: var(--stone);
+    }
+
+    .album-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 48px 36px 80px;
+    }
+
+    .album-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .album-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .album-body { padding: 28px 16px 60px; }
+    }
+    @media (max-width: 480px) {
+      .album-grid { grid-template-columns: 1fr; }
+    }
+
+    .album-photo {
+      position: relative;
+      overflow: hidden;
+      border-radius: 6px;
+      cursor: pointer;
+      background: var(--ash);
+    }
+    .album-photo:nth-child(3n+1) { aspect-ratio: 3 / 4; }
+    .album-photo:nth-child(3n+2) { aspect-ratio: 4 / 5; }
+    .album-photo:nth-child(3n)   { aspect-ratio: 2 / 3; }
+
+    .album-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(0.3) sepia(0.06) saturate(0.95) contrast(1.05);
+      transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+    }
+    .album-photo:hover img {
+      transform: scale(1.04);
+      filter: grayscale(0) sepia(0.04) saturate(1.05) contrast(1.03);
+    }
+    .album-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(28,26,23,0.28) 0%, transparent 40%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .album-photo:hover::after { opacity: 1; }
+
+    /* stagger in album photos */
+    .album-photo {
+      opacity: 0;
+      transform: translateY(18px);
+      transition:
+        opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.6s ease;
+    }
+    .album-photo.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── Footer ──────────────────────────────────── */
+    footer {
+      position: relative;
+      z-index: 5;
+      background: var(--charcoal);
+      padding: 36px 48px;
+      text-align: center;
+    }
+    .footer-links {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ash);
+    }
+    .footer-links a { transition: color 0.3s ease; }
+    .footer-links a:hover { color: var(--parchment); }
+    .footer-divider { margin: 0 14px; color: var(--slate); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-brand">WRM</a>
+    <div class="nav-center">
+      <a href="film.html" class="nav-link">Film</a>
+      <a href="photo.html" class="nav-link active">Photo</a>
+    </div>
+    <a href="info.html" class="nav-info">Info</a>
+  </nav>
+
+  <header class="intro">
+    <p class="eyebrow">Photo</p>
+    <h1>A visual journal from the field</h1>
+    <p>Stills gathered between takes — quiet studies of the landscapes, light, and people that shape our films. Scroll to turn the wheel.</p>
+  </header>
+
+  <section class="wheel-section" id="wheelSection">
+    <div class="wheel-pin">
+      <div class="wheel-mask">
+        <ul class="wheel" id="wheel"></ul>
+      </div>
+      <div class="wheel-center">
+        <span class="wheel-center-index" id="wheelIndex">01 / 14</span>
+        <span class="wheel-center-label fade-in" id="wheelLabel">Riverbed</span>
+      </div>
+      <div class="wheel-hint" id="wheelHint">
+        <span>Scroll</span>
+        <span class="line"></span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p class="footer-links">
+      <a href="https://www.instagram.com/ethancparrish/" target="_blank" rel="noopener">Instagram</a><span class="footer-divider">|</span><a href="https://www.youtube.com/@ethancparrish" target="_blank" rel="noopener">Youtube</a><span class="footer-divider">|</span><a href="https://www.linkedin.com/in/ethancparrish/" target="_blank" rel="noopener">LinkedIn</a>
+    </p>
+  </footer>
+
+  <!-- Album overlay -->
+  <div class="album-overlay" id="albumOverlay" role="dialog" aria-modal="true" aria-label="Photo album">
+    <div class="album-header">
+      <button class="album-back" id="albumBack" aria-label="Back to gallery">
+        <span class="album-back-arrow">&#8592;</span>
+        <span>Gallery</span>
+      </button>
+      <div class="album-title-bar">
+        <span class="album-eyebrow">Album</span>
+        <span class="album-name" id="albumName"></span>
+      </div>
+      <span class="album-counter" id="albumCounter"></span>
+    </div>
+    <div class="album-body">
+      <div class="album-grid" id="albumGrid"></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var TOTAL = 14;
+
+      // Album data — title + 8 cover photos each (swap src for real images)
+      var albums = [
+        { title: 'Riverbed',   photos: 8  },
+        { title: 'Strata',     photos: 9  },
+        { title: 'Fieldnotes', photos: 7  },
+        { title: 'Horizon',    photos: 10 },
+        { title: 'Outcrop',    photos: 6  },
+        { title: 'Tideline',   photos: 8  },
+        { title: 'Basin',      photos: 9  },
+        { title: 'Ridgeline',  photos: 7  },
+        { title: 'Quarry',     photos: 6  },
+        { title: 'Delta',      photos: 8  },
+        { title: 'Canyon',     photos: 10 },
+        { title: 'Watershed',  photos: 9  },
+        { title: 'Bedrock',    photos: 7  },
+        { title: 'Summit',     photos: 8  }
+      ];
+
+      // Palette pairs [bg, text] for placeholder images
+      var palettes = [
+        ['44403b','c4bfb8'], ['857f78','f2ede6'], ['1c1a17','857f78'],
+        ['7d8c7a','f2ede6'], ['c4bfb8','44403b'], ['44403b','7d8c7a']
+      ];
+
+      var wheel      = document.getElementById('wheel');
+      var section    = document.getElementById('wheelSection');
+      var hint       = document.getElementById('wheelHint');
+      var centerIdx  = document.getElementById('wheelIndex');
+      var centerLbl  = document.getElementById('wheelLabel');
+      var overlay    = document.getElementById('albumOverlay');
+      var albumName  = document.getElementById('albumName');
+      var albumCtr   = document.getElementById('albumCounter');
+      var albumGrid  = document.getElementById('albumGrid');
+      var albumBack  = document.getElementById('albumBack');
+
+      var apexIdx = 0;
+      var items   = [];
+
+      // ── Build wheel cards ───────────────────────────
+      albums.forEach(function (album, i) {
+        var li   = document.createElement('li');
+        li.className = 'wheel-item';
+
+        var card = document.createElement('div');
+        card.className = 'wheel-card';
+        card.setAttribute('role', 'button');
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('aria-label', 'Open album: ' + album.title);
+
+        var pal = palettes[i % palettes.length];
+        var img = document.createElement('img');
+        img.src = 'https://placehold.co/360x480/' + pal[0] + '/' + pal[0];
+        img.alt = album.title;
+        card.appendChild(img);
+
+        var title = document.createElement('span');
+        title.className = 'wheel-card-title';
+        title.textContent = album.title;
+        card.appendChild(title);
+
+        li.appendChild(card);
+        wheel.appendChild(li);
+        items.push({ li: li, card: card, album: album, index: i });
+
+        // hover / focus interactions
+        (function (idx, cardEl) {
+          function setHover(on) {
+            items.forEach(function (it, j) {
+              if (j === idx) {
+                it.card.classList.toggle('hovered', on);
+                it.card.classList.remove('dimmed');
+              } else {
+                it.card.classList.toggle('dimmed', on);
+                it.card.classList.remove('hovered');
+              }
+            });
+          }
+          cardEl.addEventListener('mouseenter', function () { setHover(true); });
+          cardEl.addEventListener('mouseleave', function () { setHover(false); });
+          cardEl.addEventListener('focus',      function () { setHover(true); });
+          cardEl.addEventListener('blur',       function () { setHover(false); });
+
+          // click → open album
+          cardEl.addEventListener('click', function () { openAlbum(idx); });
+          cardEl.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openAlbum(idx); }
+          });
+        })(i, card);
+      });
+
+      // ── Layout ──────────────────────────────────────
+      function isMobile()  { return window.innerWidth < 768; }
+      function getRadius() { return isMobile() ? 190 : 460; }
+      function cardSize()  { return isMobile() ? { w: 96, h: 130 } : { w: 132, h: 178 }; }
+
+      function layout() {
+        var r    = getRadius();
+        var d    = r * 2;
+        var size = cardSize();
+        var hiddenDecimal = 0.52;
+
+        wheel.style.width     = d + 'px';
+        wheel.style.height    = d + 'px';
+        wheel.style.marginLeft = (-r) + 'px';
+        wheel.style.bottom    = (-(d * hiddenDecimal)) + 'px';
+
+        items.forEach(function (it, index) {
+          var angle    = (index / TOTAL) * 2 * Math.PI;
+          var x        = r * Math.cos(angle);
+          var y        = r * Math.sin(angle);
+          var rotation = (angle * 180 / Math.PI) + 90;
+
+          it.card.style.setProperty('--card-w', size.w + 'px');
+          it.card.style.setProperty('--card-h', size.h + 'px');
+          it.li.style.transform =
+            'translate(-50%, -50%) translate3d(' + x.toFixed(2) + 'px,' + y.toFixed(2) + 'px, 0) rotate(' + rotation.toFixed(2) + 'deg)';
+        });
+      }
+
+      layout();
+      var resizeTimer;
+      window.addEventListener('resize', function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(layout, 120);
+      });
+
+      // ── Entrance stagger ────────────────────────────
+      wheel.classList.add('mounted');
+      items.forEach(function (it, idx) {
+        setTimeout(function () { it.card.classList.add('in'); }, 500 + idx * 55);
+      });
+
+      // ── Scroll rotation ─────────────────────────────
+      var prefersReduced  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var currentRotation = 0;
+      var targetRotation  = 0;
+
+      function updateTarget() {
+        var rect  = section.getBoundingClientRect();
+        var total = rect.height - window.innerHeight;
+        if (total <= 0) { targetRotation = 0; return; }
+        var progress = (-rect.top) / total;
+        progress = Math.min(Math.max(progress, 0), 1);
+        targetRotation = progress * 360;
+      }
+
+      function updateApex() {
+        var best = 0, bestDist = Infinity;
+        for (var i = 0; i < TOTAL; i++) {
+          var angle = ((i / TOTAL) * 360 + currentRotation) % 360;
+          var dist  = Math.abs(((angle - 270 + 540) % 360) - 180);
+          if (dist < bestDist) { bestDist = dist; best = i; }
+        }
+        if (best !== apexIdx) {
+          apexIdx = best;
+          centerIdx.textContent = String(best + 1).padStart(2, '0') + ' / ' + String(TOTAL).padStart(2, '0');
+          centerLbl.classList.remove('fade-in');
+          centerLbl.classList.add('fade-out');
+          setTimeout(function () {
+            centerLbl.textContent = albums[apexIdx].title;
+            centerLbl.classList.remove('fade-out');
+            centerLbl.classList.add('fade-in');
+          }, 180);
+        }
+      }
+
+      function tick() {
+        updateTarget();
+        currentRotation += (targetRotation - currentRotation) * (prefersReduced ? 1 : 0.12);
+        wheel.style.transform = 'rotate(' + currentRotation.toFixed(2) + 'deg)';
+        hint.style.opacity    = currentRotation < 4 ? '0.6' : '0';
+        updateApex();
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+
+      // ── Album overlay ───────────────────────────────
+      var savedScrollY = 0;
+
+      function openAlbum(idx) {
+        var album = albums[idx];
+
+        // populate header
+        albumName.textContent = album.title;
+        albumCtr.textContent  = album.photos + ' photos';
+
+        // build grid
+        albumGrid.innerHTML = '';
+        for (var p = 0; p < album.photos; p++) {
+          var pal   = palettes[(idx + p) % palettes.length];
+          // vary dimensions for visual interest
+          var dims  = [['360','480'],['480','600'],['360','540'],['480','560'],['400','520']];
+          var d     = dims[p % dims.length];
+          var photo = document.createElement('div');
+          photo.className = 'album-photo';
+
+          var pImg  = document.createElement('img');
+          pImg.src  = 'https://placehold.co/' + d[0] + 'x' + d[1] + '/' + pal[0] + '/' + pal[0];
+          pImg.alt  = album.title + ' — ' + (p + 1);
+          photo.appendChild(pImg);
+          albumGrid.appendChild(photo);
+        }
+
+        // lock page scroll, show overlay
+        savedScrollY = window.scrollY;
+        document.body.style.overflow  = 'hidden';
+        document.body.style.position  = 'fixed';
+        document.body.style.top       = '-' + savedScrollY + 'px';
+        document.body.style.width     = '100%';
+
+        overlay.classList.add('open');
+        overlay.scrollTop = 0;
+
+        // stagger photos in
+        var photos = albumGrid.querySelectorAll('.album-photo');
+        photos.forEach(function (el, i) {
+          setTimeout(function () { el.classList.add('revealed'); }, 80 + i * 55);
+        });
+
+        // focus management
+        albumBack.focus();
+      }
+
+      function closeAlbum() {
+        overlay.classList.remove('open');
+        document.body.style.overflow  = '';
+        document.body.style.position  = '';
+        document.body.style.top       = '';
+        document.body.style.width     = '';
+        window.scrollTo(0, savedScrollY);
+      }
+
+      albumBack.addEventListener('click', closeAlbum);
+      overlay.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeAlbum();
+      });
+    })();
+  </script>
+
+</body>
+</html>
