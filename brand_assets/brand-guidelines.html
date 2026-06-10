@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WRM — Brand Guidelines</title>
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="brand_assets/favicon.svg" type="image/svg+xml">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,6 +58,7 @@
       gap: 0;
       background: #FAF8F5;
       z-index: 10;
+      overflow-y: auto;
     }
     .sidebar-brand {
       font-family: 'Josefin Sans', sans-serif;
@@ -137,6 +138,15 @@
       letter-spacing: -0.01em;
       color: #1C1A17;
       margin: 0 0 8px 0;
+    }
+    h3 {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 300;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #44403B;
+      margin: 40px 0 12px;
     }
     .section-intro {
       font-family: 'EB Garamond', serif;
@@ -238,7 +248,7 @@
     /* ─── Logo section ──────────────────────────────── */
     .logo-display {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 1px;
       background: #C4BFB8;
       border: 1px solid #C4BFB8;
@@ -297,6 +307,74 @@
       flex-shrink: 0;
       line-height: 1.2;
     }
+
+    /* ─── Download button ───────────────────────────── */
+    .dl-btn {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 400;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #44403B;
+      background: none;
+      border: 1px solid #C4BFB8;
+      padding: 11px 22px;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .dl-btn:hover { border-color: #1C1A17; color: #1C1A17; }
+
+    /* ─── Icon mark ──────────────────────────────────── */
+    .icon-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin: 0 0 40px;
+    }
+    .icon-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .icon-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+      border: 1px solid #C4BFB8;
+    }
+    .checker {
+      background: repeating-conic-gradient(#ddd 0% 25%, #f0ece6 0% 50%) 0 0 / 14px 14px;
+    }
+    .icon-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 400;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #857F78;
+    }
+    .sz-row {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .sz-btn {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 400;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #44403B;
+      background: none;
+      border: 1px solid #C4BFB8;
+      padding: 5px 9px;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .sz-btn:hover { border-color: #1C1A17; color: #1C1A17; }
 
     /* ─── Favicon showcase ──────────────────────────── */
     .favicon-showcase {
@@ -433,6 +511,8 @@
     <a href="#color"       class="nav-link">Color Palette</a>
     <a href="#typography"  class="nav-link">Typography</a>
     <a href="#logo"        class="nav-link">Logo</a>
+    <a href="#poster"      class="nav-link">Brand Poster</a>
+    <a href="#icon-mark"   class="nav-link">Icon Mark</a>
     <a href="#favicon"     class="nav-link">Favicon</a>
     <a href="#application" class="nav-link">Application</a>
 
@@ -618,7 +698,7 @@
     <section id="logo">
       <div class="section-label">04 — Logo</div>
       <h2>Logo</h2>
-      <p class="section-intro">The WRM mark used on light and dark surfaces. Maintain clear space equal to the cap-height of the "W" on all four sides. Minimum digital size: 200px wide.</p>
+      <p class="section-intro">The WRM mark used on light, dark, and neutral surfaces. Maintain clear space equal to the cap-height of the "W" on all four sides. Minimum size: 200px wide for digital, 1.5 inches for print.</p>
 
       <div class="logo-display">
         <div class="logo-cell" style="background:#FAF8F5;">
@@ -628,6 +708,10 @@
         <div class="logo-cell" style="background:#1C1A17;">
           <img src="brand_assets/Simple_trsnprnt_Square.png" alt="WRM Logo — dark background" style="filter: invert(1) brightness(0.93);">
           <div class="logo-cell-label" style="color:#857F78;">On Charcoal</div>
+        </div>
+        <div class="logo-cell" style="background:#F2EDE6;">
+          <img src="brand_assets/Simple_trsnprnt_Square.png" alt="WRM Logo — neutral background" style="opacity:0.45;">
+          <div class="logo-cell-label" style="color:#857F78;">On Neutral / Stone</div>
         </div>
       </div>
 
@@ -640,11 +724,101 @@
         <div class="dont-item">Add outlines to the letterforms</div>
         <div class="dont-item">Use on backgrounds that reduce legibility</div>
       </div>
+
+      <div class="dont-label">Download</div>
+      <button class="dl-btn" onclick="downloadLogo()">Download primary logo (PNG 4096×4096)</button>
+    </section>
+
+    <!-- ─── Brand Poster ────────────────────────────────── -->
+    <section id="poster">
+      <div class="section-label">05 — Brand Poster</div>
+      <h2>Brand Poster</h2>
+      <p class="section-intro">A museum-quality brand identity sheet — mountain mark, full color palette, typography note, and WRM monogram on a charcoal field. Use as a pitch deck cover, festival submission cover page, or internal reference.</p>
+
+      <img src="brand_assets/wrm-brand-poster.png" alt="WRM Brand Poster" style="width:100%; max-width:480px; display:block; margin-bottom:24px; border:1px solid #C4BFB8;">
+      <button class="dl-btn" onclick="downloadPoster()">Download brand poster (PNG 2400×3200)</button>
+    </section>
+
+    <!-- ─── Icon Mark ───────────────────────────────────── -->
+    <section id="icon-mark">
+      <div class="section-label">06 — Icon Mark</div>
+      <h2>Icon Mark</h2>
+      <p class="section-intro">A compact mark for favicons, social profiles, and app icons where the full logo would be illegible. Use the Mountain Mark as the default; the Monogram is an alternative for contexts where the illustration reads as too complex.</p>
+
+      <h3>Mountain Mark</h3>
+      <p class="section-intro" style="margin-bottom:20px;">Simplified mountain range with river lines and a tight WRM monogram. Recommended for most icon contexts.</p>
+      <div class="icon-row">
+        <div class="icon-card">
+          <div class="icon-wrap checker"><canvas id="mt-prev-light" width="160" height="160"></canvas></div>
+          <div class="icon-label">Light (transparent)</div>
+          <div class="sz-row">
+            <button class="sz-btn" onclick="dlMark('mountain','light',512)">512</button>
+            <button class="sz-btn" onclick="dlMark('mountain','light',180)">180</button>
+            <button class="sz-btn" onclick="dlMark('mountain','light',32)">32</button>
+            <button class="sz-btn" onclick="dlMark('mountain','light',16)">16</button>
+          </div>
+        </div>
+        <div class="icon-card">
+          <div class="icon-wrap" style="background:#1C1A17;"><canvas id="mt-prev-dark" width="160" height="160"></canvas></div>
+          <div class="icon-label">Dark background</div>
+          <div class="sz-row">
+            <button class="sz-btn" onclick="dlMark('mountain','dark',512)">512</button>
+            <button class="sz-btn" onclick="dlMark('mountain','dark',180)">180</button>
+            <button class="sz-btn" onclick="dlMark('mountain','dark',32)">32</button>
+            <button class="sz-btn" onclick="dlMark('mountain','dark',16)">16</button>
+          </div>
+        </div>
+        <div class="icon-card">
+          <div class="icon-wrap" style="background:#F2EDE6;"><canvas id="mt-prev-parchment" width="160" height="160"></canvas></div>
+          <div class="icon-label">Parchment bg</div>
+          <div class="sz-row">
+            <button class="sz-btn" onclick="dlMark('mountain','parchment',512)">512</button>
+            <button class="sz-btn" onclick="dlMark('mountain','parchment',180)">180</button>
+            <button class="sz-btn" onclick="dlMark('mountain','parchment',32)">32</button>
+            <button class="sz-btn" onclick="dlMark('mountain','parchment',16)">16</button>
+          </div>
+        </div>
+      </div>
+
+      <h3>Monogram</h3>
+      <p class="section-intro" style="margin-bottom:20px;">WRM lettermark with a river line. Use when the mountain illustration is too dense for the context.</p>
+      <div class="icon-row">
+        <div class="icon-card">
+          <div class="icon-wrap checker"><canvas id="mo-prev-light" width="160" height="160"></canvas></div>
+          <div class="icon-label">Light (transparent)</div>
+          <div class="sz-row">
+            <button class="sz-btn" onclick="dlMark('monogram','light',512)">512</button>
+            <button class="sz-btn" onclick="dlMark('monogram','light',180)">180</button>
+            <button class="sz-btn" onclick="dlMark('monogram','light',32)">32</button>
+            <button class="sz-btn" onclick="dlMark('monogram','light',16)">16</button>
+          </div>
+        </div>
+        <div class="icon-card">
+          <div class="icon-wrap" style="background:#1C1A17;"><canvas id="mo-prev-dark" width="160" height="160"></canvas></div>
+          <div class="icon-label">Dark background</div>
+          <div class="sz-row">
+            <button class="sz-btn" onclick="dlMark('monogram','dark',512)">512</button>
+            <button class="sz-btn" onclick="dlMark('monogram','dark',180)">180</button>
+            <button class="sz-btn" onclick="dlMark('monogram','dark',32)">32</button>
+            <button class="sz-btn" onclick="dlMark('monogram','dark',16)">16</button>
+          </div>
+        </div>
+        <div class="icon-card">
+          <div class="icon-wrap" style="background:#F2EDE6;"><canvas id="mo-prev-parchment" width="160" height="160"></canvas></div>
+          <div class="icon-label">Parchment bg</div>
+          <div class="sz-row">
+            <button class="sz-btn" onclick="dlMark('monogram','parchment',512)">512</button>
+            <button class="sz-btn" onclick="dlMark('monogram','parchment',180)">180</button>
+            <button class="sz-btn" onclick="dlMark('monogram','parchment',32)">32</button>
+            <button class="sz-btn" onclick="dlMark('monogram','parchment',16)">16</button>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- ─── Favicon ─────────────────────────────────────── -->
     <section id="favicon">
-      <div class="section-label">05 — Favicon</div>
+      <div class="section-label">07 — Favicon</div>
       <h2>Favicon</h2>
       <p class="section-intro">A river-focused mark built for browser tab scale. The two Sage Bézier curves carry the brand identity at 16–32px; the WRM text is a detail visible only at larger sizes.</p>
 
@@ -677,7 +851,7 @@
 
     <!-- ─── Application Reference ──────────────────────── -->
     <section id="application">
-      <div class="section-label">06 — Application</div>
+      <div class="section-label">08 — Application</div>
       <h2>Application</h2>
       <p class="section-intro">Surface-by-surface reference for background, text, and logo color pairings across all WRM touchpoints.</p>
 
@@ -740,6 +914,133 @@
   </main>
 
   <script>
+    /* ─── Icon mark canvas rendering ─────────────────── */
+    const C = '#1C1A17', P = '#F2EDE6';
+
+    function bgFor(variant) {
+      return variant === 'dark' ? C : variant === 'parchment' ? P : null;
+    }
+    function fgFor(variant) {
+      return variant === 'dark' ? P : C;
+    }
+
+    function drawLetterSpaced(ctx, text, cx, cy, spacing) {
+      const chars = text.split('');
+      const widths = chars.map(c => ctx.measureText(c).width);
+      const totalW = widths.reduce((a, b) => a + b, 0) + spacing * (chars.length - 1);
+      let x = cx - totalW / 2;
+      chars.forEach((c, i) => {
+        ctx.fillText(c, x, cy);
+        x += widths[i] + (i < chars.length - 1 ? spacing : 0);
+      });
+    }
+
+    function drawMountain(canvas, fg, bg) {
+      const sz = canvas.width, ctx = canvas.getContext('2d'), s = sz / 512;
+      ctx.clearRect(0, 0, sz, sz);
+      if (bg) { ctx.fillStyle = bg; ctx.fillRect(0, 0, sz, sz); }
+
+      ctx.strokeStyle = fg;
+      ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+
+      ctx.beginPath();
+      ctx.moveTo(72*s,265*s); ctx.lineTo(142*s,180*s); ctx.lineTo(198*s,228*s);
+      ctx.lineTo(256*s,65*s); ctx.lineTo(314*s,214*s);
+      ctx.lineTo(370*s,155*s); ctx.lineTo(440*s,265*s);
+      ctx.lineWidth = Math.max(0.5, 2.5*s); ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(72*s,284*s);
+      ctx.bezierCurveTo(132*s,277*s,182*s,291*s,256*s,284*s);
+      ctx.bezierCurveTo(330*s,277*s,380*s,291*s,440*s,284*s);
+      ctx.lineWidth = Math.max(0.4, 1.5*s); ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(88*s,300*s);
+      ctx.bezierCurveTo(148*s,293*s,192*s,307*s,256*s,300*s);
+      ctx.bezierCurveTo(320*s,293*s,368*s,307*s,424*s,300*s);
+      ctx.lineWidth = Math.max(0.3, 1*s); ctx.stroke();
+
+      const fs = Math.round(90*s);
+      ctx.font = `100 ${fs}px 'Josefin Sans', sans-serif`;
+      ctx.fillStyle = fg; ctx.textBaseline = 'middle';
+      drawLetterSpaced(ctx, 'WRM', 256*s, 398*s, 10*s);
+    }
+
+    function drawMonogram(canvas, fg, bg) {
+      const sz = canvas.width, ctx = canvas.getContext('2d'), s = sz / 512;
+      ctx.clearRect(0, 0, sz, sz);
+      if (bg) { ctx.fillStyle = bg; ctx.fillRect(0, 0, sz, sz); }
+
+      const fs = Math.round(128*s);
+      ctx.font = `100 ${fs}px 'Josefin Sans', sans-serif`;
+      ctx.fillStyle = fg; ctx.textBaseline = 'middle';
+      drawLetterSpaced(ctx, 'WRM', sz/2, 256*s, 28*s);
+
+      const lineY = 256*s + fs * 0.46;
+      ctx.beginPath();
+      ctx.moveTo(75*s, lineY); ctx.lineTo(437*s, lineY);
+      ctx.strokeStyle = fg;
+      ctx.lineWidth = Math.max(0.5, 1.2*s);
+      ctx.lineCap = 'round'; ctx.stroke();
+    }
+
+    function makeCanvas(size) {
+      const c = document.createElement('canvas');
+      c.width = c.height = size; return c;
+    }
+
+    function dlMark(type, variant, size) {
+      const c = makeCanvas(size);
+      const fn = type === 'mountain' ? drawMountain : drawMonogram;
+      fn(c, fgFor(variant), bgFor(variant));
+      const a = document.createElement('a');
+      a.download = `wrm-${type}-${variant}-${size}.png`;
+      a.href = c.toDataURL('image/png'); a.click();
+    }
+
+    function downloadPoster() {
+      fetch('brand_assets/wrm-brand-poster.png')
+        .then(r => r.blob())
+        .then(blob => {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url; a.download = 'wrm-brand-poster.png'; a.click();
+          URL.revokeObjectURL(url);
+        });
+    }
+
+    function downloadLogo() {
+      fetch('brand_assets/Simple_trsnprnt_Square.png')
+        .then(r => r.blob())
+        .then(blob => {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url; a.download = 'wrm-logo.png'; a.click();
+          URL.revokeObjectURL(url);
+        });
+    }
+
+    function renderPreviews() {
+      [
+        ['mt-prev-light',     drawMountain,  C, null],
+        ['mt-prev-dark',      drawMountain,  P,  C  ],
+        ['mt-prev-parchment', drawMountain,  C,  P  ],
+        ['mo-prev-light',     drawMonogram,  C, null],
+        ['mo-prev-dark',      drawMonogram,  P,  C  ],
+        ['mo-prev-parchment', drawMonogram,  C,  P  ],
+      ].forEach(([id, fn, fg, bg]) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const src = makeCanvas(512);
+        fn(src, fg, bg);
+        el.getContext('2d').drawImage(src, 0, 0, 160, 160);
+      });
+    }
+
+    document.fonts.ready.then(renderPreviews);
+
+    /* ─── Sidebar scroll-spy ──────────────────────────── */
     const links = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('section[id]');
     function setActive() {
