@@ -237,25 +237,6 @@
       color: var(--parchment);
       opacity: 0.55;
     }
-    .wheel-card-role {
-      position: absolute;
-      bottom: 30px;
-      left: 12px;
-      right: 12px;
-      z-index: 1;
-      font-family: var(--font-body);
-      font-style: italic;
-      font-size: 11px;
-      color: var(--ash);
-      opacity: 0;
-      transform: translateY(4px);
-      transition: opacity 0.35s ease, transform 0.35s ease;
-    }
-    .wheel-card.hovered .wheel-card-role {
-      opacity: 0.85;
-      transform: translateY(0);
-    }
-
     /* ─── Scroll hint ─────────────────────────────── */
     .wheel-hint {
       position: absolute;
@@ -338,12 +319,25 @@
       opacity: 0.7;
       transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
     }
+    .wheel-center-client {
+      display: block;
+      margin-top: 6px;
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: clamp(10px, 1.1vw, 12px);
+      color: var(--stone);
+      opacity: 0.6;
+      transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .wheel-center-client:empty { display: none; }
     .wheel-center-year.fade-out,
     .wheel-center-title.fade-out,
-    .wheel-center-role.fade-out  { opacity: 0; transform: translateY(-6px); }
+    .wheel-center-role.fade-out,
+    .wheel-center-client.fade-out { opacity: 0; transform: translateY(-6px); }
     .wheel-center-year.fade-in,
     .wheel-center-title.fade-in,
-    .wheel-center-role.fade-in   { opacity: 1; transform: translateY(0); }
+    .wheel-center-role.fade-in,
+    .wheel-center-client.fade-in  { opacity: 1; transform: translateY(0); }
 
     /* ─── Project overlay ─────────────────────────── */
     .project-overlay {
@@ -567,7 +561,7 @@
     <a href="index.html" class="nav-brand">WRM</a>
     <div class="nav-center">
       <a href="film.html" class="nav-link active">Film</a>
-      <a href="photo.html" class="nav-link">Photo</a>
+      <a href="photo-temp.html" class="nav-link">Photo</a>
     </div>
     <a href="info.html" class="nav-info">Info</a>
   </nav>
@@ -588,6 +582,7 @@
         <span class="wheel-center-year fade-in" id="wheelYear">2024</span>
         <span class="wheel-center-title fade-in" id="wheelTitle">What's in a Name?</span>
         <span class="wheel-center-role fade-in" id="wheelRole">Director · Producer · Cinematographer · Editor</span>
+        <span class="wheel-center-client fade-in" id="wheelClient">Whispering River Media</span>
       </div>
       <div class="wheel-hint" id="wheelHint">
         <span>Scroll</span>
@@ -625,7 +620,7 @@
           <div class="project-detail-meta" id="detailMeta"></div>
           <div class="project-rule"></div>
           <p class="project-description" id="detailDesc"></p>
-          <a href="#" class="watch-btn" id="watchBtn">Watch</a>
+          <a href="#" class="watch-btn" id="watchBtn" target="_blank" rel="noopener">Watch</a>
         </div>
       </div>
     </div>
@@ -637,14 +632,14 @@
 
       // Newest → oldest
       var projects = [
-        { title: "What's in a Name?",    year: 2024, type: 'Documentary', client: null,                   role: 'Director · Producer · Cinematographer · Editor', watchUrl: '#' },
-        { title: 'Working with Nature',  year: 2024, type: 'Contracted',  client: 'North Forty',          role: 'Production Team',                                watchUrl: '#' },
-        { title: 'Death of a Glacier',   year: 2023, type: 'Documentary', client: null,                   role: 'Director · Producer · Cinematographer · Editor', watchUrl: '#' },
-        { title: 'Celebrating Life',     year: 2023, type: 'Contracted',  client: 'Rosaland Productions', role: '2nd Unit Cinematography',                        watchUrl: '#' },
-        { title: 'Decolonizing Dinner',  year: 2023, type: 'Contracted',  client: 'Rosaland Productions', role: '2nd Unit Cinematography',                        watchUrl: '#' },
-        { title: 'Decolonizing Science', year: 2022, type: 'Documentary', client: null,                   role: 'Director · Cinematographer',                     watchUrl: '#' },
-        { title: 'Urban Triage',         year: 2022, type: 'Contracted',  client: 'Rosaland Productions', role: '2nd Unit Cinematography',                        watchUrl: '#' },
-        { title: 'Live Like a River',    year: 2021, type: 'Documentary', client: null,                   role: 'Director · Producer · Cinematographer · Editor', watchUrl: '#' }
+        { title: "What's in a Name?",    year: 2024, type: 'Documentary', client: 'Whispering River Media', role: 'Director · Producer · Cinematographer · Editor', watchUrl: '#' },
+        { title: 'Working with Nature',  year: 2024, type: 'Contracted',  client: 'North Forty',            role: 'Production Team',                                watchUrl: 'https://www.youtube.com/watch?v=xQ6M9fcZ1Go', image: 'https://img.youtube.com/vi/xQ6M9fcZ1Go/maxresdefault.jpg' },
+        { title: 'Death of a Glacier',   year: 2023, type: 'Documentary', client: 'Whispering River Media', role: 'Director · Producer · Cinematographer · Editor', watchUrl: '#' },
+        { title: 'Celebrating Life',     year: 2023, type: 'Contracted',  client: 'Bravebird Productions', role: '2nd Unit Cinematography',                        watchUrl: 'https://vimeo.com/1040964610?turnstile=1.bBdezhV6luWZkq5C847NOfZ31a9B2iKVikgUkh1QpnfoVknUBlvbiV2eMkSmwVJ5FDGJ7mzH0de2UQ5jMJQ1IrMdkziIwCOMtASXXmjzhR5MvFJGwfAXdCdMqIUm46okKdWIaxvk9gop0rNCxLrLBcUYbS64NNGK6yiG3IDPF9caWQWePymQR5Wo1WuG5acmud5CaEHHxrIlphcuj9yMZ9hcxZMtl9aTLgkB232lBYLUFVg9ZSKPtdyYxkTcyVpcBoXdKplgc427RhpEmrvMMO73qBHJLLRGtUN4mRGfbLPTCWp6oPtXYhayHv9Yxw6aoeA-F7CshJeGMI3YojRCXgquISwdO-BTLeXphyoAob4lUPHgHm_ns3W21rnq_eaLGS5jmib_oGdq2dbY3LhpAp_sXf8cjopiwnpF6zFd2BGQls-gkjegvGcPKvUBdRsfRkOS3c_dA4RnbawdPehOK5h52hdsbrSRi1-d9Fhy6WvvgKKE3rnshEHosmUlGTHPVP-x_1Zct-AiZ_GEt0iKaKtwU2Mh1tFrCWuUhFblLUC7Y7PdGJUnkrrBg211Uz15f-jSKd1IiKO4ee1vknzefJclxONo-w3HXPnk3Dqk56E.57qX-r1jk0CPHUbfaG8X3A.e0981cf6100e0c396e48dd6cced304bcd84286c04cf2a4194711f1c46929a318', image: 'https://i.vimeocdn.com/video/1963638036-f826b44c429336225d91bc45fd347da2148ccea07c6247591b4be12458f887da-d_1920x1080?region=us' },
+        { title: 'Decolonizing Dinner',  year: 2023, type: 'Contracted',  client: 'Bravebird Productions', role: '2nd Unit Cinematography',                        watchUrl: 'https://vimeo.com/679605275/1b2d49300e?turnstile=1.ttUdenIpZK8duZTwu-BONDUHgRQ2IGStPx1ihmuIGetzncSZTEe9W0PuFonCxvgHjLIK4INhkDmwk0lzL5df5kRueqHdwXS4Z4jX40O5jJFTxSt8XZuqiJUVOmZ9rvG_ebjcFbkiXpQusDSvwl1BemS_dMV36oxArp3XnDGmxngzX7ZMz4Mfu6CCeRcBJdp_VbTksK8wUoqA_wUekQZ_Pg4HKN3l9ZTzOLMXblzHDJzYQ_UcwlywbplPsYEv4NQd9VRxb0lEWZ1D6FqPC3exAY47zicdelxi1sKEROhPgwD4T2qkSaliTEQMRRVd7gxlAQyuw0Gj4xvINeRBuldG12Q680bZp6VkMiu3s6XEhXQDn9FLtZ5y_Ffc8kJZR0BbjlBqyxY8tPwdIGHk9u7cuRTGOpnZOBNu3YC5SDCucXSfcSFdBPlWFKpkqMrp7cydhvWwyMDZ-bam7grIoRQ9jMH85osbu1FkOR-8HdwOapBNdMCuzFMYUp4RQbMny8pScJKD7dgIMl3_yTDZJzZbIrDOCsmC86qc0YZw-xzcKyZSrTWvZGRfq3arsl90Z7AaW7LiD7gCQSeLUV-Byrw33QsUk6IsrmDgj4v-EINFjls.2Spi9aiD5jshfteV5k_HTg.6c1d36d02e330aa442ed9eb7c283a5eb061d98f0c5833a4c625beefef601e9f4', image: 'https://i.vimeocdn.com/video/1377394246-dd06bf39c99ce951412a682d2cacdf216a8a9e4e1eb378fe6e340025fe626add-d_1920x1080?region=us' },
+        { title: 'Decolonizing Science', year: 2022, type: 'Documentary', client: 'Bravebird Productions',  role: 'Director · Cinematographer',                     watchUrl: 'https://www.youtube.com/watch?v=fdWqD5KE-4Q', image: 'https://img.youtube.com/vi/fdWqD5KE-4Q/maxresdefault.jpg' },
+        { title: 'Urban Triage',         year: 2022, type: 'Contracted',  client: 'Bravebird Productions', role: '2nd Unit Cinematography',                        watchUrl: 'https://vimeo.com/891706800?autoplay=1&muted=1&stream_id=Y2xpcHN8MjEyODgzNDl8aWQ6ZGVzY3xbXQ%3D%3D' },
+        { title: 'Love Like a River',    year: 2021, type: 'Documentary', client: 'Whispering River Media', role: 'Director · Producer · Cinematographer · Editor', watchUrl: 'https://www.youtube.com/watch?v=6P1xxB0A470', image: 'https://img.youtube.com/vi/6P1xxB0A470/maxresdefault.jpg' }
       ];
 
       var palettes = [
@@ -660,6 +655,7 @@
       var wheelYear    = document.getElementById('wheelYear');
       var wheelTitle   = document.getElementById('wheelTitle');
       var wheelRole    = document.getElementById('wheelRole');
+      var wheelClient  = document.getElementById('wheelClient');
       var overlay      = document.getElementById('projectOverlay');
       var overlayName  = document.getElementById('overlayName');
       var overlayBadge = document.getElementById('overlayBadge');
@@ -688,7 +684,7 @@
 
         var pal = palettes[i % palettes.length];
         var img = document.createElement('img');
-        img.src = 'https://placehold.co/420x560/' + pal[0] + '/' + pal[0];
+        img.src = proj.image || ('https://placehold.co/420x560/' + pal[0] + '/' + pal[0]);
         img.alt = proj.title;
         card.appendChild(img);
 
@@ -696,11 +692,6 @@
         yearTag.className = 'wheel-card-year';
         yearTag.textContent = proj.year;
         card.appendChild(yearTag);
-
-        var roleTag = document.createElement('span');
-        roleTag.className = 'wheel-card-role';
-        roleTag.textContent = proj.role;
-        card.appendChild(roleTag);
 
         var titleTag = document.createElement('span');
         titleTag.className = 'wheel-card-title';
@@ -750,7 +741,9 @@
         wheel.style.bottom     = (-(d * 0.52)) + 'px';
 
         items.forEach(function (it, index) {
-          var angle    = (index / TOTAL) * 2 * Math.PI;
+          // 0.75 turns = 270deg = the apex angle, so item 0 starts at the apex
+          // and later items fall in behind it, putting newest-first as you scroll.
+          var angle    = (0.75 - index / TOTAL) * 2 * Math.PI;
           var x        = r * Math.cos(angle);
           var y        = r * Math.sin(angle);
           var rotation = (angle * 180 / Math.PI) + 90;
@@ -792,7 +785,7 @@
       function updateApex() {
         var best = 0, bestDist = Infinity;
         for (var i = 0; i < TOTAL; i++) {
-          var angle = ((i / TOTAL) * 360 + currentRotation) % 360;
+          var angle = ((0.75 - i / TOTAL) * 360 + currentRotation + 360) % 360;
           var dist  = Math.abs(((angle - 270 + 540) % 360) - 180);
           if (dist < bestDist) { bestDist = dist; best = i; }
         }
@@ -808,17 +801,22 @@
           wheelTitle.classList.add('fade-out');
           wheelRole.classList.remove('fade-in');
           wheelRole.classList.add('fade-out');
+          wheelClient.classList.remove('fade-in');
+          wheelClient.classList.add('fade-out');
 
           setTimeout(function () {
-            wheelYear.textContent  = proj.year;
-            wheelTitle.textContent = proj.title;
-            wheelRole.textContent  = proj.role;
+            wheelYear.textContent   = proj.year;
+            wheelTitle.textContent  = proj.title;
+            wheelRole.textContent   = proj.role;
+            wheelClient.textContent = proj.client || '';
             wheelYear.classList.remove('fade-out');
             wheelYear.classList.add('fade-in');
             wheelTitle.classList.remove('fade-out');
             wheelTitle.classList.add('fade-in');
             wheelRole.classList.remove('fade-out');
             wheelRole.classList.add('fade-in');
+            wheelClient.classList.remove('fade-out');
+            wheelClient.classList.add('fade-in');
           }, 180);
         }
       }
@@ -845,7 +843,7 @@
         overlayBadge.textContent = proj.year + ' · ' + proj.type + (proj.client ? ' · ' + proj.client : '');
 
         // cover
-        coverImg.src = 'https://placehold.co/600x800/' + pal[0] + '/' + pal[0];
+        coverImg.src = proj.image || ('https://placehold.co/600x800/' + pal[0] + '/' + pal[0]);
         coverImg.alt = proj.title;
 
         // details
