@@ -1,0 +1,16 @@
+[
+  { "title": "Riverbed",   "photos": 8  },
+  { "title": "Strata",     "photos": 9  },
+  { "title": "Fieldnotes", "photos": 7  },
+  { "title": "Horizon",    "photos": 10 },
+  { "title": "Outcrop",    "photos": 6  },
+  { "title": "Tideline",   "photos": 8  },
+  { "title": "Basin",      "photos": 9  },
+  { "title": "Ridgeline",  "photos": 7  },
+  { "title": "Quarry",     "photos": 6  },
+  { "title": "Delta",      "photos": 8  },
+  { "title": "Canyon",     "photos": 10 },
+  { "title": "Watershed",  "photos": 9  },
+  { "title": "Bedrock",    "photos": 7  },
+  { "title": "Summit",     "photos": 8  }
+]

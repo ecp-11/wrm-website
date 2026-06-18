@@ -25,8 +25,8 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { overflow-y: scroll; }
     body {
-      background: var(--parchment);
-      color: var(--charcoal);
+      background: #151310;
+      color: var(--parchment);
       font-family: var(--font-display);
       -webkit-font-smoothing: antialiased;
     }
@@ -41,7 +41,7 @@
       z-index: 200;
       opacity: 0.3;
       background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.11 0 0 0 0 0.10 0 0 0 0 0.09 0 0 0 0.045 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-      mix-blend-mode: multiply;
+      mix-blend-mode: screen;
     }
 
     /* ─── Navigation ──────────────────────────────── */
@@ -53,10 +53,10 @@
       justify-content: space-between;
       align-items: center;
       padding: 24px 36px;
-      background: rgba(250, 248, 245, 0.88);
+      background: rgba(21, 19, 16, 0.92);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--ash);
+      border-bottom: 1px solid rgba(196, 191, 184, 0.12);
     }
     .nav-brand {
       font-family: var(--font-display);
@@ -64,7 +64,7 @@
       font-size: 13px;
       letter-spacing: 0.38em;
       text-transform: uppercase;
-      color: var(--charcoal);
+      color: var(--parchment);
       transition: opacity 0.3s ease;
     }
     .nav-brand:hover { opacity: 0.6; }
@@ -84,8 +84,8 @@
       color: var(--stone);
       transition: color 0.3s ease;
     }
-    .nav-link:hover  { color: var(--charcoal); }
-    .nav-link.active { color: var(--charcoal); }
+    .nav-link:hover  { color: var(--parchment); }
+    .nav-link.active { color: var(--parchment); }
     .nav-info {
       font-family: var(--font-display);
       font-weight: 300;
@@ -95,7 +95,7 @@
       color: var(--stone);
       transition: color 0.3s ease;
     }
-    .nav-info:hover { color: var(--charcoal); }
+    .nav-info:hover { color: var(--parchment); }
 
     /* ─── Intro ───────────────────────────────────── */
     .intro {
@@ -119,14 +119,14 @@
       font-size: clamp(28px, 5vw, 48px);
       letter-spacing: 0.04em;
       line-height: 1.4;
-      color: var(--charcoal);
+      color: var(--parchment);
     }
     .intro p {
       margin-top: 20px;
       font-family: var(--font-body);
       font-size: 17px;
       line-height: 1.7;
-      color: var(--slate);
+      color: var(--stone);
       max-width: 56ch;
       margin-left: auto;
       margin-right: auto;
@@ -292,7 +292,7 @@
       font-size: clamp(22px, 3.6vw, 42px);
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--charcoal);
+      color: var(--parchment);
       transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .wheel-center-label.fade-out {
@@ -309,7 +309,7 @@
       position: fixed;
       inset: 0;
       z-index: 300;
-      background: var(--parchment);
+      background: #151310;
       display: flex;
       flex-direction: column;
       opacity: 0;
@@ -333,10 +333,10 @@
       align-items: center;
       justify-content: space-between;
       padding: 22px 36px;
-      background: rgba(242, 237, 230, 0.92);
+      background: rgba(21, 19, 16, 0.92);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--ash);
+      border-bottom: 1px solid rgba(196, 191, 184, 0.12);
       flex-shrink: 0;
     }
 
@@ -356,7 +356,7 @@
       padding: 0;
       transition: color 0.3s ease, transform 0.3s ease;
     }
-    .album-back:hover { color: var(--charcoal); transform: translateX(-3px); }
+    .album-back:hover { color: var(--parchment); transform: translateX(-3px); }
     .album-back:focus-visible { outline: 2px solid var(--sage); outline-offset: 3px; }
     .album-back-arrow { font-size: 14px; }
 
@@ -384,7 +384,7 @@
       font-size: 15px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--charcoal);
+      color: var(--parchment);
     }
 
     .album-counter {
@@ -422,7 +422,7 @@
       overflow: hidden;
       border-radius: 6px;
       cursor: pointer;
-      background: var(--ash);
+      background: rgba(196, 191, 184, 0.18);
     }
     .album-photo:nth-child(3n+1) { aspect-ratio: 3 / 4; }
     .album-photo:nth-child(3n+2) { aspect-ratio: 4 / 5; }
@@ -467,7 +467,7 @@
     footer {
       position: relative;
       z-index: 5;
-      background: var(--charcoal);
+      background: #0d0b09;
       padding: 36px 48px;
       text-align: center;
     }
@@ -481,13 +481,13 @@
     }
     .footer-links a { transition: color 0.3s ease; }
     .footer-links a:hover { color: var(--parchment); }
-    .footer-divider { margin: 0 14px; color: var(--slate); }
+    .footer-divider { margin: 0 14px; color: var(--stone); }
   </style>
 </head>
 <body>
 
   <nav>
-    <a href="index.html" class="nav-brand">WRM</a>
+    <a href="index.html" class="nav-brand">ECP</a>
     <div class="nav-center">
       <a href="film.html" class="nav-link">Film</a>
       <a href="photo.html" class="nav-link active">Photo</a>
@@ -543,244 +543,237 @@
 
   <script>
     (function () {
-      var TOTAL = 14;
-
-      // Album data — title + 8 cover photos each (swap src for real images)
-      var albums = [
-        { title: 'Riverbed',   photos: 8  },
-        { title: 'Strata',     photos: 9  },
-        { title: 'Fieldnotes', photos: 7  },
-        { title: 'Horizon',    photos: 10 },
-        { title: 'Outcrop',    photos: 6  },
-        { title: 'Tideline',   photos: 8  },
-        { title: 'Basin',      photos: 9  },
-        { title: 'Ridgeline',  photos: 7  },
-        { title: 'Quarry',     photos: 6  },
-        { title: 'Delta',      photos: 8  },
-        { title: 'Canyon',     photos: 10 },
-        { title: 'Watershed',  photos: 9  },
-        { title: 'Bedrock',    photos: 7  },
-        { title: 'Summit',     photos: 8  }
-      ];
-
-      // Palette pairs [bg, text] for placeholder images
       var palettes = [
         ['44403b','c4bfb8'], ['857f78','f2ede6'], ['1c1a17','857f78'],
         ['7d8c7a','f2ede6'], ['c4bfb8','44403b'], ['44403b','7d8c7a']
       ];
 
-      var wheel      = document.getElementById('wheel');
-      var section    = document.getElementById('wheelSection');
-      var hint       = document.getElementById('wheelHint');
-      var centerIdx  = document.getElementById('wheelIndex');
-      var centerLbl  = document.getElementById('wheelLabel');
-      var overlay    = document.getElementById('albumOverlay');
-      var albumName  = document.getElementById('albumName');
-      var albumCtr   = document.getElementById('albumCounter');
-      var albumGrid  = document.getElementById('albumGrid');
-      var albumBack  = document.getElementById('albumBack');
+      var wheel     = document.getElementById('wheel');
+      var section   = document.getElementById('wheelSection');
+      var hint      = document.getElementById('wheelHint');
+      var centerIdx = document.getElementById('wheelIndex');
+      var centerLbl = document.getElementById('wheelLabel');
+      var overlay   = document.getElementById('albumOverlay');
+      var albumName = document.getElementById('albumName');
+      var albumCtr  = document.getElementById('albumCounter');
+      var albumGrid = document.getElementById('albumGrid');
+      var albumBack = document.getElementById('albumBack');
 
-      var apexIdx = 0;
-      var items   = [];
+      fetch('albums.json')
+        .then(function (r) { return r.json(); })
+        .then(init)
+        .catch(function () {
+          document.getElementById('wheelSection').style.display = 'none';
+        });
 
-      // ── Build wheel cards ───────────────────────────
-      albums.forEach(function (album, i) {
-        var li   = document.createElement('li');
-        li.className = 'wheel-item';
+      function init(albums) {
+        var TOTAL   = albums.length;
+        var apexIdx = 0;
+        var items   = [];
 
-        var card = document.createElement('div');
-        card.className = 'wheel-card';
-        card.setAttribute('role', 'button');
-        card.setAttribute('tabindex', '0');
-        card.setAttribute('aria-label', 'Open album: ' + album.title);
+        centerIdx.textContent = '01 / ' + String(TOTAL).padStart(2, '0');
+        centerLbl.textContent = albums[0] ? albums[0].title : '';
 
-        var pal = palettes[i % palettes.length];
-        var img = document.createElement('img');
-        img.src = 'https://placehold.co/360x480/' + pal[0] + '/' + pal[0];
-        img.alt = album.title;
-        card.appendChild(img);
+        // ── Build wheel cards ─────────────────────────
+        albums.forEach(function (album, i) {
+          var li = document.createElement('li');
+          li.className = 'wheel-item';
 
-        var title = document.createElement('span');
-        title.className = 'wheel-card-title';
-        title.textContent = album.title;
-        card.appendChild(title);
+          var card = document.createElement('div');
+          card.className = 'wheel-card';
+          card.setAttribute('role', 'button');
+          card.setAttribute('tabindex', '0');
+          card.setAttribute('aria-label', 'Open album: ' + album.title);
 
-        li.appendChild(card);
-        wheel.appendChild(li);
-        items.push({ li: li, card: card, album: album, index: i });
+          var pal = palettes[i % palettes.length];
+          var img = document.createElement('img');
+          img.src = album.cover || ('https://placehold.co/360x480/' + pal[0] + '/' + pal[0]);
+          img.alt = album.title;
+          card.appendChild(img);
 
-        // hover / focus interactions
-        (function (idx, cardEl) {
-          function setHover(on) {
-            items.forEach(function (it, j) {
-              if (j === idx) {
-                it.card.classList.toggle('hovered', on);
-                it.card.classList.remove('dimmed');
-              } else {
-                it.card.classList.toggle('dimmed', on);
-                it.card.classList.remove('hovered');
-              }
+          var titleEl = document.createElement('span');
+          titleEl.className = 'wheel-card-title';
+          titleEl.textContent = album.title;
+          card.appendChild(titleEl);
+
+          li.appendChild(card);
+          wheel.appendChild(li);
+          items.push({ li: li, card: card, album: album, index: i });
+
+          (function (idx, cardEl) {
+            function setHover(on) {
+              items.forEach(function (it, j) {
+                if (j === idx) {
+                  it.card.classList.toggle('hovered', on);
+                  it.card.classList.remove('dimmed');
+                } else {
+                  it.card.classList.toggle('dimmed', on);
+                  it.card.classList.remove('hovered');
+                }
+              });
+            }
+            cardEl.addEventListener('mouseenter', function () { setHover(true); });
+            cardEl.addEventListener('mouseleave', function () { setHover(false); });
+            cardEl.addEventListener('focus',      function () { setHover(true); });
+            cardEl.addEventListener('blur',       function () { setHover(false); });
+            cardEl.addEventListener('click', function () { openAlbum(idx); });
+            cardEl.addEventListener('keydown', function (e) {
+              if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openAlbum(idx); }
             });
-          }
-          cardEl.addEventListener('mouseenter', function () { setHover(true); });
-          cardEl.addEventListener('mouseleave', function () { setHover(false); });
-          cardEl.addEventListener('focus',      function () { setHover(true); });
-          cardEl.addEventListener('blur',       function () { setHover(false); });
+          })(i, card);
+        });
 
-          // click → open album
-          cardEl.addEventListener('click', function () { openAlbum(idx); });
-          cardEl.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openAlbum(idx); }
+        // ── Layout ────────────────────────────────────
+        function isMobile()  { return window.innerWidth < 768; }
+        function getRadius() { return isMobile() ? 190 : 460; }
+        function cardSize()  { return isMobile() ? { w: 96, h: 130 } : { w: 132, h: 178 }; }
+
+        function layout() {
+          var r    = getRadius();
+          var d    = r * 2;
+          var size = cardSize();
+          var hiddenDecimal = 0.52;
+
+          wheel.style.width      = d + 'px';
+          wheel.style.height     = d + 'px';
+          wheel.style.marginLeft = (-r) + 'px';
+          wheel.style.bottom     = (-(d * hiddenDecimal)) + 'px';
+
+          items.forEach(function (it, index) {
+            var angle    = (index / TOTAL) * 2 * Math.PI;
+            var x        = r * Math.cos(angle);
+            var y        = r * Math.sin(angle);
+            var rotation = (angle * 180 / Math.PI) + 90;
+
+            it.card.style.setProperty('--card-w', size.w + 'px');
+            it.card.style.setProperty('--card-h', size.h + 'px');
+            it.li.style.transform =
+              'translate(-50%, -50%) translate3d(' + x.toFixed(2) + 'px,' + y.toFixed(2) + 'px, 0) rotate(' + rotation.toFixed(2) + 'deg)';
           });
-        })(i, card);
-      });
+        }
 
-      // ── Layout ──────────────────────────────────────
-      function isMobile()  { return window.innerWidth < 768; }
-      function getRadius() { return isMobile() ? 190 : 460; }
-      function cardSize()  { return isMobile() ? { w: 96, h: 130 } : { w: 132, h: 178 }; }
-
-      function layout() {
-        var r    = getRadius();
-        var d    = r * 2;
-        var size = cardSize();
-        var hiddenDecimal = 0.52;
-
-        wheel.style.width     = d + 'px';
-        wheel.style.height    = d + 'px';
-        wheel.style.marginLeft = (-r) + 'px';
-        wheel.style.bottom    = (-(d * hiddenDecimal)) + 'px';
-
-        items.forEach(function (it, index) {
-          var angle    = (index / TOTAL) * 2 * Math.PI;
-          var x        = r * Math.cos(angle);
-          var y        = r * Math.sin(angle);
-          var rotation = (angle * 180 / Math.PI) + 90;
-
-          it.card.style.setProperty('--card-w', size.w + 'px');
-          it.card.style.setProperty('--card-h', size.h + 'px');
-          it.li.style.transform =
-            'translate(-50%, -50%) translate3d(' + x.toFixed(2) + 'px,' + y.toFixed(2) + 'px, 0) rotate(' + rotation.toFixed(2) + 'deg)';
+        layout();
+        var resizeTimer;
+        window.addEventListener('resize', function () {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(layout, 120);
         });
-      }
 
-      layout();
-      var resizeTimer;
-      window.addEventListener('resize', function () {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(layout, 120);
-      });
+        // ── Entrance stagger ──────────────────────────
+        wheel.classList.add('mounted');
+        items.forEach(function (it, idx) {
+          setTimeout(function () { it.card.classList.add('in'); }, 500 + idx * 55);
+        });
 
-      // ── Entrance stagger ────────────────────────────
-      wheel.classList.add('mounted');
-      items.forEach(function (it, idx) {
-        setTimeout(function () { it.card.classList.add('in'); }, 500 + idx * 55);
-      });
+        // ── Scroll rotation ───────────────────────────
+        var prefersReduced  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var currentRotation = 0;
+        var targetRotation  = 0;
 
-      // ── Scroll rotation ─────────────────────────────
-      var prefersReduced  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var currentRotation = 0;
-      var targetRotation  = 0;
-
-      function updateTarget() {
-        var rect  = section.getBoundingClientRect();
-        var total = rect.height - window.innerHeight;
-        if (total <= 0) { targetRotation = 0; return; }
-        var progress = (-rect.top) / total;
-        progress = Math.min(Math.max(progress, 0), 1);
-        targetRotation = progress * 360;
-      }
-
-      function updateApex() {
-        var best = 0, bestDist = Infinity;
-        for (var i = 0; i < TOTAL; i++) {
-          var angle = ((i / TOTAL) * 360 + currentRotation) % 360;
-          var dist  = Math.abs(((angle - 270 + 540) % 360) - 180);
-          if (dist < bestDist) { bestDist = dist; best = i; }
+        function updateTarget() {
+          var rect  = section.getBoundingClientRect();
+          var total = rect.height - window.innerHeight;
+          if (total <= 0) { targetRotation = 0; return; }
+          var progress = (-rect.top) / total;
+          progress = Math.min(Math.max(progress, 0), 1);
+          targetRotation = progress * 360;
         }
-        if (best !== apexIdx) {
-          apexIdx = best;
-          centerIdx.textContent = String(best + 1).padStart(2, '0') + ' / ' + String(TOTAL).padStart(2, '0');
-          centerLbl.classList.remove('fade-in');
-          centerLbl.classList.add('fade-out');
-          setTimeout(function () {
-            centerLbl.textContent = albums[apexIdx].title;
-            centerLbl.classList.remove('fade-out');
-            centerLbl.classList.add('fade-in');
-          }, 180);
-        }
-      }
 
-      function tick() {
-        updateTarget();
-        currentRotation += (targetRotation - currentRotation) * (prefersReduced ? 1 : 0.12);
-        wheel.style.transform = 'rotate(' + currentRotation.toFixed(2) + 'deg)';
-        hint.style.opacity    = currentRotation < 4 ? '0.6' : '0';
-        updateApex();
+        function updateApex() {
+          var best = 0, bestDist = Infinity;
+          for (var i = 0; i < TOTAL; i++) {
+            var angle = ((i / TOTAL) * 360 + currentRotation) % 360;
+            var dist  = Math.abs(((angle - 270 + 540) % 360) - 180);
+            if (dist < bestDist) { bestDist = dist; best = i; }
+          }
+          if (best !== apexIdx) {
+            apexIdx = best;
+            centerIdx.textContent = String(best + 1).padStart(2, '0') + ' / ' + String(TOTAL).padStart(2, '0');
+            centerLbl.classList.remove('fade-in');
+            centerLbl.classList.add('fade-out');
+            setTimeout(function () {
+              centerLbl.textContent = albums[apexIdx].title;
+              centerLbl.classList.remove('fade-out');
+              centerLbl.classList.add('fade-in');
+            }, 180);
+          }
+        }
+
+        function tick() {
+          updateTarget();
+          currentRotation += (targetRotation - currentRotation) * (prefersReduced ? 1 : 0.12);
+          wheel.style.transform = 'rotate(' + currentRotation.toFixed(2) + 'deg)';
+          hint.style.opacity    = currentRotation < 4 ? '0.6' : '0';
+          updateApex();
+          requestAnimationFrame(tick);
+        }
         requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
 
-      // ── Album overlay ───────────────────────────────
-      var savedScrollY = 0;
+        // ── Album overlay ─────────────────────────────
+        var savedScrollY = 0;
 
-      function openAlbum(idx) {
-        var album = albums[idx];
+        function openAlbum(idx) {
+          var album      = albums[idx];
+          var photoList  = Array.isArray(album.photos) ? album.photos : null;
+          var photoCount = photoList ? photoList.length : (album.photos || 0);
 
-        // populate header
-        albumName.textContent = album.title;
-        albumCtr.textContent  = album.photos + ' photos';
+          albumName.textContent = album.title;
+          albumCtr.textContent  = photoCount + ' photos';
 
-        // build grid
-        albumGrid.innerHTML = '';
-        for (var p = 0; p < album.photos; p++) {
-          var pal   = palettes[(idx + p) % palettes.length];
-          // vary dimensions for visual interest
-          var dims  = [['360','480'],['480','600'],['360','540'],['480','560'],['400','520']];
-          var d     = dims[p % dims.length];
-          var photo = document.createElement('div');
-          photo.className = 'album-photo';
+          albumGrid.innerHTML = '';
+          for (var p = 0; p < photoCount; p++) {
+            var src;
+            if (photoList && photoList[p] && photoList[p].src) {
+              src = photoList[p].src;
+            } else {
+              var pal  = palettes[(idx + p) % palettes.length];
+              var dims = [['360','480'],['480','600'],['360','540'],['480','560'],['400','520']];
+              var d    = dims[p % dims.length];
+              src = 'https://placehold.co/' + d[0] + 'x' + d[1] + '/' + pal[0] + '/' + pal[0];
+            }
 
-          var pImg  = document.createElement('img');
-          pImg.src  = 'https://placehold.co/' + d[0] + 'x' + d[1] + '/' + pal[0] + '/' + pal[0];
-          pImg.alt  = album.title + ' — ' + (p + 1);
-          photo.appendChild(pImg);
-          albumGrid.appendChild(photo);
+            var photo = document.createElement('div');
+            photo.className = 'album-photo';
+            var pImg = document.createElement('img');
+            pImg.src = src;
+            pImg.alt = (photoList && photoList[p] && photoList[p].caption)
+              ? photoList[p].caption
+              : album.title + ' — ' + (p + 1);
+            photo.appendChild(pImg);
+            albumGrid.appendChild(photo);
+          }
+
+          savedScrollY = window.scrollY;
+          document.body.style.overflow  = 'hidden';
+          document.body.style.position  = 'fixed';
+          document.body.style.top       = '-' + savedScrollY + 'px';
+          document.body.style.width     = '100%';
+
+          overlay.classList.add('open');
+          overlay.scrollTop = 0;
+
+          var photos = albumGrid.querySelectorAll('.album-photo');
+          photos.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('revealed'); }, 80 + i * 55);
+          });
+
+          albumBack.focus();
         }
 
-        // lock page scroll, show overlay
-        savedScrollY = window.scrollY;
-        document.body.style.overflow  = 'hidden';
-        document.body.style.position  = 'fixed';
-        document.body.style.top       = '-' + savedScrollY + 'px';
-        document.body.style.width     = '100%';
+        function closeAlbum() {
+          overlay.classList.remove('open');
+          document.body.style.overflow  = '';
+          document.body.style.position  = '';
+          document.body.style.top       = '';
+          document.body.style.width     = '';
+          window.scrollTo(0, savedScrollY);
+        }
 
-        overlay.classList.add('open');
-        overlay.scrollTop = 0;
-
-        // stagger photos in
-        var photos = albumGrid.querySelectorAll('.album-photo');
-        photos.forEach(function (el, i) {
-          setTimeout(function () { el.classList.add('revealed'); }, 80 + i * 55);
+        albumBack.addEventListener('click', closeAlbum);
+        overlay.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') closeAlbum();
         });
-
-        // focus management
-        albumBack.focus();
       }
-
-      function closeAlbum() {
-        overlay.classList.remove('open');
-        document.body.style.overflow  = '';
-        document.body.style.position  = '';
-        document.body.style.top       = '';
-        document.body.style.width     = '';
-        window.scrollTo(0, savedScrollY);
-      }
-
-      albumBack.addEventListener('click', closeAlbum);
-      overlay.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') closeAlbum();
-      });
     })();
   </script>
 

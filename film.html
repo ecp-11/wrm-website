@@ -25,8 +25,8 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { overflow-y: scroll; }
     body {
-      background: var(--parchment);
-      color: var(--charcoal);
+      background: #151310;
+      color: var(--parchment);
       font-family: var(--font-display);
       -webkit-font-smoothing: antialiased;
     }
@@ -41,7 +41,7 @@
       z-index: 200;
       opacity: 0.3;
       background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.11 0 0 0 0 0.10 0 0 0 0 0.09 0 0 0 0.045 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-      mix-blend-mode: multiply;
+      mix-blend-mode: screen;
     }
 
     /* ─── Navigation ──────────────────────────────── */
@@ -53,10 +53,10 @@
       justify-content: space-between;
       align-items: center;
       padding: 24px 36px;
-      background: rgba(250, 248, 245, 0.88);
+      background: rgba(21, 19, 16, 0.92);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--ash);
+      border-bottom: 1px solid rgba(196, 191, 184, 0.12);
     }
     .nav-brand {
       font-family: var(--font-display);
@@ -64,7 +64,7 @@
       font-size: 13px;
       letter-spacing: 0.38em;
       text-transform: uppercase;
-      color: var(--charcoal);
+      color: var(--parchment);
       transition: opacity 0.3s ease;
     }
     .nav-brand:hover { opacity: 0.6; }
@@ -84,8 +84,8 @@
       color: var(--stone);
       transition: color 0.3s ease;
     }
-    .nav-link:hover  { color: var(--charcoal); }
-    .nav-link.active { color: var(--charcoal); }
+    .nav-link:hover  { color: var(--parchment); }
+    .nav-link.active { color: var(--parchment); }
     .nav-info {
       font-family: var(--font-display);
       font-weight: 300;
@@ -95,7 +95,7 @@
       color: var(--stone);
       transition: color 0.3s ease;
     }
-    .nav-info:hover { color: var(--charcoal); }
+    .nav-info:hover { color: var(--parchment); }
 
     /* ─── Intro ───────────────────────────────────── */
     .intro {
@@ -119,17 +119,268 @@
       font-size: clamp(28px, 5vw, 48px);
       letter-spacing: 0.04em;
       line-height: 1.4;
-      color: var(--charcoal);
+      color: var(--parchment);
     }
     .intro p {
       margin-top: 20px;
       font-family: var(--font-body);
       font-size: 17px;
       line-height: 1.7;
-      color: var(--slate);
+      color: var(--stone);
       max-width: 56ch;
       margin-left: auto;
       margin-right: auto;
+    }
+
+    /* ─── WRM Originals section ───────────────────── */
+    .wrm-section {
+      position: relative;
+      z-index: 5;
+    }
+
+    .wrm-section-header {
+      padding: 16px 48px 72px;
+      max-width: 820px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .section-eyebrow {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.36em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 18px;
+    }
+
+    .section-desc {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--stone);
+    }
+
+    /* ─── Feature rows ────────────────────────────── */
+    .feature-row {
+      display: flex;
+      min-height: 78vh;
+      align-items: stretch;
+      border-top: 1px solid rgba(196, 191, 184, 0.12);
+    }
+
+    .feature-row:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    .feature-img-col {
+      flex: 0 0 58%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-img-col img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(0.55) sepia(0.06) saturate(0.9) contrast(1.06);
+    }
+
+    .feature-img-col::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(28,26,23,0.68) 0%, rgba(28,26,23,0.06) 50%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .feature-img-col.is-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.22;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.96 0 0 0 0 0.93 0 0 0 0 0.90 0 0 0 0.08 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      mix-blend-mode: screen;
+    }
+
+    .feature-placeholder-text {
+      position: absolute;
+      bottom: 28px;
+      left: 32px;
+      z-index: 2;
+      font-family: var(--font-display);
+      font-weight: 100;
+      font-size: 11px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--linen);
+      opacity: 0.18;
+    }
+
+    .feature-text-col {
+      flex: 0 0 42%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 72px 64px;
+    }
+
+    .feature-label {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 22px;
+      opacity: 0.75;
+    }
+
+    .feature-title {
+      font-family: var(--font-display);
+      font-weight: 100;
+      font-size: clamp(32px, 4vw, 58px);
+      letter-spacing: 0.02em;
+      line-height: 1.12;
+      color: var(--parchment);
+      margin-bottom: 18px;
+    }
+
+    .feature-rule {
+      width: 36px;
+      height: 1px;
+      background: rgba(196, 191, 184, 0.18);
+      margin-bottom: 20px;
+    }
+
+    .feature-role {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 28px;
+      opacity: 0.75;
+    }
+
+    .feature-description {
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--stone);
+      max-width: 42ch;
+      margin-bottom: 40px;
+    }
+
+    .feature-actions {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .feature-watch-btn {
+      display: inline-block;
+      padding: 12px 28px;
+      border: 1px solid var(--ash);
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--parchment);
+      background: transparent;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+    }
+    .feature-watch-btn:hover {
+      background: rgba(242, 237, 230, 0.1);
+      color: var(--parchment);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px -12px rgba(28,26,23,0.45);
+    }
+    .feature-watch-btn:active { transform: translateY(0); box-shadow: none; }
+    .feature-watch-btn:focus-visible { outline: 2px solid var(--sage); outline-offset: 3px; }
+
+    .feature-details-btn {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--stone);
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0;
+      transition: color 0.3s ease;
+    }
+    .feature-details-btn:hover { color: var(--parchment); }
+    .feature-details-btn:focus-visible { outline: 2px solid var(--sage); outline-offset: 3px; }
+
+    /* ─── Feature row scroll reveals ─────────────── */
+    .feature-img-col,
+    .feature-text-col {
+      opacity: 0;
+      transition:
+        opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .feature-row:nth-child(odd)  .feature-img-col  { transform: translateX(-32px); }
+    .feature-row:nth-child(even) .feature-img-col  { transform: translateX(32px); }
+    .feature-row:nth-child(odd)  .feature-text-col { transform: translateX(20px); transition-delay: 0.12s; }
+    .feature-row:nth-child(even) .feature-text-col { transform: translateX(-20px); transition-delay: 0.12s; }
+
+    .feature-row.revealed .feature-img-col,
+    .feature-row.revealed .feature-text-col {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ─── Section divider ─────────────────────────── */
+    .section-divider {
+      position: relative;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      padding: 80px 56px 56px;
+    }
+
+    .divider-rule {
+      flex: 1;
+      height: 1px;
+      background: rgba(196, 191, 184, 0.18);
+    }
+
+    .divider-content {
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .divider-label {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.36em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 7px;
+    }
+
+    .divider-sub {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 14px;
+      color: var(--stone);
+      opacity: 0.65;
     }
 
     /* ─── Radial gallery ──────────────────────────── */
@@ -237,6 +488,7 @@
       color: var(--parchment);
       opacity: 0.55;
     }
+
     /* ─── Scroll hint ─────────────────────────────── */
     .wheel-hint {
       position: absolute;
@@ -294,7 +546,7 @@
       font-weight: 100;
       font-size: clamp(36px, 6vw, 68px);
       letter-spacing: 0.06em;
-      color: var(--charcoal);
+      color: var(--parchment);
       line-height: 1;
       transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
     }
@@ -304,7 +556,7 @@
       font-family: var(--font-body);
       font-style: italic;
       font-size: clamp(14px, 1.6vw, 18px);
-      color: var(--slate);
+      color: var(--stone);
       transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .wheel-center-role {
@@ -344,7 +596,7 @@
       position: fixed;
       inset: 0;
       z-index: 300;
-      background: var(--parchment);
+      background: #151310;
       display: flex;
       flex-direction: column;
       opacity: 0;
@@ -359,7 +611,6 @@
       transform: translateY(0);
       pointer-events: all;
     }
-
     .project-header {
       position: sticky;
       top: 0;
@@ -368,10 +619,10 @@
       align-items: center;
       justify-content: space-between;
       padding: 22px 36px;
-      background: rgba(242, 237, 230, 0.92);
+      background: rgba(21, 19, 16, 0.92);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--ash);
+      border-bottom: 1px solid rgba(196, 191, 184, 0.12);
       flex-shrink: 0;
     }
     .project-back {
@@ -390,9 +641,8 @@
       padding: 0;
       transition: color 0.3s ease, transform 0.3s ease;
     }
-    .project-back:hover { color: var(--charcoal); transform: translateX(-3px); }
+    .project-back:hover { color: var(--parchment); transform: translateX(-3px); }
     .project-back:focus-visible { outline: 2px solid var(--sage); outline-offset: 3px; }
-
     .project-title-bar {
       position: absolute;
       left: 50%;
@@ -416,7 +666,7 @@
       font-size: 15px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--charcoal);
+      color: var(--parchment);
     }
     .project-meta-badge {
       font-family: var(--font-display);
@@ -426,13 +676,11 @@
       color: var(--stone);
       white-space: nowrap;
     }
-
     .project-body {
       flex: 1;
       overflow-y: auto;
       padding: 56px 48px 80px;
     }
-
     .project-content {
       display: grid;
       grid-template-columns: 2fr 3fr;
@@ -441,15 +689,6 @@
       margin: 0 auto;
       align-items: start;
     }
-
-    @media (max-width: 768px) {
-      .project-content { grid-template-columns: 1fr; gap: 36px; }
-      .project-body { padding: 32px 24px 60px; }
-      .project-header { padding: 18px 20px; }
-      .project-title-bar { display: none; }
-      .project-meta-badge { display: none; }
-    }
-
     .project-cover {
       border-radius: 8px;
       overflow: hidden;
@@ -465,21 +704,19 @@
       display: block;
       filter: grayscale(0.2) sepia(0.06) saturate(0.95) contrast(1.04);
     }
-
     .project-details {
       opacity: 0;
       transform: translateY(16px);
       transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.22s, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.22s;
     }
     .project-details.revealed { opacity: 1; transform: translateY(0); }
-
     .project-detail-title {
       font-family: var(--font-display);
       font-weight: 100;
       font-size: clamp(26px, 4vw, 44px);
       letter-spacing: 0.04em;
       line-height: 1.2;
-      color: var(--charcoal);
+      color: var(--parchment);
       margin-bottom: 20px;
     }
     .project-detail-meta {
@@ -500,33 +737,190 @@
     .project-rule {
       width: 48px;
       height: 1px;
-      background: var(--ash);
+      background: rgba(196, 191, 184, 0.18);
       margin-bottom: 28px;
     }
     .project-description {
       font-family: var(--font-body);
       font-size: 17px;
       line-height: 1.75;
-      color: var(--slate);
+      color: var(--stone);
       margin-bottom: 36px;
       max-width: 58ch;
     }
+    .project-credits {
+      margin-bottom: 36px;
+    }
+    .credits-label {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--ash);
+      margin-bottom: 14px;
+    }
+    .credit-row {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 16px;
+      align-items: baseline;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(196, 191, 184, 0.08);
+    }
+    .credit-row:first-of-type { border-top: 1px solid rgba(196, 191, 184, 0.08); }
+    .credit-role {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ash);
+    }
+    .credit-name {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      color: var(--stone);
+    }
+    .credit-name a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: rgba(196,191,184,0.3);
+      transition: color 0.2s ease, text-decoration-color 0.2s ease;
+    }
+    .credit-name a:hover { color: var(--parchment); text-decoration-color: rgba(196,191,184,0.7); }
+    /* ─── Production gallery ─────────────────────── */
+    .detail-gallery-section {
+      max-width: 1100px;
+      margin: 56px auto 0;
+      padding-top: 40px;
+      border-top: 1px solid rgba(196, 191, 184, 0.1);
+    }
+    .gallery-eyebrow {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--ash);
+      margin-bottom: 16px;
+    }
+    .gallery-strip {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 16px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(196, 191, 184, 0.2) transparent;
+    }
+    .gallery-strip::-webkit-scrollbar { height: 3px; }
+    .gallery-strip::-webkit-scrollbar-track { background: transparent; }
+    .gallery-strip::-webkit-scrollbar-thumb { background: rgba(196, 191, 184, 0.2); border-radius: 2px; }
+    .gallery-thumb {
+      flex: 0 0 auto;
+      height: 160px;
+      cursor: pointer;
+      overflow: hidden;
+      border-radius: 4px;
+      opacity: 0.82;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .gallery-thumb img {
+      height: 100%;
+      width: auto;
+      display: block;
+      object-fit: cover;
+      filter: grayscale(0.3) sepia(0.06);
+      transition: filter 0.25s ease;
+    }
+    .gallery-thumb:hover { opacity: 1; transform: translateY(-2px); }
+    .gallery-thumb:hover img { filter: grayscale(0) sepia(0); }
+    .gallery-thumb:focus-visible { outline: 2px solid var(--sage); outline-offset: 2px; }
+
+    /* ─── Gallery lightbox ────────────────────────── */
+    .gallery-lightbox {
+      display: none;
+      position: absolute;
+      inset: 0;
+      z-index: 50;
+      background: rgba(21, 19, 16, 0.97);
+      align-items: center;
+      justify-content: center;
+    }
+    .gallery-lightbox.open { display: flex; }
+    .lightbox-img {
+      max-width: 90%;
+      max-height: 85vh;
+      object-fit: contain;
+      display: block;
+      border-radius: 2px;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 24px; right: 28px;
+      background: none;
+      border: none;
+      color: var(--stone);
+      font-family: var(--font-display);
+      font-size: 20px;
+      cursor: pointer;
+      line-height: 1;
+      padding: 8px;
+      transition: color 0.2s ease;
+    }
+    .lightbox-close:hover { color: var(--parchment); }
+    .lightbox-prev,
+    .lightbox-next {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--stone);
+      font-family: var(--font-display);
+      font-size: 36px;
+      cursor: pointer;
+      padding: 16px 20px;
+      line-height: 1;
+      transition: color 0.2s ease;
+    }
+    .lightbox-prev { left: 16px; }
+    .lightbox-next { right: 16px; }
+    .lightbox-prev:hover,
+    .lightbox-next:hover { color: var(--parchment); }
+    .lightbox-counter {
+      position: absolute;
+      bottom: 24px;
+      left: 50%; transform: translateX(-50%);
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      color: var(--stone);
+    }
+
+    @media (max-width: 768px) {
+      .gallery-thumb { height: 100px; }
+    }
+
     .watch-btn {
       display: inline-block;
       padding: 14px 32px;
-      border: 1px solid var(--charcoal);
+      border: 1px solid var(--ash);
       font-family: var(--font-display);
       font-weight: 400;
       font-size: 11px;
       letter-spacing: 0.28em;
       text-transform: uppercase;
-      color: var(--charcoal);
+      color: var(--parchment);
       background: transparent;
       cursor: pointer;
       transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     }
     .watch-btn:hover {
-      background: var(--charcoal);
+      background: rgba(242, 237, 230, 0.1);
       color: var(--parchment);
       transform: translateY(-2px);
       box-shadow: 0 14px 28px -12px rgba(28,26,23,0.45);
@@ -534,11 +928,289 @@
     .watch-btn:focus-visible { outline: 2px solid var(--sage); outline-offset: 3px; }
     .watch-btn:active { transform: translateY(0); box-shadow: none; }
 
+    /* ─── Tagline + epigraph (detail) ─────────────── */
+    .detail-tagline {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 16px;
+    }
+    .detail-epigraph {
+      margin: 0 0 32px;
+      padding-left: 22px;
+      border-left: 1px solid rgba(125, 140, 122, 0.55);
+    }
+    .detail-epigraph p {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 15px;
+      line-height: 1.72;
+      color: var(--ash);
+      margin-bottom: 12px;
+      max-width: 60ch;
+    }
+    .detail-epigraph cite {
+      display: block;
+      font-family: var(--font-display);
+      font-style: normal;
+      font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--stone);
+    }
+
+    /* ─── Media column (cover + poster) ───────────── */
+    .project-media {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .cover-poster {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 24px 56px -20px rgba(28,26,23,0.42), 0 4px 12px rgba(28,26,23,0.2);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.18s, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.18s;
+    }
+    .project-cover.revealed ~ .cover-poster { opacity: 1; transform: translateY(0); }
+    .cover-poster img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: contrast(1.02) saturate(0.98);
+    }
+
+    /* ─── Cover video placeholder ─────────────────── */
+    .project-cover { position: relative; }
+    .cover-play {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      background: linear-gradient(to top, rgba(28,26,23,0.78), rgba(28,26,23,0.30) 55%, rgba(28,26,23,0.50));
+    }
+    .cover-play-icon {
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      border: 1px solid rgba(242, 237, 230, 0.7);
+      position: relative;
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), border-color 0.3s ease, background-color 0.3s ease;
+    }
+    .cover-play-icon::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 53%;
+      transform: translate(-50%, -50%);
+      border-style: solid;
+      border-width: 9px 0 9px 15px;
+      border-color: transparent transparent transparent var(--parchment);
+    }
+    .project-cover:hover .cover-play-icon {
+      transform: scale(1.08);
+      border-color: var(--parchment);
+      background: rgba(242, 237, 230, 0.08);
+    }
+    .cover-play-label {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--parchment);
+    }
+    .cover-play-sub {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 9px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--ash);
+      opacity: 0.85;
+    }
+
+    /* ─── Screening room (videos) ─────────────────── */
+    .detail-videos-section {
+      max-width: 1100px;
+      margin: 56px auto 0;
+      padding-top: 40px;
+      border-top: 1px solid rgba(196, 191, 184, 0.1);
+    }
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-top: 18px;
+    }
+    .video-card-frame {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      border-radius: 6px;
+      overflow: hidden;
+      background:
+        radial-gradient(120% 120% at 50% 0%, rgba(125,140,122,0.12), transparent 60%),
+        #211e1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 18px 40px -22px rgba(28,26,23,0.5);
+      transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+    }
+    .video-card-frame::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.4;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.96 0 0 0 0 0.93 0 0 0 0 0.90 0 0 0 0.05 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      mix-blend-mode: screen;
+    }
+    .video-card:hover .video-card-frame:not(.is-embed) { transform: translateY(-3px); }
+    .video-card-frame.is-embed { background: #000; }
+    .video-card-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .video-card-play {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 1px solid rgba(196, 191, 184, 0.5);
+      position: relative;
+      z-index: 1;
+      transition: border-color 0.3s ease, transform 0.4s cubic-bezier(0.22,1,0.36,1), background-color 0.3s ease;
+    }
+    .video-card-play::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 53%;
+      transform: translate(-50%, -50%);
+      border-style: solid;
+      border-width: 7px 0 7px 12px;
+      border-color: transparent transparent transparent var(--ash);
+    }
+    .video-card:hover .video-card-play {
+      border-color: var(--parchment);
+      background: rgba(242, 237, 230, 0.06);
+      transform: scale(1.06);
+    }
+    .video-card-tag {
+      position: absolute;
+      bottom: 12px;
+      left: 14px;
+      z-index: 1;
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 8px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--ash);
+      padding: 4px 9px;
+      border: 1px solid rgba(196, 191, 184, 0.22);
+      border-radius: 2px;
+      background: rgba(21, 19, 16, 0.55);
+    }
+    .video-card-source {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 9px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin: 16px 0 6px;
+    }
+    .video-card-label {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 14px;
+      letter-spacing: 0.06em;
+      line-height: 1.4;
+      color: var(--parchment);
+    }
+    .video-card-label a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: rgba(196, 191, 184, 0.28);
+      transition: color 0.2s ease, text-decoration-color 0.2s ease;
+    }
+    .video-card-label a:hover {
+      color: var(--parchment);
+      text-decoration-color: rgba(196, 191, 184, 0.7);
+    }
+    .video-card-label a:focus-visible { outline: 2px solid var(--sage); outline-offset: 3px; }
+    .video-card-note {
+      font-family: var(--font-body);
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--stone);
+      margin-top: 8px;
+      max-width: 46ch;
+    }
+
+    /* ─── Director's statement ────────────────────── */
+    .detail-statement-section {
+      max-width: 760px;
+      margin: 56px auto 0;
+      padding-top: 40px;
+      border-top: 1px solid rgba(196, 191, 184, 0.1);
+    }
+    .statement-eyebrow {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--ash);
+      margin-bottom: 28px;
+    }
+    .statement-body p {
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.85;
+      color: var(--stone);
+      margin-bottom: 22px;
+    }
+    .statement-body p:first-of-type::first-letter {
+      font-size: 3.2em;
+      line-height: 0.78;
+      float: left;
+      padding: 6px 12px 0 0;
+      color: var(--parchment);
+      font-weight: 100;
+    }
+    .statement-byline {
+      margin-top: 14px;
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--sage);
+    }
+
+    @media (max-width: 768px) {
+      .video-grid { grid-template-columns: 1fr; gap: 20px; }
+      .detail-videos-section,
+      .detail-statement-section { margin-top: 40px; padding-top: 32px; }
+      .statement-body p { font-size: 16px; }
+    }
+
     /* ─── Footer ──────────────────────────────────── */
     footer {
       position: relative;
       z-index: 5;
-      background: var(--charcoal);
+      background: #0d0b09;
       padding: 36px 48px;
       text-align: center;
     }
@@ -552,13 +1224,34 @@
     }
     .footer-links a { transition: color 0.3s ease; }
     .footer-links a:hover { color: var(--parchment); }
-    .footer-divider { margin: 0 14px; color: var(--slate); }
+    .footer-divider { margin: 0 14px; color: var(--stone); }
+
+    /* ─── Responsive ──────────────────────────────── */
+    @media (max-width: 768px) {
+      .feature-row          { flex-direction: column !important; min-height: auto; }
+      .feature-row:nth-child(odd)  .feature-img-col  { transform: translateY(20px); }
+      .feature-row:nth-child(even) .feature-img-col  { transform: translateY(20px); }
+      .feature-row:nth-child(odd)  .feature-text-col { transform: translateY(16px); }
+      .feature-row:nth-child(even) .feature-text-col { transform: translateY(16px); }
+      .feature-row.revealed .feature-img-col,
+      .feature-row.revealed .feature-text-col        { transform: translateY(0); }
+      .feature-img-col      { flex: none; height: 62vw; width: 100%; }
+      .feature-text-col     { flex: none; padding: 40px 24px 48px; }
+      .feature-description  { max-width: 100%; }
+      .section-divider      { padding: 48px 24px 36px; gap: 16px; }
+      .wrm-section-header   { padding: 16px 24px 48px; }
+      .project-content      { grid-template-columns: 1fr; gap: 36px; }
+      .project-body         { padding: 32px 24px 60px; }
+      .project-header       { padding: 18px 20px; }
+      .project-title-bar    { display: none; }
+      .project-meta-badge   { display: none; }
+    }
   </style>
 </head>
 <body>
 
   <nav>
-    <a href="index.html" class="nav-brand">WRM</a>
+    <a href="index.html" class="nav-brand">ECP</a>
     <div class="nav-center">
       <a href="film.html" class="nav-link active">Film</a>
       <a href="photo-temp.html" class="nav-link">Photo</a>
@@ -568,21 +1261,39 @@
 
   <header class="intro">
     <p class="eyebrow">Film</p>
-    <h1>A body of work shaped by the land</h1>
-    <p>Documentary and commissioned films exploring the intersections of science, place, and the people who inhabit both. Scroll to move through time.</p>
+    <h1>A body of work shaped by the deep history of our shared planet</h1>
   </header>
 
+  <!-- WRM Originals -->
+  <section class="wrm-section">
+    <div class="wrm-section-header">
+      <p class="section-desc">Documentary films exploring the intersections of Earth science, place, and the people who inhabit both.</p>
+    </div>
+    <div class="feature-rows" id="featureRows"></div>
+  </section>
+
+  <!-- Section divider -->
+  <div class="section-divider">
+    <div class="divider-rule"></div>
+    <div class="divider-content">
+      <p class="divider-label">Contract Work</p>
+      <p class="divider-sub">Selected projects for clients</p>
+    </div>
+    <div class="divider-rule"></div>
+  </div>
+
+  <!-- Contract Work radial wheel -->
   <section class="wheel-section" id="wheelSection">
     <div class="wheel-pin">
       <div class="wheel-mask">
         <ul class="wheel" id="wheel"></ul>
       </div>
       <div class="wheel-center">
-        <span class="wheel-center-index" id="wheelIndex">01 / 08</span>
+        <span class="wheel-center-index" id="wheelIndex">01 / 05</span>
         <span class="wheel-center-year fade-in" id="wheelYear">2024</span>
-        <span class="wheel-center-title fade-in" id="wheelTitle">What's in a Name?</span>
-        <span class="wheel-center-role fade-in" id="wheelRole">Director · Producer · Cinematographer · Editor</span>
-        <span class="wheel-center-client fade-in" id="wheelClient">Whispering River Media</span>
+        <span class="wheel-center-title fade-in" id="wheelTitle">Working with Nature</span>
+        <span class="wheel-center-role fade-in" id="wheelRole">Production Team</span>
+        <span class="wheel-center-client fade-in" id="wheelClient">North Forty</span>
       </div>
       <div class="wheel-hint" id="wheelHint">
         <span>Scroll</span>
@@ -612,34 +1323,103 @@
     </div>
     <div class="project-body">
       <div class="project-content">
-        <div class="project-cover" id="projectCover">
-          <img id="coverImg" src="" alt="">
+        <div class="project-media">
+          <div class="project-cover" id="projectCover">
+            <img id="coverImg" src="" alt="">
+            <iframe id="embedPlayer" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:none;width:100%;aspect-ratio:16/9;border:0;"></iframe>
+            <div class="cover-play" id="coverPlay" style="display:none;">
+              <span class="cover-play-icon" aria-hidden="true"></span>
+              <span class="cover-play-label" id="coverPlayLabel"></span>
+              <span class="cover-play-sub">Coming soon</span>
+            </div>
+          </div>
+          <figure class="cover-poster" id="coverPoster" style="display:none;">
+            <img id="coverPosterImg" src="" alt="">
+          </figure>
         </div>
         <div class="project-details" id="projectDetails">
+          <p class="detail-tagline" id="detailTagline" style="display:none;"></p>
           <h2 class="project-detail-title" id="detailTitle"></h2>
           <div class="project-detail-meta" id="detailMeta"></div>
           <div class="project-rule"></div>
+          <blockquote class="detail-epigraph" id="detailEpigraph" style="display:none;">
+            <p id="epigraphText"></p>
+            <cite id="epigraphCite"></cite>
+          </blockquote>
           <p class="project-description" id="detailDesc"></p>
+          <div class="project-credits" id="detailCredits"></div>
           <a href="#" class="watch-btn" id="watchBtn" target="_blank" rel="noopener">Watch</a>
         </div>
       </div>
+      <div class="detail-videos-section" id="detailVideos" style="display:none;">
+        <p class="gallery-eyebrow">Screening Room</p>
+        <div class="video-grid" id="videoGrid"></div>
+      </div>
+      <div class="detail-gallery-section" id="detailGallery" style="display:none;">
+        <p class="gallery-eyebrow">Production</p>
+        <div class="gallery-strip" id="galleryStrip"></div>
+      </div>
+      <div class="detail-statement-section" id="detailStatement" style="display:none;">
+        <p class="statement-eyebrow">Director's Statement</p>
+        <div class="statement-body" id="statementBody"></div>
+        <p class="statement-byline" id="statementByline"></p>
+      </div>
+    </div>
+    <div class="gallery-lightbox" id="galleryLightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close">&#x2715;</button>
+      <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous">&#x2039;</button>
+      <img class="lightbox-img" id="lightboxImg" src="" alt="">
+      <button class="lightbox-next" id="lightboxNext" aria-label="Next">&#x203a;</button>
+      <span class="lightbox-counter" id="lightboxCounter"></span>
     </div>
   </div>
 
   <script>
     (function () {
-      var TOTAL = 8;
 
-      // Newest → oldest
       var projects = [
-        { title: "What's in a Name?",    year: 2024, type: 'Documentary', client: 'Whispering River Media', role: 'Director · Producer · Cinematographer · Editor', watchUrl: '#' },
-        { title: 'Working with Nature',  year: 2024, type: 'Contracted',  client: 'North Forty',            role: 'Production Team',                                watchUrl: 'https://www.youtube.com/watch?v=xQ6M9fcZ1Go', image: 'https://img.youtube.com/vi/xQ6M9fcZ1Go/maxresdefault.jpg' },
-        { title: 'Death of a Glacier',   year: 2023, type: 'Documentary', client: 'Whispering River Media', role: 'Director · Producer · Cinematographer · Editor', watchUrl: '#' },
-        { title: 'Celebrating Life',     year: 2023, type: 'Contracted',  client: 'Bravebird Productions', role: '2nd Unit Cinematography',                        watchUrl: 'https://vimeo.com/1040964610?turnstile=1.bBdezhV6luWZkq5C847NOfZ31a9B2iKVikgUkh1QpnfoVknUBlvbiV2eMkSmwVJ5FDGJ7mzH0de2UQ5jMJQ1IrMdkziIwCOMtASXXmjzhR5MvFJGwfAXdCdMqIUm46okKdWIaxvk9gop0rNCxLrLBcUYbS64NNGK6yiG3IDPF9caWQWePymQR5Wo1WuG5acmud5CaEHHxrIlphcuj9yMZ9hcxZMtl9aTLgkB232lBYLUFVg9ZSKPtdyYxkTcyVpcBoXdKplgc427RhpEmrvMMO73qBHJLLRGtUN4mRGfbLPTCWp6oPtXYhayHv9Yxw6aoeA-F7CshJeGMI3YojRCXgquISwdO-BTLeXphyoAob4lUPHgHm_ns3W21rnq_eaLGS5jmib_oGdq2dbY3LhpAp_sXf8cjopiwnpF6zFd2BGQls-gkjegvGcPKvUBdRsfRkOS3c_dA4RnbawdPehOK5h52hdsbrSRi1-d9Fhy6WvvgKKE3rnshEHosmUlGTHPVP-x_1Zct-AiZ_GEt0iKaKtwU2Mh1tFrCWuUhFblLUC7Y7PdGJUnkrrBg211Uz15f-jSKd1IiKO4ee1vknzefJclxONo-w3HXPnk3Dqk56E.57qX-r1jk0CPHUbfaG8X3A.e0981cf6100e0c396e48dd6cced304bcd84286c04cf2a4194711f1c46929a318', image: 'https://i.vimeocdn.com/video/1963638036-f826b44c429336225d91bc45fd347da2148ccea07c6247591b4be12458f887da-d_1920x1080?region=us' },
-        { title: 'Decolonizing Dinner',  year: 2023, type: 'Contracted',  client: 'Bravebird Productions', role: '2nd Unit Cinematography',                        watchUrl: 'https://vimeo.com/679605275/1b2d49300e?turnstile=1.ttUdenIpZK8duZTwu-BONDUHgRQ2IGStPx1ihmuIGetzncSZTEe9W0PuFonCxvgHjLIK4INhkDmwk0lzL5df5kRueqHdwXS4Z4jX40O5jJFTxSt8XZuqiJUVOmZ9rvG_ebjcFbkiXpQusDSvwl1BemS_dMV36oxArp3XnDGmxngzX7ZMz4Mfu6CCeRcBJdp_VbTksK8wUoqA_wUekQZ_Pg4HKN3l9ZTzOLMXblzHDJzYQ_UcwlywbplPsYEv4NQd9VRxb0lEWZ1D6FqPC3exAY47zicdelxi1sKEROhPgwD4T2qkSaliTEQMRRVd7gxlAQyuw0Gj4xvINeRBuldG12Q680bZp6VkMiu3s6XEhXQDn9FLtZ5y_Ffc8kJZR0BbjlBqyxY8tPwdIGHk9u7cuRTGOpnZOBNu3YC5SDCucXSfcSFdBPlWFKpkqMrp7cydhvWwyMDZ-bam7grIoRQ9jMH85osbu1FkOR-8HdwOapBNdMCuzFMYUp4RQbMny8pScJKD7dgIMl3_yTDZJzZbIrDOCsmC86qc0YZw-xzcKyZSrTWvZGRfq3arsl90Z7AaW7LiD7gCQSeLUV-Byrw33QsUk6IsrmDgj4v-EINFjls.2Spi9aiD5jshfteV5k_HTg.6c1d36d02e330aa442ed9eb7c283a5eb061d98f0c5833a4c625beefef601e9f4', image: 'https://i.vimeocdn.com/video/1377394246-dd06bf39c99ce951412a682d2cacdf216a8a9e4e1eb378fe6e340025fe626add-d_1920x1080?region=us' },
-        { title: 'Decolonizing Science', year: 2022, type: 'Documentary', client: 'Bravebird Productions',  role: 'Director · Cinematographer',                     watchUrl: 'https://www.youtube.com/watch?v=fdWqD5KE-4Q', image: 'https://img.youtube.com/vi/fdWqD5KE-4Q/maxresdefault.jpg' },
-        { title: 'Urban Triage',         year: 2022, type: 'Contracted',  client: 'Bravebird Productions', role: '2nd Unit Cinematography',                        watchUrl: 'https://vimeo.com/891706800?autoplay=1&muted=1&stream_id=Y2xpcHN8MjEyODgzNDl8aWQ6ZGVzY3xbXQ%3D%3D' },
-        { title: 'Love Like a River',    year: 2021, type: 'Documentary', client: 'Whispering River Media', role: 'Director · Producer · Cinematographer · Editor', watchUrl: 'https://www.youtube.com/watch?v=6P1xxB0A470', image: 'https://img.youtube.com/vi/6P1xxB0A470/maxresdefault.jpg' }
+        { title: "What's in a Name?",           year: 2024, type: 'Documentary', client: 'Whispering River Media', role: 'Director · Producer · Cinematographer · Editor', tagline: 'Decolonizing Paleontology', watchUrl: 'https://youtu.be/yxPXtBFZWEo', embedUrl: 'https://www.youtube.com/embed/yxPXtBFZWEo', poster: 'images/film/wian-poster.jpg', image: 'images/film/wian-cover.jpg', imagePosition: 'center',
+          epigraph: {
+            text: "For more than 250 years, new taxa—be they fossil or still living animals—have traditionally been given a formal binomial name in Latin or Greek (e.g., dogs = Canis familiaris). However, very few scientific names use aboriginal place names, honor Indigenous peoples, or use Native languages, despite discoveries being made on the land they call home. This tradition perpetuates the impact colonial history has on scientific practices.",
+            source: 'Dr. Dave Lovelace · 2022 Outcrop'
+          },
+          videos: [
+            { label: 'Official Trailer', embedUrl: 'https://www.youtube.com/embed/pEsWbRrJWSQ', watchUrl: 'https://youtu.be/pEsWbRrJWSQ', desc: `What's in a Name? highlights the development of a partnership between paleontologist Dr. Dave Lovelace and the Wind River Reservation community that led to the naming of three new paleontological taxa via multi-generational collaboration between tribal Elders and students. It is a journey that calls for a change in well-entrenched colonial practices throughout the sciences, and specifically to the process of how taxa are commonly named within the science of paleontology.` },
+            { label: "Behind the Scenes — Director's Thoughts & Insights", embedUrl: 'https://www.youtube.com/embed/3dccswiVvdI', watchUrl: 'https://youtu.be/3dccswiVvdI', desc: `In this behind-the-scenes video, I share the story of how What's in a Name? came to life. From its earliest spark as an idea to the unexpected ways it grew in scope and meaning, I reflect on my personal connection to the film's central theme, the significance of the work featured in it, and the motivations that shaped its direction. I also offer a few thoughts on what I hope audiences take away from the project, offering a candid look at the film through my lens as both a geoscientist and the director.` },
+            { label: 'Wisconsin Life | Decolonizing Science', source: 'PBS Wisconsin', embedUrl: 'https://www.youtube.com/embed/fdWqD5KE-4Q', watchUrl: 'https://youtu.be/fdWqD5KE-4Q', desc: `In the high desert of Wyoming, two UW-Madison scientists, Ethan Parrish and Dave Lovelace, Ph.D, discuss their collaboration to decolonize their scientific disciplines in order to promote a more inclusive future for the next generation.` }
+          ],
+          gallery: ['images/film/wian-production/wian-prod-01.jpg','images/film/wian-production/wian-prod-02.jpg','images/film/wian-production/wian-prod-03.jpg','images/film/wian-production/wian-prod-04.jpg','images/film/wian-production/wian-prod-05.jpg','images/film/wian-production/wian-prod-06.jpg','images/film/wian-production/wian-prod-07.jpg','images/film/wian-production/wian-prod-08.jpg','images/film/wian-production/wian-prod-09.jpg'],
+          credits: [
+            { label: 'Director · DP · Editor', name: 'Ethan C. Parrish' },
+            { label: 'Composer', name: 'Joshua DeMoss' },
+            { label: 'Producers', name: 'Whispering River Media · UW–Madison Geology Museum · Bravebird Productions' },
+            { label: 'Camera Operators', name: 'Ethan C. Parrish · Alex Miranda · Mike Gorski' },
+            { label: 'Narrator', name: 'George Abyeta' },
+            { label: 'Aerial Imagery', name: 'Ethan C. Parrish · Mike Gorski' },
+            { label: 'Assistant Editor', name: 'Matilde Acosta' }
+          ],
+          statementByline: 'Ethan C. Parrish · Director / DP / Editor',
+          statement: [
+            `I've taken an atypical path to my budding career as a filmmaker and my first documentary film "What's in a Name?". By training, I'm a geologist who specialized during my Ph.D. in reading the sedimentary record to assess how climate change affected a terrestrial hydrologic system fifty-five million years ago. But film and photography have forever been a passion of mine, so much so that as part of my Ph.D. I applied my passion for filmmaking to my love of teaching and geoscience to study how incorporating art into introductory geoscience curricula inspires students. While pursuing my Ph.D., I had the opportunity to work as a camera operator for Bravebird Productions on several films, including the independently produced feature-length narrative "Trace the Line" and the award-winning documentary short "Decolonizing Dinner". In addition to "What's in a Name?", which was shot and edited during my Ph.D., I also began production on a project about glacial decline in the western hemisphere shortly before graduation in January of this year (2024). The stories that compel me are those at the intersections of Earth science and humanity. Our relationship to this planet is so fundamentally important to our existence, yet so easily under-appreciated and ignored. My passion is to tell stories that illustrate the beauty and importance of that relationship.`,
+            `As part of my Ph.D. research, I discovered an ancient river that existed in southwestern Wyoming fifty-five million years ago. Needing to name it, I decided I wanted to honor the ancestral keepers of the land and thus reached out to the Eastern Shoshone Heritage Center (ESHC) for help naming the river. After working with Robyn Rokfur at the ESHC to find a name that honored the land and Eastern Shoshone culture, I ran into significant pushback from collaborators in my effort to publish the name. It was around that time that I was approached by Dr. Dave Lovelace at the University of Wisconsin Geology Museum about documenting his project that led to this film. As it turned out, he was encountering similar reticence by the scientific community to honor the Indigenous heritage of the communities whose ancestral land he worked on as he worked with them to name new taxa. Moreover, he was going about collaborating with the local communities and incorporating them in a far better way than I had by simply emailing the local heritage center. His passion, selflessness, and commitment to doing his science more inclusively and ethically—often to the detriment of his "scientific productivity" as he seeks to dismantle more than a hundred years of colonialistic practices—inspired me to undertake this film.`,
+            `Western science is profoundly colonialistic. Subsumed in its practice is the inherent assumption that, due to the "scientific process", there is no higher mode of understanding or relating to the world. This assumption has been a leading justifier for hundreds of years of colonialistic practices around the world. As an Earth scientist, I see a profoundly tragic irony in this. Considering that the basis for much of our research is careful observation of the world we inhabit, it flies in the face of logic to routinely disregard hundreds of years of careful observation of the natural world by indigenous cultures. The principal theme of this film, as discussed via the naming of new paleontological discoveries, is that of recognizing the importance of Indigenous knowledge and history, and how honoring these things benefits Western science as much as it does Indigenous cultures. Inherent in this theme is the recognition that empowering Indigenous youth is vital to the future of their culture as well as to healthier relationships between Western science and Indigenous knowledge. As such, the film is centered on a field trip where youth from the Wind River Reservation are introduced to fossils near their home in Wyoming. My hope is that viewers of this film might begin to appreciate the need to redefine how we approach science in the ancestral lands of Indigenous groups and recognize the importance of investing time and energy into elevating their voices, perspectives, and wisdom—wisdom built on thousands of years of lived experience.`,
+            `The original intent for "What's in a Name?" was a short educational piece documenting Dr. Dave Lovelace's work to be shown at the University of Wisconsin Geology Museum. It was predicated on a collaborative field trip between the Museum and Fort Washakie School on the Wind River Reservation. During the field trip with Fort Washakie School, I met Reba Teran, an elder of the Eastern Shoshone Tribe. She opened the day with a blessing and asked the students to be good listeners during the field trip. Health and mobility challenges prevented her from joining us as the trip entailed a substantial hike. Returning to the trailhead, however, we found Reba there drumming and praying. The drumming soon stopped as the chatter of 40+ middle schoolers saturated the space. After thank yous and goodbyes, the school bus rumbled off and Reba followed it out. It was during that trip that I saw the potential for a more substantial film than a short educational piece. However, for it to have a shot at getting there, I knew I would need to incorporate the voices and perspectives of community members. Unfortunately, I had no idea how best to build those bridges.`,
+            `About ten minutes later, as my team was packing up, we heard a car coming up the road. As it pulled up next to us, Reba rolled down the window and said, "The Great Spirit told me to turn around and ask if you all would like to have lunch with me". Lunch led to conversation, conversation led to her interest in being interviewed, and her interview led to the backbone of "What's in a Name?". It took another year and a half and two more trips to Wyoming to wrap principal photography before moving to post-production. The entire production process was complicated by the fact that I was concurrently working on my Ph.D. and that my production and dissertation timelines were so unfortunately aligned that the first private showing of the film was scheduled for the same day as my public dissertation defense.`,
+            `Despite the film being founded on the field trip, its backbone seeks to contrast the personal stories of Dr. Dave Lovelace and Eastern Shoshone elder Reba Teran as it leads to their convergence as part of the naming of two newly discovered taxa. Both characters grew up in and developed a love for Wyoming during their childhood. Yet, while Dave's childhood was one of privilege and the joy of exploring the land, Reba's was that of cultural homicide as she, like hundreds of thousands of Indigenous children in the United States since colonial expansion, was sent to a boarding school and prevented from speaking her native language.`,
+            `One of Dave's goals in his collaboration with the Wind River Reservation community is that of reciprocity—the idea that he shouldn't be gaining anything (even scientifically) without the community profiting equally. Moreover, his goal from the beginning was that of sustained collaboration with the community. I wanted to apply the same mentality to the filming of "What's in a Name?". To do so I collaborated with Indigenous filmmaker Alejandro Miranda-Cruz on the project, in an effort to address any blind spots I might have as a white filmmaker. Additionally, should the film garner any profit, 50% of the proceeds will go to Fort Washakie School on the Wind River Reservation.`,
+            `As Dave mentions in the film, the work being documented in "What's in a Name?" is not ground-breaking. It's certainly not original to collaborate with Indigenous groups, but it's also not the status quo… and it should be. I would love for this film to be another voice in the fight for Indigenous civil rights, especially within scientific communities that engage with and depend on the natural world as a basis for their science.`
+          ] },
+        { title: 'Working with Nature',          year: 2024, type: 'Contracted',  client: 'North Forty',            role: 'Production Team',                                watchUrl: 'https://www.youtube.com/watch?v=xQ6M9fcZ1Go',  image: 'https://img.youtube.com/vi/xQ6M9fcZ1Go/maxresdefault.jpg' },
+        { title: 'Death of a Glacier - Iceland', year: 2023, type: 'Documentary', client: 'Whispering River Media', role: 'Director · Cinematographer · Editor', watchUrl: 'https://youtu.be/o20ekRl65Xc', embedUrl: 'https://www.youtube.com/embed/o20ekRl65Xc', image: 'images/film/doag-iceland-cover.jpg', imagePosition: '75% center', gallery: ['images/film/doag-production/doag-prod-01.jpg','images/film/doag-production/doag-prod-02.jpg','images/film/doag-production/doag-prod-03.jpg','images/film/doag-production/doag-prod-04.jpg','images/film/doag-production/doag-prod-05.jpg','images/film/doag-production/doag-prod-06.jpg','images/film/doag-production/doag-prod-07.jpg','images/film/doag-production/doag-prod-08.jpg','images/film/doag-production/doag-prod-09.jpg','images/film/doag-production/doag-prod-10.jpg','images/film/doag-production/doag-prod-11.jpg','images/film/doag-production/doag-prod-12.jpg'], credits: [
+  { label: 'Director · Cinematographer · Editor', name: 'Ethan C. Parrish' },
+  { label: 'Producers', name: 'Shaun Marcott · Ethan C. Parrish · Andrew Jones' },
+  { label: 'Client', name: 'University of Wisconsin – Madison Proglacial Research Lab', url: 'https://proglacial.geoscience.wisc.edu/' }
+] },
+        { title: 'Celebrating Life',             year: 2023, type: 'Contracted',  client: 'Bravebird Productions',  role: '2nd Unit Cinematography',                        watchUrl: 'https://vimeo.com/1040964610?turnstile=1.bBdezhV6luWZkq5C847NOfZ31a9B2iKVikgUkh1QpnfoVknUBlvbiV2eMkSmwVJ5FDGJ7mzH0de2UQ5jMJQ1IrMdkziIwCOMtASXXmjzhR5MvFJGwfAXdCdMqIUm46okKdWIaxvk9gop0rNCxLrLBcUYbS64NNGK6yiG3IDPF9caWQWePymQR5Wo1WuG5acmud5CaEHHxrIlphcuj9yMZ9hcxZMtl9aTLgkB232lBYLUFVg9ZSKPtdyYxkTcyVpcBoXdKplgc427RhpEmrvMMO73qBHJLLRGtUN4mRGfbLPTCWp6oPtXYhayHv9Yxw6aoeA-F7CshJeGMI3YojRCXgquISwdO-BTLeXphyoAob4lUPHgHm_ns3W21rnq_eaLGS5jmib_oGdq2dbY3LhpAp_sXf8cjopiwnpF6zFd2BGQls-gkjegvGcPKvUBdRsfRkOS3c_dA4RnbawdPehOK5h52hdsbrSRi1-d9Fhy6WvvgKKE3rnshEHosmUlGTHPVP-x_1Zct-AiZ_GEt0iKaKtwU2Mh1tFrCWuUhFblLUC7Y7PdGJUnkrrBg211Uz15f-jSKd1IiKO4ee1vknzefJclxONo-w3HXPnk3Dqk56E.57qX-r1jk0CPHUbfaG8X3A.e0981cf6100e0c396e48dd6cced304bcd84286c04cf2a4194711f1c46929a318', image: 'https://i.vimeocdn.com/video/1963638036-f826b44c429336225d91bc45fd347da2148ccea07c6247591b4be12458f887da-d_1920x1080?region=us' },
+        { title: 'Decolonizing Dinner',          year: 2023, type: 'Contracted',  client: 'Bravebird Productions',  role: '2nd Unit Cinematography',                        watchUrl: 'https://vimeo.com/679605275/1b2d49300e?turnstile=1.ttUdenIpZK8duZTwu-BONDUHgRQ2IGStPx1ihmuIGetzncSZTEe9W0PuFonCxvgHjLIK4INhkDmwk0lzL5df5kRueqHdwXS4Z4jX40O5jJFTxSt8XZuqiJUVOmZ9rvG_ebjcFbkiXpQusDSvwl1BemS_dMV36oxArp3XnDGmxngzX7ZMz4Mfu6CCeRcBJdp_VbTksK8wUoqA_wUekQZ_Pg4HKN3l9ZTzOLMXblzHDJzYQ_UcwlywbplPsYEv4NQd9VRxb0lEWZ1D6FqPC3exAY47zicdelxi1sKEROhPgwD4T2qkSaliTEQMRRVd7gxlAQyuw0Gj4xvINeRBuldG12Q680bZp6VkMiu3s6XEhXQDn9FLtZ5y_Ffc8kJZR0BbjlBqyxY8tPwdIGHk9u7cuRTGOpnZOBNu3YC5SDCucXSfcSFdBPlWFKpkqMrp7cydhvWwyMDZ-bam7grIoRQ9jMH85osbu1FkOR-8HdwOapBNdMCuzFMYUp4RQbMny8pScJKD7dgIMl3_yTDZJzZbIrDOCsmC86qc0YZw-xzcKyZSrTWvZGRfq3arsl90Z7AaW7LiD7gCQSeLUV-Byrw33QsUk6IsrmDgj4v-EINFjls.2Spi9aiD5jshfteV5k_HTg.6c1d36d02e330aa442ed9eb7c283a5eb061d98f0c5833a4c625beefef601e9f4', image: 'https://i.vimeocdn.com/video/1377394246-dd06bf39c99ce951412a682d2cacdf216a8a9e4e1eb378fe6e340025fe626add-d_1920x1080?region=us' },
+        { title: 'Decolonizing Science',         year: 2022, type: 'Contracted',  client: 'Bravebird Productions',  role: 'Director · Cinematographer',                     watchUrl: 'https://www.youtube.com/watch?v=fdWqD5KE-4Q',  image: 'https://img.youtube.com/vi/fdWqD5KE-4Q/maxresdefault.jpg' },
+        { title: 'Urban Triage',                 year: 2022, type: 'Contracted',  client: 'Bravebird Productions',  role: '2nd Unit Cinematography',                        watchUrl: 'https://vimeo.com/891706800?autoplay=1&muted=1&stream_id=Y2xpcHN8MjEyODgzNDl8aWQ6ZGVzY3xbXQ%3D%3D' },
+        { title: 'Love Like a River',            year: 2021, type: 'Documentary', client: 'Whispering River Media', role: 'Director · Producer · Cinematographer · Editor', watchUrl: 'https://www.youtube.com/watch?v=6P1xxB0A470',  image: 'https://img.youtube.com/vi/6P1xxB0A470/maxresdefault.jpg' }
       ];
 
       var palettes = [
@@ -648,31 +1428,142 @@
         ['1c1a17','c4bfb8'], ['857f78','1c1a17']
       ];
 
-      var wheel        = document.getElementById('wheel');
-      var section      = document.getElementById('wheelSection');
-      var hint         = document.getElementById('wheelHint');
-      var wheelIdx     = document.getElementById('wheelIndex');
-      var wheelYear    = document.getElementById('wheelYear');
-      var wheelTitle   = document.getElementById('wheelTitle');
-      var wheelRole    = document.getElementById('wheelRole');
-      var wheelClient  = document.getElementById('wheelClient');
+      var wrmProjects      = projects.filter(function (p) { return p.client === 'Whispering River Media'; });
+      var contractProjects = projects.filter(function (p) { return p.client !== 'Whispering River Media'; });
+      var TOTAL            = contractProjects.length;
+
+      // ── WRM feature row descriptions ─────────────
+      var wrmDesc = {
+        "What's in a Name?":           "What do we carry in a name, and what disappears when it's forgotten? A documentary asking how language shapes the landscapes we inhabit.",
+        "Death of a Glacier - Iceland": "At the edge of a retreating glacier, two Earth scientists and a concert violinist attempt what data alone cannot — inviting you to grieve what ice remembers.",
+        "Love Like a River":            "A poetic exploration of what rivers have to teach about love — born from a Liturgy of the Land gathering at Upper House in Madison, WI."
+      };
+
+      var detailDescs = {
+        "What's in a Name?":            "\"What's in a Name?\" highlights the development of a partnership between paleontologist Dr. Dave Lovelace and the Wind River Reservation community that led to the naming of three new paleontological taxa via multi-generational collaboration between tribal Elders and students. It is a journey that calls for a change in well-entrenched colonial practices throughout the sciences, and specifically to the process of how taxa are commonly named within the science of paleontology.",
+        "Death of a Glacier - Iceland": "Death of a Glacier - Iceland originated as a collaboration between two Earth scientists (Dr. Ethan C. Parrish and Dr. Andrew Jones) and a concert violinist (Sahada Buckley). The goal of the project was twofold: first, the film was created as means of processing and lamenting the inescapably concerning data about our warming planet that geoscientists deal with every day. Second, in contrast to the endless firehose of climate change data unrelentingly sprayed at the public, this film offers an alternative way to hear and hopefully feel the tragic reality of climate change.",
+        "Love Like a River":            "Created for a \"Liturgy of the Land\" event held at Upper House in Madison, WI, in the spring of 2023, Love Like a River offers a poetic exploration of the wisdom rivers have to offer on \"love\"."
+      };
+
+      // ── Build WRM feature rows ────────────────────
+      var featureRowsEl = document.getElementById('featureRows');
+
+      wrmProjects.forEach(function (proj, i) {
+        var originalIndex = projects.indexOf(proj);
+        var pal = palettes[originalIndex % palettes.length];
+
+        var row = document.createElement('div');
+        row.className = 'feature-row';
+
+        var imgCol = document.createElement('div');
+        imgCol.className = 'feature-img-col';
+
+        if (proj.image) {
+          var imgEl = document.createElement('img');
+          imgEl.src = proj.image;
+          imgEl.alt = proj.title;
+          if (proj.imagePosition) imgEl.style.objectPosition = proj.imagePosition;
+          imgCol.appendChild(imgEl);
+        } else {
+          imgCol.classList.add('is-placeholder');
+          imgCol.style.backgroundColor = '#' + pal[1];
+          var pt = document.createElement('span');
+          pt.className = 'feature-placeholder-text';
+          pt.textContent = proj.title + ' · ' + proj.year;
+          imgCol.appendChild(pt);
+        }
+
+        var textCol = document.createElement('div');
+        textCol.className = 'feature-text-col';
+
+        var hasWatch = proj.watchUrl && proj.watchUrl !== '#';
+
+        textCol.innerHTML =
+          '<h2 class="feature-title">' + proj.title + '</h2>' +
+          '<div class="feature-rule"></div>' +
+          '<p class="feature-role">' + proj.year + '</p>' +
+          '<p class="feature-description">' + (wrmDesc[proj.title] || '') + '</p>' +
+          '<div class="feature-actions">' +
+            (hasWatch ? '<a href="' + proj.watchUrl + '" class="feature-watch-btn" target="_blank" rel="noopener">Watch</a>' : '') +
+            '<button class="feature-details-btn">Details &#8594;</button>' +
+          '</div>';
+
+        row.appendChild(imgCol);
+        row.appendChild(textCol);
+        featureRowsEl.appendChild(row);
+
+        textCol.querySelector('.feature-details-btn').addEventListener('click', (function (idx) {
+          return function () { openProject(idx); };
+        })(originalIndex));
+      });
+
+      // ── IntersectionObserver for reveal ──────────
+      var revealObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            revealObs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      document.querySelectorAll('.feature-row').forEach(function (row) {
+        revealObs.observe(row);
+      });
+
+      // ── Build wheel cards (contract only) ─────────
+      var wheel       = document.getElementById('wheel');
+      var section     = document.getElementById('wheelSection');
+      var hint        = document.getElementById('wheelHint');
+      var wheelIdxEl  = document.getElementById('wheelIndex');
+      var wheelYear   = document.getElementById('wheelYear');
+      var wheelTitle  = document.getElementById('wheelTitle');
+      var wheelRole   = document.getElementById('wheelRole');
+      var wheelClient = document.getElementById('wheelClient');
+
       var overlay      = document.getElementById('projectOverlay');
       var overlayName  = document.getElementById('overlayName');
       var overlayBadge = document.getElementById('overlayBadge');
       var projectCover = document.getElementById('projectCover');
       var coverImg     = document.getElementById('coverImg');
+      var embedPlayer  = document.getElementById('embedPlayer');
       var projectDet   = document.getElementById('projectDetails');
-      var detailTitle  = document.getElementById('detailTitle');
-      var detailMeta   = document.getElementById('detailMeta');
-      var detailDesc   = document.getElementById('detailDesc');
-      var watchBtn     = document.getElementById('watchBtn');
+      var detailTitle   = document.getElementById('detailTitle');
+      var detailMeta    = document.getElementById('detailMeta');
+      var detailDesc    = document.getElementById('detailDesc');
+      var detailCredits  = document.getElementById('detailCredits');
+      var watchBtn       = document.getElementById('watchBtn');
+      var detailGallery  = document.getElementById('detailGallery');
+      var galleryStrip   = document.getElementById('galleryStrip');
+      var coverPlay      = document.getElementById('coverPlay');
+      var coverPlayLabel = document.getElementById('coverPlayLabel');
+      var coverPoster    = document.getElementById('coverPoster');
+      var coverPosterImg = document.getElementById('coverPosterImg');
+      var detailTagline  = document.getElementById('detailTagline');
+      var detailEpigraph = document.getElementById('detailEpigraph');
+      var epigraphText   = document.getElementById('epigraphText');
+      var epigraphCite   = document.getElementById('epigraphCite');
+      var detailVideos   = document.getElementById('detailVideos');
+      var videoGrid      = document.getElementById('videoGrid');
+      var detailStatement = document.getElementById('detailStatement');
+      var statementBody  = document.getElementById('statementBody');
+      var statementByline = document.getElementById('statementByline');
+      var galleryLightbox = document.getElementById('galleryLightbox');
+      var lightboxImg    = document.getElementById('lightboxImg');
+      var lightboxClose  = document.getElementById('lightboxClose');
+      var lightboxPrev   = document.getElementById('lightboxPrev');
+      var lightboxNext   = document.getElementById('lightboxNext');
+      var lightboxCounter = document.getElementById('lightboxCounter');
+      var lightboxImages = [];
+      var lightboxIdx    = 0;
       var projectBack  = document.getElementById('projectBack');
 
       var apexIdx = 0;
       var items   = [];
 
-      // ── Build wheel cards ────────────────────────────
-      projects.forEach(function (proj, i) {
+      contractProjects.forEach(function (proj, i) {
+        var originalIndex = projects.indexOf(proj);
+
         var li   = document.createElement('li');
         li.className = 'wheel-item';
 
@@ -682,11 +1573,11 @@
         card.setAttribute('tabindex', '0');
         card.setAttribute('aria-label', 'Open project: ' + proj.title);
 
-        var pal = palettes[i % palettes.length];
-        var img = document.createElement('img');
-        img.src = proj.image || ('https://placehold.co/420x560/' + pal[0] + '/' + pal[0]);
-        img.alt = proj.title;
-        card.appendChild(img);
+        var pal = palettes[originalIndex % palettes.length];
+        var imgEl = document.createElement('img');
+        imgEl.src = proj.image || ('https://placehold.co/420x560/' + pal[0] + '/' + pal[0]);
+        imgEl.alt = proj.title;
+        card.appendChild(imgEl);
 
         var yearTag = document.createElement('span');
         yearTag.className = 'wheel-card-year';
@@ -700,12 +1591,12 @@
 
         li.appendChild(card);
         wheel.appendChild(li);
-        items.push({ li: li, card: card, proj: proj, index: i });
+        items.push({ li: li, card: card, proj: proj });
 
-        (function (idx, cardEl) {
+        (function (wheelPos, cardEl, origIdx) {
           function setHover(on) {
             items.forEach(function (it, j) {
-              if (j === idx) {
+              if (j === wheelPos) {
                 it.card.classList.toggle('hovered', on);
                 it.card.classList.remove('dimmed');
               } else {
@@ -718,11 +1609,11 @@
           cardEl.addEventListener('mouseleave', function () { setHover(false); });
           cardEl.addEventListener('focus',      function () { setHover(true); });
           cardEl.addEventListener('blur',       function () { setHover(false); });
-          cardEl.addEventListener('click',      function () { openProject(idx); });
+          cardEl.addEventListener('click',      function () { openProject(origIdx); });
           cardEl.addEventListener('keydown',    function (e) {
-            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openProject(idx); }
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openProject(origIdx); }
           });
-        })(i, card);
+        })(i, card, originalIndex);
       });
 
       // ── Layout ───────────────────────────────────────
@@ -741,8 +1632,6 @@
         wheel.style.bottom     = (-(d * 0.52)) + 'px';
 
         items.forEach(function (it, index) {
-          // 0.75 turns = 270deg = the apex angle, so item 0 starts at the apex
-          // and later items fall in behind it, putting newest-first as you scroll.
           var angle    = (0.75 - index / TOTAL) * 2 * Math.PI;
           var x        = r * Math.cos(angle);
           var y        = r * Math.sin(angle);
@@ -791,32 +1680,23 @@
         }
         if (best !== apexIdx) {
           apexIdx = best;
-          var proj = projects[best];
-          wheelIdx.textContent = String(best + 1).padStart(2, '0') + ' / ' + String(TOTAL).padStart(2, '0');
+          var proj = contractProjects[best];
+          wheelIdxEl.textContent = String(best + 1).padStart(2, '0') + ' / ' + String(TOTAL).padStart(2, '0');
 
-          // fade year out → swap → fade in
-          wheelYear.classList.remove('fade-in');
-          wheelYear.classList.add('fade-out');
-          wheelTitle.classList.remove('fade-in');
-          wheelTitle.classList.add('fade-out');
-          wheelRole.classList.remove('fade-in');
-          wheelRole.classList.add('fade-out');
-          wheelClient.classList.remove('fade-in');
-          wheelClient.classList.add('fade-out');
+          wheelYear.classList.remove('fade-in');   wheelYear.classList.add('fade-out');
+          wheelTitle.classList.remove('fade-in');  wheelTitle.classList.add('fade-out');
+          wheelRole.classList.remove('fade-in');   wheelRole.classList.add('fade-out');
+          wheelClient.classList.remove('fade-in'); wheelClient.classList.add('fade-out');
 
           setTimeout(function () {
             wheelYear.textContent   = proj.year;
             wheelTitle.textContent  = proj.title;
             wheelRole.textContent   = proj.role;
             wheelClient.textContent = proj.client || '';
-            wheelYear.classList.remove('fade-out');
-            wheelYear.classList.add('fade-in');
-            wheelTitle.classList.remove('fade-out');
-            wheelTitle.classList.add('fade-in');
-            wheelRole.classList.remove('fade-out');
-            wheelRole.classList.add('fade-in');
-            wheelClient.classList.remove('fade-out');
-            wheelClient.classList.add('fade-in');
+            wheelYear.classList.remove('fade-out');   wheelYear.classList.add('fade-in');
+            wheelTitle.classList.remove('fade-out');  wheelTitle.classList.add('fade-in');
+            wheelRole.classList.remove('fade-out');   wheelRole.classList.add('fade-in');
+            wheelClient.classList.remove('fade-out'); wheelClient.classList.add('fade-in');
           }, 180);
         }
       }
@@ -838,15 +1718,41 @@
         var proj = projects[idx];
         var pal  = palettes[idx % palettes.length];
 
-        // header
         overlayName.textContent  = proj.title;
         overlayBadge.textContent = proj.year + ' · ' + proj.type + (proj.client ? ' · ' + proj.client : '');
 
-        // cover
-        coverImg.src = proj.image || ('https://placehold.co/600x800/' + pal[0] + '/' + pal[0]);
-        coverImg.alt = proj.title;
+        coverPlay.style.display = 'none';
+        if (proj.embedUrl) {
+          coverImg.style.display = 'none';
+          embedPlayer.src = proj.embedUrl;
+          embedPlayer.style.display = 'block';
+        } else {
+          embedPlayer.src = '';
+          embedPlayer.style.display = 'none';
+          coverImg.src = proj.image || ('https://placehold.co/600x800/' + pal[0] + '/' + pal[0]);
+          coverImg.alt = proj.title;
+          coverImg.style.display = 'block';
+          if (proj.coverVideo) {
+            coverPlayLabel.textContent = proj.coverVideo;
+            coverPlay.style.display = 'flex';
+          }
+        }
 
-        // details
+        if (proj.poster) {
+          coverPosterImg.src = proj.poster;
+          coverPosterImg.alt = proj.title + ' — film poster';
+          coverPoster.style.display = 'block';
+        } else {
+          coverPoster.style.display = 'none';
+        }
+
+        if (proj.tagline) {
+          detailTagline.textContent = proj.tagline;
+          detailTagline.style.display = 'block';
+        } else {
+          detailTagline.style.display = 'none';
+        }
+
         detailTitle.textContent = proj.title;
 
         detailMeta.innerHTML = '';
@@ -860,10 +1766,109 @@
         addMeta(proj.type);
         if (proj.client) { addMeta('·'); addMeta(proj.client); }
 
-        detailDesc.textContent = 'A placeholder description for ' + proj.title + '. Replace this with the real synopsis, context, or notes about the project when ready.';
-        watchBtn.href = proj.watchUrl;
+        if (proj.epigraph) {
+          epigraphText.textContent = proj.epigraph.text;
+          epigraphCite.textContent = '— ' + proj.epigraph.source;
+          detailEpigraph.style.display = 'block';
+        } else {
+          detailEpigraph.style.display = 'none';
+        }
 
-        // lock scroll + show overlay
+        detailDesc.textContent = detailDescs[proj.title] || 'A placeholder description for ' + proj.title + '. Replace this with the real synopsis, context, or notes about the project when ready.';
+
+        detailCredits.innerHTML = '';
+        if (proj.credits) {
+          var creditsHtml = '<p class="credits-label">Credits</p>';
+          proj.credits.forEach(function (c) {
+            var nameHtml = c.url
+              ? '<a href="' + c.url + '" target="_blank" rel="noopener">' + c.name + '</a>'
+              : c.name;
+            creditsHtml += '<div class="credit-row"><span class="credit-role">' + c.label + '</span><span class="credit-name">' + nameHtml + '</span></div>';
+          });
+          detailCredits.innerHTML = creditsHtml;
+        } else if (proj.role) {
+          var roles = proj.role.split(' · ');
+          var creditsHtml = '<p class="credits-label">Credits</p>';
+          roles.forEach(function (r) {
+            creditsHtml += '<div class="credit-row"><span class="credit-role">' + r + '</span></div>';
+          });
+          detailCredits.innerHTML = creditsHtml;
+        }
+
+        if (proj.watchUrl && proj.watchUrl !== '#') {
+          watchBtn.href = proj.watchUrl;
+          watchBtn.style.display = 'inline-block';
+        } else {
+          watchBtn.style.display = 'none';
+        }
+
+        galleryStrip.innerHTML = '';
+        if (proj.gallery && proj.gallery.length) {
+          lightboxImages = proj.gallery;
+          proj.gallery.forEach(function (src, i) {
+            var thumb = document.createElement('div');
+            thumb.className = 'gallery-thumb';
+            thumb.tabIndex = 0;
+            var img = document.createElement('img');
+            img.src = src;
+            img.alt = 'Production still ' + (i + 1);
+            thumb.appendChild(img);
+            thumb.addEventListener('click', function () { openLightbox(i); });
+            thumb.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(i); } });
+            galleryStrip.appendChild(thumb);
+          });
+          detailGallery.style.display = 'block';
+        } else {
+          lightboxImages = [];
+          detailGallery.style.display = 'none';
+        }
+
+        videoGrid.innerHTML = '';
+        if (proj.videos && proj.videos.length) {
+          proj.videos.forEach(function (v) {
+            var card = document.createElement('div');
+            card.className = 'video-card';
+            var html;
+            if (v.embedUrl) {
+              html =
+                '<div class="video-card-frame is-embed">' +
+                  '<iframe src="' + v.embedUrl + '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>' +
+                '</div>';
+            } else {
+              html =
+                '<div class="video-card-frame">' +
+                  '<span class="video-card-play" aria-hidden="true"></span>' +
+                  '<span class="video-card-tag">Coming soon</span>' +
+                '</div>';
+            }
+            if (v.source) html += '<p class="video-card-source">' + v.source + '</p>';
+            var labelHtml = v.watchUrl
+              ? '<a href="' + v.watchUrl + '" target="_blank" rel="noopener">' + v.label + '</a>'
+              : v.label;
+            html += '<p class="video-card-label">' + labelHtml + '</p>';
+            if (v.desc) html += '<p class="video-card-note">' + v.desc + '</p>';
+            card.innerHTML = html;
+            videoGrid.appendChild(card);
+          });
+          detailVideos.style.display = 'block';
+        } else {
+          detailVideos.style.display = 'none';
+        }
+
+        statementBody.innerHTML = '';
+        if (proj.statement && proj.statement.length) {
+          proj.statement.forEach(function (para) {
+            var p = document.createElement('p');
+            p.textContent = para;
+            statementBody.appendChild(p);
+          });
+          statementByline.textContent = proj.statementByline || '';
+          statementByline.style.display = proj.statementByline ? 'block' : 'none';
+          detailStatement.style.display = 'block';
+        } else {
+          detailStatement.style.display = 'none';
+        }
+
         savedScrollY = window.scrollY;
         document.body.style.overflow = 'hidden';
         document.body.style.position = 'fixed';
@@ -873,7 +1878,6 @@
         overlay.classList.add('open');
         overlay.scrollTop = 0;
 
-        // stagger content in
         projectCover.classList.remove('revealed');
         projectDet.classList.remove('revealed');
         setTimeout(function () { projectCover.classList.add('revealed'); }, 80);
@@ -882,7 +1886,34 @@
         projectBack.focus();
       }
 
+      function openLightbox(idx) {
+        lightboxIdx = idx;
+        lightboxImg.src = lightboxImages[idx];
+        lightboxImg.alt = 'Production still ' + (idx + 1);
+        lightboxCounter.textContent = (idx + 1) + ' / ' + lightboxImages.length;
+        galleryLightbox.classList.add('open');
+        lightboxClose.focus();
+      }
+
+      function closeLightbox() {
+        galleryLightbox.classList.remove('open');
+        lightboxImg.src = '';
+      }
+
+      lightboxClose.addEventListener('click', closeLightbox);
+      lightboxPrev.addEventListener('click', function () {
+        openLightbox((lightboxIdx - 1 + lightboxImages.length) % lightboxImages.length);
+      });
+      lightboxNext.addEventListener('click', function () {
+        openLightbox((lightboxIdx + 1) % lightboxImages.length);
+      });
+      galleryLightbox.addEventListener('click', function (e) {
+        if (e.target === galleryLightbox) closeLightbox();
+      });
+
       function closeProject() {
+        closeLightbox();
+        embedPlayer.src = '';
         overlay.classList.remove('open');
         document.body.style.overflow = '';
         document.body.style.position = '';
@@ -893,6 +1924,12 @@
 
       projectBack.addEventListener('click', closeProject);
       overlay.addEventListener('keydown', function (e) {
+        if (galleryLightbox.classList.contains('open')) {
+          if (e.key === 'ArrowLeft')  lightboxPrev.click();
+          if (e.key === 'ArrowRight') lightboxNext.click();
+          if (e.key === 'Escape')     closeLightbox();
+          return;
+        }
         if (e.key === 'Escape') closeProject();
       });
     })();
