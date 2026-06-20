@@ -103,50 +103,133 @@
 
     /* ─── Layout ──────────────────────────────────── */
     main {
-      padding-top: 132px;
-      padding-bottom: 80px;
-      max-width: 1280px;
+      max-width: 760px;
       margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.05fr 1fr;
-      gap: 96px;
-      padding-left: 48px;
-      padding-right: 48px;
+      padding: 88px 24px 100px;
     }
 
-    @media (max-width: 880px) {
-      main { grid-template-columns: 1fr; gap: 64px; }
+    /* ─── Hero (full-bleed) ───────────────────────── */
+    .info-hero {
+      position: relative;
+      width: 100%;
+      height: 60vh;
+      min-height: 440px;
+      max-height: 760px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
     }
-
-    /* ─── Left column ─────────────────────────────── */
-    .col-left h1 {
+    .info-hero img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 55%;
+      filter: contrast(1.04) saturate(1.05);
+    }
+    .info-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to top, rgba(21,19,16,0.92) 0%, rgba(21,19,16,0.34) 30%, rgba(21,19,16,0) 56%, rgba(21,19,16,0.22) 100%),
+        linear-gradient(to right, rgba(21,19,16,0.55) 0%, rgba(21,19,16,0.05) 44%, transparent 64%);
+    }
+    .info-hero-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 48px 56px;
+    }
+    .eyebrow {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.36em;
+      text-transform: uppercase;
+      color: var(--ash);
+      margin-bottom: 18px;
+    }
+    .info-hero h1 {
       font-family: var(--font-display);
       font-weight: 100;
-      font-size: clamp(30px, 4.4vw, 46px);
-      letter-spacing: 0.04em;
-      line-height: 1.15;
+      font-size: clamp(30px, 4.4vw, 54px);
+      letter-spacing: 0.02em;
+      line-height: 1.12;
       color: var(--parchment);
-      margin-bottom: 36px;
+      max-width: 16ch;
+      text-wrap: balance;
+      text-shadow: 0 1px 3px rgba(21,19,16,0.5), 0 2px 28px rgba(21,19,16,0.72);
+    }
+    .lede {
+      margin-top: 20px;
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: clamp(17px, 1.8vw, 20px);
+      line-height: 1.55;
+      color: var(--ash);
+      max-width: 46ch;
+      text-shadow: 0 1px 16px rgba(21,19,16,0.65);
     }
 
-    .col-left p {
+    /* ─── Services ────────────────────────────────── */
+    .services {
+      margin-bottom: 72px;
+    }
+    .service-block {
+      display: grid;
+      grid-template-columns: 132px 1fr;
+      gap: 36px;
+      padding: 34px 0;
+      border-top: 1px solid rgba(196, 191, 184, 0.12);
+    }
+    .service-block:last-child {
+      border-bottom: 1px solid rgba(196, 191, 184, 0.12);
+    }
+    .service-num {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 100;
+      font-size: 30px;
+      line-height: 1;
+      color: var(--ash);
+      opacity: 0.5;
+      margin-bottom: 12px;
+    }
+    .service-label {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 10px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--sage);
+    }
+    .service-block p {
       font-family: var(--font-body);
       font-size: 17px;
-      line-height: 1.7;
+      line-height: 1.75;
       color: var(--stone);
-      margin-bottom: 22px;
-      max-width: 56ch;
     }
 
-    .figure {
-      margin-top: 44px;
-      max-width: 420px;
+    /* ─── Feature image ───────────────────────────── */
+    .feature-figure {
+      margin: 0 0 28px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 26px 60px -24px rgba(28, 26, 23, 0.5), 0 4px 12px rgba(28, 26, 23, 0.2);
     }
-
-    .figure img {
+    .feature-figure img {
       width: 100%;
       height: auto;
-      filter: grayscale(1) contrast(1.05);
+      display: block;
+      filter: contrast(1.03) saturate(1.03);
+    }
+    .about-cta {
+      text-align: center;
+      margin-bottom: 100px;
     }
 
     .btn {
@@ -178,31 +261,46 @@
 
     .btn:active { transform: translateY(0); }
 
-    /* ─── Right column ────────────────────────────── */
+    /* ─── Contact ─────────────────────────────────── */
+    .contact {
+      max-width: 640px;
+      margin: 0 auto;
+    }
     .get-in-touch {
+      text-align: center;
       font-family: var(--font-display);
       font-weight: 400;
       font-size: 11px;
-      letter-spacing: 0.32em;
+      letter-spacing: 0.34em;
       text-transform: uppercase;
       color: var(--stone);
-      margin-bottom: 22px;
+      margin-bottom: 28px;
+    }
+    .contact-card {
+      background: rgba(242, 237, 230, 0.03);
+      border: 1px solid rgba(196, 191, 184, 0.12);
+      border-radius: 14px;
+      padding: 40px;
+      box-shadow: 0 30px 70px -32px rgba(0, 0, 0, 0.6);
     }
 
     .intro-row {
       display: flex;
-      gap: 28px;
-      align-items: flex-start;
-      margin-bottom: 44px;
+      gap: 22px;
+      align-items: center;
+      margin-bottom: 32px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid rgba(196, 191, 184, 0.1);
     }
 
     .intro-text p {
       font-family: var(--font-body);
-      font-size: 17px;
-      line-height: 1.7;
+      font-size: 16px;
+      line-height: 1.65;
       color: var(--stone);
-      margin-bottom: 16px;
+      margin-bottom: 8px;
     }
+    .intro-text p:last-child { margin-bottom: 0; }
 
     .intro-text a {
       color: var(--parchment);
@@ -215,8 +313,8 @@
 
     .portrait {
       flex-shrink: 0;
-      width: 112px;
-      height: 112px;
+      width: 96px;
+      height: 96px;
       border-radius: 50%;
       object-fit: cover;
       filter: grayscale(0.25) sepia(0.12) saturate(0.9);
@@ -322,6 +420,18 @@
 
     .send-btn:active { transform: translateY(0); box-shadow: none; }
 
+    /* ─── Responsive ──────────────────────────────── */
+    @media (max-width: 640px) {
+      main { padding-top: 64px; }
+      .info-hero { height: 56vh; min-height: 380px; }
+      .info-hero-content { padding: 0 24px 36px; }
+      .service-block { grid-template-columns: 1fr; gap: 6px; padding: 24px 0; }
+      .service-num { font-size: 24px; margin-bottom: 6px; }
+      .about-cta { margin-bottom: 72px; }
+      .contact-card { padding: 28px 22px; }
+      .intro-row { flex-direction: column; align-items: flex-start; }
+    }
+
     /* ─── Footer ──────────────────────────────────── */
     footer {
       background: #0d0b09;
@@ -359,12 +469,20 @@
     @keyframes rise {
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* ─── Scroll reveal ───────────────────────────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1);
+    }
+    .fade-up.in { opacity: 1; transform: none; }
   </style>
 </head>
 <body>
 
   <nav>
-    <a href="index.html" class="nav-brand">ECP</a>
+    <a href="index.html" class="nav-brand">WRM</a>
     <div class="nav-center">
       <a href="film.html" class="nav-link">Film</a>
       <a href="photo-temp.html" class="nav-link">Photo</a>
@@ -372,37 +490,60 @@
     <a href="info.html" class="nav-info">Info</a>
   </nav>
 
-  <main>
-    <div class="col-left reveal reveal-1">
+  <header class="info-hero">
+    <img src="images/info/hero-river-pano.jpg" alt="Aerial view of a river winding through Wyoming canyon country at golden hour">
+    <div class="info-hero-content fade-up">
+      <p class="eyebrow">Information</p>
       <h1>What Whispering River Media does</h1>
+      <p class="lede">Your research is important, that's why you do it.<br>I want to help you share it.</p>
+    </div>
+  </header>
 
-      <p>Your research is important, that's why you do it. I want to help you share it.</p>
+  <main>
+    <section class="services fade-up">
+      <div class="service-block">
+        <div class="service-gutter">
+          <span class="service-num">01</span>
+          <span class="service-label">The Gap</span>
+        </div>
+        <p>One of the many things my background in academia taught me is that much of the incredible research that institutions around the world pursue never sees the light of day in the public's eye. More often than not, this is a function of the academic workload and the unfortunate fact that "public outreach", however important, is understandably not a priority relative to the actual research. That's where I come in. I'll work closely with you and your team to understand your work, why and how you do it, and its impact so that I can tell honest and authentic stories about you and your work.</p>
+      </div>
+      <div class="service-block">
+        <div class="service-gutter">
+          <span class="service-num">02</span>
+          <span class="service-label">How I Work</span>
+        </div>
+        <p>Given the nature of the myriad sources of funding, project scales, outreach objectives, etc., I'll work with you to define and execute projects in a way that makes sense for you, your research, and your vision.</p>
+      </div>
+      <div class="service-block">
+        <div class="service-gutter">
+          <span class="service-num">03</span>
+          <span class="service-label">Scale</span>
+        </div>
+        <p>From smaller web shorts to feature-length documentaries, I have the skill and/or collaborator connections to execute across multiple scales.</p>
+      </div>
+    </section>
 
-      <p>One of the many things my background in academia taught me is that much of the incredible research that institutions around the world pursue never sees the light of day in the public's eye. More often than not, this is a function of the academic workload and the unfortunate fact that "public outreach", however important, is understandably not a priority relative to the actual research. That's where I come in. I'll work closely with you and your team to understand your work, why and how you do it, and its impact so that I can tell honest and authentic stories about you and your work.</p>
-
-      <p>Given the nature of the myriad sources of funding, project scales, outreach objectives, etc., I'll work with you to define and execute projects in a way that makes sense for you, your research, and your vision. From smaller web shorts to feature-length documentaries, I have the skill and/or collaborator connections to execute across multiple scales.</p>
-
-      <p>So, if you're looking for video production services for public outreach or any other reasons related to your research, please don't hesitate to drop me a line. I'd love to chat!</p>
-
-      <figure class="figure">
-        <img src="https://placehold.co/420x520/1c1a17/c4bfb8?text=" alt="Behind the scenes on location">
-      </figure>
-
+    <figure class="feature-figure fade-up">
+      <img src="images/info/wrm-camera.jpg" alt="Ethan Parrish operating a cinema camera on location">
+    </figure>
+    <div class="about-cta fade-up">
       <a href="about.html" class="btn">About Me</a>
     </div>
 
-    <div class="col-right reveal reveal-2">
+    <section class="contact fade-up">
       <p class="get-in-touch">Get in touch</p>
 
-      <div class="intro-row">
-        <div class="intro-text">
-          <p>You can find me on Instagram at <a href="#">@ethancparrish</a></p>
-          <p>Or, fill out the form below for some good old-fashioned email correspondence.</p>
+      <div class="contact-card">
+        <div class="intro-row">
+          <img class="portrait" src="images/info/ethan-portrait.jpg" alt="Portrait of Ethan Parrish">
+          <div class="intro-text">
+            <p>You can find me on Instagram at <a href="https://www.instagram.com/ethancparrish/" target="_blank" rel="noopener">@ethancparrish</a>.</p>
+            <p>Or, fill out the form below for some good old-fashioned email correspondence. I'd love to chat.</p>
+          </div>
         </div>
-        <img class="portrait" src="https://placehold.co/224x224/c4bfb8/44403b?text=" alt="Portrait of Ethan Parrish">
-      </div>
 
-      <form action="https://formspree.io/f/your-form-id" method="POST">
+        <form action="https://formspree.io/f/your-form-id" method="POST">
         <div class="field-group">
           <p class="field-group-label">Name</p>
           <div class="field-row">
@@ -434,7 +575,8 @@
 
         <button type="submit" class="send-btn">Send</button>
       </form>
-    </div>
+      </div>
+    </section>
   </main>
 
   <footer class="reveal reveal-3">
@@ -442,6 +584,25 @@
       <a href="https://www.instagram.com/ethancparrish/" target="_blank" rel="noopener">Instagram</a><span class="footer-divider">|</span><a href="https://www.youtube.com/@ethancparrish" target="_blank" rel="noopener">Youtube</a><span class="footer-divider">|</span><a href="https://www.linkedin.com/in/ethancparrish/" target="_blank" rel="noopener">LinkedIn</a>
     </p>
   </footer>
+
+  <script>
+    (function () {
+      var els = document.querySelectorAll('.fade-up');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function (el) { el.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      els.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
 
 </body>
 </html>

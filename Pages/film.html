@@ -99,7 +99,7 @@
 
     /* ─── Intro ───────────────────────────────────── */
     .intro {
-      padding: 200px 32px 80px;
+      padding: 200px 32px 36px;
       max-width: 800px;
       margin: 0 auto;
       text-align: center;
@@ -351,7 +351,7 @@
       display: flex;
       align-items: center;
       gap: 32px;
-      padding: 80px 56px 56px;
+      padding: 80px 56px 28px;
     }
 
     .divider-rule {
@@ -387,6 +387,7 @@
     .wheel-section {
       position: relative;
       height: 340vh;
+      margin-top: -130px;
     }
     .wheel-pin {
       position: sticky;
@@ -544,7 +545,7 @@
       margin-top: 8px;
       font-family: var(--font-display);
       font-weight: 100;
-      font-size: clamp(36px, 6vw, 68px);
+      font-size: clamp(23px, 3.8vw, 43px);
       letter-spacing: 0.06em;
       color: var(--parchment);
       line-height: 1;
@@ -1239,6 +1240,7 @@
       .feature-text-col     { flex: none; padding: 40px 24px 48px; }
       .feature-description  { max-width: 100%; }
       .section-divider      { padding: 48px 24px 36px; gap: 16px; }
+      .wheel-section        { margin-top: -48px; }
       .wrm-section-header   { padding: 16px 24px 48px; }
       .project-content      { grid-template-columns: 1fr; gap: 36px; }
       .project-body         { padding: 32px 24px 60px; }
@@ -1251,7 +1253,7 @@
 <body>
 
   <nav>
-    <a href="index.html" class="nav-brand">ECP</a>
+    <a href="index.html" class="nav-brand">WRM</a>
     <div class="nav-center">
       <a href="film.html" class="nav-link active">Film</a>
       <a href="photo-temp.html" class="nav-link">Photo</a>
@@ -1419,7 +1421,7 @@
         { title: 'Decolonizing Dinner',          year: 2023, type: 'Contracted',  client: 'Bravebird Productions',  role: '2nd Unit Cinematography',                        watchUrl: 'https://vimeo.com/679605275/1b2d49300e?turnstile=1.ttUdenIpZK8duZTwu-BONDUHgRQ2IGStPx1ihmuIGetzncSZTEe9W0PuFonCxvgHjLIK4INhkDmwk0lzL5df5kRueqHdwXS4Z4jX40O5jJFTxSt8XZuqiJUVOmZ9rvG_ebjcFbkiXpQusDSvwl1BemS_dMV36oxArp3XnDGmxngzX7ZMz4Mfu6CCeRcBJdp_VbTksK8wUoqA_wUekQZ_Pg4HKN3l9ZTzOLMXblzHDJzYQ_UcwlywbplPsYEv4NQd9VRxb0lEWZ1D6FqPC3exAY47zicdelxi1sKEROhPgwD4T2qkSaliTEQMRRVd7gxlAQyuw0Gj4xvINeRBuldG12Q680bZp6VkMiu3s6XEhXQDn9FLtZ5y_Ffc8kJZR0BbjlBqyxY8tPwdIGHk9u7cuRTGOpnZOBNu3YC5SDCucXSfcSFdBPlWFKpkqMrp7cydhvWwyMDZ-bam7grIoRQ9jMH85osbu1FkOR-8HdwOapBNdMCuzFMYUp4RQbMny8pScJKD7dgIMl3_yTDZJzZbIrDOCsmC86qc0YZw-xzcKyZSrTWvZGRfq3arsl90Z7AaW7LiD7gCQSeLUV-Byrw33QsUk6IsrmDgj4v-EINFjls.2Spi9aiD5jshfteV5k_HTg.6c1d36d02e330aa442ed9eb7c283a5eb061d98f0c5833a4c625beefef601e9f4', image: 'https://i.vimeocdn.com/video/1377394246-dd06bf39c99ce951412a682d2cacdf216a8a9e4e1eb378fe6e340025fe626add-d_1920x1080?region=us' },
         { title: 'Decolonizing Science',         year: 2022, type: 'Contracted',  client: 'Bravebird Productions',  role: 'Director · Cinematographer',                     watchUrl: 'https://www.youtube.com/watch?v=fdWqD5KE-4Q',  image: 'https://img.youtube.com/vi/fdWqD5KE-4Q/maxresdefault.jpg' },
         { title: 'Urban Triage',                 year: 2022, type: 'Contracted',  client: 'Bravebird Productions',  role: '2nd Unit Cinematography',                        watchUrl: 'https://vimeo.com/891706800?autoplay=1&muted=1&stream_id=Y2xpcHN8MjEyODgzNDl8aWQ6ZGVzY3xbXQ%3D%3D' },
-        { title: 'Love Like a River',            year: 2021, type: 'Documentary', client: 'Whispering River Media', role: 'Director · Producer · Cinematographer · Editor', watchUrl: 'https://www.youtube.com/watch?v=6P1xxB0A470',  image: 'https://img.youtube.com/vi/6P1xxB0A470/maxresdefault.jpg' }
+        { title: 'Love Like a River',            year: 2021, type: 'Documentary', client: 'Whispering River Media', role: 'Director · Producer · Cinematographer · Editor', watchUrl: 'https://www.youtube.com/watch?v=6P1xxB0A470',  image: 'images/film/llar-cover.jpg' }
       ];
 
       var palettes = [
@@ -1434,9 +1436,9 @@
 
       // ── WRM feature row descriptions ─────────────
       var wrmDesc = {
-        "What's in a Name?":           "What do we carry in a name, and what disappears when it's forgotten? A documentary asking how language shapes the landscapes we inhabit.",
+        "What's in a Name?":           "On the Wind River Reservation in central Wyoming, a paleontologist works alongside Eastern Shoshone Elders and students to name newly discovered fossils — a multi-generational collaboration that asks Western science to honor the Indigenous land and language it has long overlooked.",
         "Death of a Glacier - Iceland": "At the edge of a retreating glacier, two Earth scientists and a concert violinist attempt what data alone cannot — inviting you to grieve what ice remembers.",
-        "Love Like a River":            "A poetic exploration of what rivers have to teach about love — born from a Liturgy of the Land gathering at Upper House in Madison, WI."
+        "Love Like a River":            "Whispers from a river: A poetic exploration of what rivers have to teach about love."
       };
 
       var detailDescs = {
@@ -1619,7 +1621,7 @@
       // ── Layout ───────────────────────────────────────
       function isMobile()  { return window.innerWidth < 768; }
       function getRadius() { return isMobile() ? 190 : 460; }
-      function cardSize()  { return isMobile() ? { w: 110, h: 155 } : { w: 148, h: 210 }; }
+      function cardSize()  { return isMobile() ? { w: 133, h: 188 } : { w: 179, h: 254 }; }
 
       function layout() {
         var r    = getRadius();
