@@ -1,0 +1,5 @@
+#!/bin/sh
+# Keep Pages/cv.html in sync with the personal-assistant CV source on every commit.
+REPO="$(git rev-parse --show-toplevel)"
+node "$REPO/sync-cv.mjs" || true
+git add "$REPO/Pages/cv.html" 2>/dev/null || true

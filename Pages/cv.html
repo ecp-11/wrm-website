@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ethan C. Parrish, Ph.D. — Curriculum Vitae</title>
+  <meta name="description" content="Curriculum vitae of Ethan C. Parrish, Ph.D. — documentary filmmaker and science communicator at the intersection of earth science and human experience.">
+  <link rel="icon" href="brand_assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;300;400&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── Theme tokens ─────────────────────────────────
+       Tokens are mapped by ROLE, not literal brand name, so the
+       same stylesheet renders in both WRM themes:
+         --linen     = page background
+         --charcoal  = primary text / display
+         --slate     = body copy
+         --stone     = meta / labels (secondary)
+         --ash       = structural hairlines + faint marks
+         --parchment = soft inner dividers
+         --sage      = accent (links, active states)
+       Dark is the default (matches whisperingrivermedia.com).
+    ──────────────────────────────────────────────────── */
+    :root {
+      --linen:     #151310;  /* page bg — near-black */
+      --charcoal:  #F2EDE6;  /* primary text — parchment */
+      --slate:     #C4BFB8;  /* body copy — ash */
+      --stone:     #8E877E;  /* meta / labels — stone, nudged for contrast */
+      --ash:       #46413B;  /* hairlines + faint marks */
+      --parchment: #29251F;  /* soft inner dividers */
+      --sage:      #93A28F;  /* accent — sage, brightened for dark */
+      --grain: 0.28;
+    }
+    html[data-theme="light"] {
+      --linen:     #FAF8F5;
+      --charcoal:  #1C1A17;
+      --slate:     #44403B;
+      --stone:     #857F78;
+      --ash:       #C4BFB8;
+      --parchment: #F2EDE6;
+      --sage:      #7D8C7A;
+      --grain: 0;
+    }
+
+    /* ─── Base ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--linen);
+      color: var(--charcoal);
+      font-family: 'EB Garamond', serif;
+      font-size: 17px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+
+    /* ─── Grain overlay (dark theme only) ──────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 200;
+      opacity: var(--grain);
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.11 0 0 0 0 0.10 0 0 0 0 0.09 0 0 0 0.045 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      mix-blend-mode: screen;
+    }
+
+    /* ─── Sidebar nav ───────────────────────────────── */
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 232px;
+      height: 100vh;
+      padding: 48px 0 48px 40px;
+      border-right: 1px solid var(--ash);
+      display: flex;
+      flex-direction: column;
+      background: var(--linen);
+      z-index: 10;
+      overflow-y: auto;
+    }
+    .sidebar-mark { width: 46px; height: 46px; margin-bottom: 18px; }
+    .sidebar-mark .mark-ln { stroke: var(--charcoal); }
+    .sidebar-mark .mark-ac { stroke: var(--sage); }
+    .sidebar-name {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 300;
+      font-size: 14px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      line-height: 1.4;
+    }
+    .sidebar-role {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 300;
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-top: 6px;
+      margin-bottom: 30px;
+    }
+    .nav-section-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 8.5px;
+      font-weight: 400;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--ash);
+      margin-top: 24px;
+      margin-bottom: 6px;
+    }
+    .nav-link {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--stone);
+      text-decoration: none;
+      display: block;
+      padding: 5px 0 5px 14px;
+      margin-left: -1px;
+      border-left: 1px solid transparent;
+      transition: color 0.18s ease, border-color 0.18s ease;
+    }
+    .nav-link:hover  { color: var(--charcoal); border-left-color: var(--sage); }
+    .nav-link.active { color: var(--charcoal); border-left-color: var(--charcoal); }
+
+    /* ─── Main content ──────────────────────────────── */
+    .main {
+      margin-left: 232px;
+      padding: 76px 84px 120px 88px;
+      max-width: 880px;
+    }
+
+    /* ─── Masthead ──────────────────────────────────── */
+    .masthead { margin-bottom: 72px; }
+    .masthead h1 {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 100;
+      font-size: 54px;
+      line-height: 1.04;
+      letter-spacing: -0.01em;
+      color: var(--charcoal);
+      margin: 0 0 14px 0;
+    }
+    .masthead .tagline {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 300;
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--slate);
+      margin-bottom: 26px;
+    }
+    .masthead .tagline .div { color: var(--ash); margin: 0 8px; }
+    .contact-line {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--stone);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0;
+    }
+    .contact-line a { color: var(--stone); text-decoration: none; transition: color 0.18s ease; }
+    .contact-line a:hover { color: var(--charcoal); }
+    .contact-line .sep { color: var(--ash); margin: 0 12px; }
+
+    /* ─── Sections ──────────────────────────────────── */
+    section {
+      scroll-margin-top: 48px;
+      padding-bottom: 56px;
+      border-bottom: 1px solid var(--ash);
+      margin-bottom: 56px;
+    }
+    section:last-of-type { border-bottom: none; margin-bottom: 0; }
+    .section-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--ash);
+    }
+
+    /* ─── Profile ───────────────────────────────────── */
+    .profile p {
+      font-size: 17px;
+      color: var(--slate);
+      line-height: 1.78;
+      margin: 0 0 18px 0;
+      max-width: 640px;
+    }
+    .profile p:last-child { margin-bottom: 0; }
+    .profile .lead { color: var(--charcoal); font-size: 19px; }
+
+    /* ─── Entry block ───────────────────────────────── */
+    .entry { margin-bottom: 34px; }
+    .entry:last-child { margin-bottom: 0; }
+    .entry-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 24px;
+      margin-bottom: 3px;
+    }
+    .entry-role {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 300;
+      font-size: 19px;
+      letter-spacing: 0.01em;
+      color: var(--charcoal);
+    }
+    .entry-role .at { color: var(--stone); font-weight: 100; }
+    .entry-dates {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 400;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--stone);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .entry-meta {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--stone);
+      margin-bottom: 12px;
+    }
+    .entry-summary {
+      font-size: 16px;
+      color: var(--slate);
+      margin: 0 0 12px 0;
+      max-width: 640px;
+    }
+
+    /* ─── Bulleted detail ───────────────────────────── */
+    ul.detail { list-style: none; padding: 0; margin: 0; }
+    ul.detail > li {
+      position: relative;
+      padding-left: 22px;
+      margin-bottom: 7px;
+      font-size: 16px;
+      color: var(--slate);
+      line-height: 1.6;
+      max-width: 640px;
+    }
+    ul.detail > li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--ash);
+    }
+    ul.detail .work-title { font-style: italic; color: var(--charcoal); }
+    ul.detail .role-tag {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 9.5px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--stone);
+    }
+    .sub-note {
+      font-size: 14.5px;
+      color: var(--stone);
+      font-style: italic;
+      margin: 4px 0 0 22px;
+      max-width: 620px;
+    }
+
+    /* ─── Sub-group heading inside a section ────────── */
+    .subgroup-label {
+      font-family: 'Josefin Sans', sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--slate);
+      margin: 38px 0 18px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--parchment);
+    }
+    .subgroup-label:first-child { margin-top: 0; }
+
+    /* ─── Two-column lists (skills, honors, etc.) ──── */
+    .col-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      columns: 2;
+      column-gap: 56px;
+    }
+    .col-list > li {
+      break-inside: avoid;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--parchment);
+      font-size: 15.5px;
+      color: var(--slate);
+      line-height: 1.5;
+    }
+    .col-list > li .yr {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      color: var(--stone);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    /* ─── Skills rows ───────────────────────────────── */
+    .skill-row {
+      display: grid;
+      grid-template-columns: 168px 1fr;
+      gap: 24px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--parchment);
+      align-items: baseline;
+    }
+    .skill-row:first-child { border-top: 1px solid var(--parchment); }
+    .skill-cat {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10.5px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--stone);
+    }
+    .skill-detail { font-size: 16px; color: var(--slate); }
+
+    /* ─── Publications ──────────────────────────────── */
+    ol.pubs { list-style: none; padding: 0; margin: 0; counter-reset: pub; }
+    ol.pubs > li {
+      position: relative;
+      padding-left: 34px;
+      margin-bottom: 18px;
+      font-size: 15.5px;
+      color: var(--slate);
+      line-height: 1.6;
+      max-width: 660px;
+    }
+    ol.pubs > li::before {
+      counter-increment: pub;
+      content: counter(pub, decimal-leading-zero);
+      position: absolute;
+      left: 0;
+      top: 2px;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: var(--ash);
+    }
+    ol.pubs .work-title { font-style: italic; color: var(--charcoal); }
+    ol.pubs a { color: var(--sage); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.18s ease; }
+    ol.pubs a:hover { border-bottom-color: var(--sage); }
+    .status-tag {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--sage);
+      border: 1px solid var(--ash);
+      border-radius: 2px;
+      padding: 1px 6px;
+      margin-left: 4px;
+      white-space: nowrap;
+    }
+
+    /* ─── Presentation lists ────────────────────────── */
+    ul.pres { list-style: none; padding: 0; margin: 0; }
+    ul.pres > li {
+      padding: 9px 0;
+      border-bottom: 1px solid var(--parchment);
+      font-size: 15.5px;
+      color: var(--slate);
+      line-height: 1.55;
+      display: grid;
+      grid-template-columns: 132px 1fr;
+      gap: 20px;
+      max-width: 700px;
+    }
+    ul.pres > li:first-child { border-top: 1px solid var(--parchment); }
+    ul.pres .venue {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--stone);
+    }
+    ul.pres .pres-title { font-style: italic; color: var(--slate); }
+
+    /* ─── Footer ────────────────────────────────────── */
+    .colophon {
+      margin-top: 64px;
+      padding-top: 28px;
+      border-top: 1px solid var(--ash);
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ash);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* ─── Print / PDF affordance ───────────────────── */
+    .print-btn {
+      position: fixed;
+      bottom: 28px; right: 28px;
+      z-index: 20;
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--linen);
+      background: var(--charcoal);
+      border: 1px solid var(--charcoal);
+      padding: 12px 18px;
+      cursor: pointer;
+      transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+    }
+    .print-btn:hover { background: var(--sage); border-color: var(--sage); color: var(--linen); transform: translateY(-1px); }
+    .print-btn:focus-visible { outline: 2px solid var(--sage); outline-offset: 3px; }
+
+    /* ─── Floating control cluster ─────────────────── */
+    .controls {
+      position: fixed;
+      bottom: 28px; right: 28px;
+      z-index: 20;
+      display: flex;
+      gap: 10px;
+    }
+    .controls .print-btn { position: static; }
+    .theme-toggle {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      background: transparent;
+      border: 1px solid var(--ash);
+      padding: 12px 18px;
+      cursor: pointer;
+      transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+    }
+    .theme-toggle:hover { border-color: var(--sage); color: var(--sage); transform: translateY(-1px); }
+    .theme-toggle:focus-visible { outline: 2px solid var(--sage); outline-offset: 3px; }
+
+    /* ─── Responsive ────────────────────────────────── */
+    @media (max-width: 880px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; padding: 48px 28px 100px; }
+      .masthead h1 { font-size: 40px; }
+      .col-list { columns: 1; }
+      .skill-row, ul.pres > li { grid-template-columns: 1fr; gap: 4px; }
+      .entry-head { flex-direction: column; gap: 2px; }
+    }
+
+    /* ─── Print ─────────────────────────────────────── */
+    @media print {
+      /* Always print the light brand palette for a clean PDF,
+         regardless of the on-screen theme. */
+      :root, html[data-theme="light"], html[data-theme="dark"] {
+        --linen: #FAF8F5; --charcoal: #1C1A17; --slate: #44403B;
+        --stone: #857F78; --ash: #C4BFB8; --parchment: #F2EDE6;
+        --sage: #7D8C7A; --grain: 0;
+      }
+      @page { margin: 18mm 16mm; }
+      body { background: #fff; color: var(--charcoal); font-size: 11pt; line-height: 1.45; }
+      body::before { display: none !important; }
+      .sidebar, .controls { display: none !important; }
+      .main { margin-left: 0; max-width: 100%; padding: 0; }
+      .masthead { margin-bottom: 24px; }
+      .masthead h1 { font-size: 30pt; }
+      section { border-bottom: 1px solid var(--ash); padding-bottom: 18px; margin-bottom: 18px; }
+      .entry, .skill-row, ul.pres > li, ol.pubs > li, .col-list > li { break-inside: avoid; }
+      .section-label { break-after: avoid; }
+      a { color: var(--charcoal); }
+      .col-list { columns: 2; }
+    }
+    .back-to-site {
+      font-family: 'Josefin Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--stone);
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 24px;
+      transition: color 0.18s ease;
+    }
+    .back-to-site:hover { color: var(--charcoal); }
+  </style>
+</head>
+<body>
+
+  <!-- ─── Sidebar ─────────────────────────────────── -->
+  <aside class="sidebar">
+    <svg class="sidebar-mark" viewBox="0 0 512 512" aria-hidden="true">
+      <path class="mark-ln" d="M 72,265 L 142,180 L 198,228 L 256,65 L 314,214 L 370,155 L 440,265"
+        fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+      <path class="mark-ln" d="M 72,300 C 132,293 182,307 256,300 C 330,293 380,307 440,300"
+        fill="none" stroke-width="4" stroke-linecap="round"/>
+      <path class="mark-ac" d="M 96,330 C 156,323 196,337 256,330 C 316,323 360,337 416,330"
+        fill="none" stroke-width="3.5" stroke-linecap="round"/>
+    </svg>
+    <div class="sidebar-name">Ethan C.<br>Parrish, Ph.D.</div>
+    <div class="sidebar-role">Curriculum Vitae</div>
+
+    <nav id="nav">
+      <div class="nav-section-label">About</div>
+      <a class="nav-link" href="#profile">Profile</a>
+      <a class="nav-link" href="#education">Education</a>
+
+      <div class="nav-section-label">Experience</div>
+      <a class="nav-link" href="#film">Film Production</a>
+      <a class="nav-link" href="#geoscience">Geoscience</a>
+      <a class="nav-link" href="#teaching">Teaching &amp; Outreach</a>
+      <a class="nav-link" href="#skills">Skills</a>
+
+      <div class="nav-section-label">Scholarship</div>
+      <a class="nav-link" href="#publications">Publications</a>
+      <a class="nav-link" href="#presentations">Presentations</a>
+
+      <div class="nav-section-label">Recognition</div>
+      <a class="nav-link" href="#honors">Honors &amp; Awards</a>
+      <a class="nav-link" href="#certifications">Certifications</a>
+      <a class="nav-link" href="#memberships">Memberships</a>
+      <a class="nav-link" href="#service">Service</a>
+    </nav>
+  </aside>
+
+  <!-- ─── Main ────────────────────────────────────── -->
+  <main class="main">
+
+    <header class="masthead">
+      <a class="back-to-site" href="index.html">&larr;&nbsp;&nbsp;Whispering River Media</a>
+      <h1>Ethan C. Parrish, Ph.D.</h1>
+      <div class="tagline">
+        Documentary Filmmaker<span class="div">·</span>Science Communicator<span class="div">·</span>Geoscientist
+      </div>
+      <div class="contact-line">
+        <span>Wenatchee, Washington</span>
+        <span class="sep">/</span>
+        <a href="mailto:ethancparrish@gmail.com">ethancparrish@gmail.com</a>
+      </div>
+    </header>
+
+    <!-- Profile -->
+    <section id="profile" class="profile">
+      <div class="section-label">Profile</div>
+      <p class="lead">A flourishing human future depends, in the broadest sense, on two things: our understanding of the natural world and our relationship with it. My work moves between both.</p>
+      <p>As a geoscientist, my contributions lie in understanding ancient lakes and the rivers that fed them — high-resolution windows into vanished worlds. Lakes record the environments they existed within and the changes those environments endured; because they depend on their rivers, my research traces these large-scale sediment systems to understand the dynamics of a changing world, and what that can tell us about our own.</p>
+      <p>But data alone has proven a poor instrument for shifting humanity's relationship with the planet. The second branch of my work moves toward that gap — both through research into how art-integrated geoscience curriculum affects students' emotional connection to the material, and through documentary filmmaking that makes complex scientific, ecological, and cultural stories emotionally legible. Character-driven, voiceover-averse, and grounded in the conviction that people protect what they have learned to love.</p>
+    </section>
+
+    <!-- Education -->
+    <section id="education">
+      <div class="section-label">Education</div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <span class="entry-role">Ph.D. Geoscience <span class="at">— University of Wisconsin–Madison</span></span>
+          <span class="entry-dates">2024</span>
+        </div>
+        <div class="entry-meta">Cumulative GPA 3.967 (unofficial)</div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <span class="entry-role">M.S. Geoscience <span class="at">— University of Wisconsin–Madison</span></span>
+          <span class="entry-dates">2019</span>
+        </div>
+        <div class="entry-meta">Cumulative GPA 3.942</div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <span class="entry-role">B.A. Geology <span class="at">— Whitman College</span></span>
+          <span class="entry-dates">2014</span>
+        </div>
+        <div class="entry-meta">Cumulative GPA 3.455 · Major GPA 3.512 (unofficial)</div>
+      </div>
+    </section>
+
+    <!-- Film Production -->
+    <section id="film">
+      <div class="section-label">Experience — Film Production</div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <span class="entry-role">Production Team <span class="at">— North Forty (N40)</span></span>
+          <span class="entry-dates">Nov 2023 – Present</span>
+        </div>
+        <div class="entry-meta">Wenatchee, WA</div>
+        <p class="entry-summary">Documentary production across a slate of character-driven films exploring community, recovery, the arts, and ecological restoration.</p>
+        <ul class="detail">
+          <li><span class="work-title">Welcome Home</span> — The story of Oxford House International and its revolutionary work in housing for recovering addicts.</li>
+          <li><span class="work-title">The Hope Dealers</span> — Former dealers and addicts, guided by lived experience, transforming how rural communities face addiction — a grassroots movement playing out where traditional systems have fallen short.</li>
+          <li><span class="work-title">Working with Nature: An Ongoing Story of Wetland Regeneration</span> — Process-based restoration as an act of reciprocity, partnering with a degraded stream and wetland system rather than imposing control.</li>
+          <li><span class="work-title">Precious Little Theater</span> — Through four passionate performance-art directors, the transformative power of theater to foster connection and bring communities together.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <span class="entry-role">Owner <span class="at">— Whispering River Media</span></span>
+          <span class="entry-dates">Jan 2022 – Present</span>
+        </div>
+        <div class="entry-meta">Wenatchee, WA</div>
+        <p class="entry-summary">Personal production company creating authentic stories about the intersections of earth science and humanity.</p>
+        <ul class="detail">
+          <li><span class="work-title">Death of a Glacier — Iceland</span> — An interdisciplinary art/science effort tied to research on deglaciation across the western hemisphere, in collaboration with glaciologist and concert bassist Andrew Jones (UW–Madison). Filmed in Iceland and Bolivia.
+            <div class="sub-note">Official selection, Madison Film Festival · Academic screening, 2025 European Geosciences Union Annual Meeting.</div>
+          </li>
+          <li><span class="work-title">What's in a Name?</span> — A 30-minute documentary on the partnership between UW Geology Museum scientist Dave Lovelace and the Wind River Reservation community that named three new taxa through multigenerational collaboration between Elders and Tribal students — a call to change colonial naming practices across the sciences.
+            <div class="sub-note">Official selections: Wisconsin Film Festival; Wyoming International Film Festival (Nominee, Best Wyoming Documentary); Wyoming Film Festival · Academic screenings: 2024 Society of Vertebrate Paleontology Annual Meeting; 2025 European Geosciences Union Annual Meeting.</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <span class="entry-role">Camera / Production Team <span class="at">— Bravebird Productions</span></span>
+          <span class="entry-dates">Aug 2020 – Jun 2023</span>
+        </div>
+        <div class="entry-meta">Middleton, WI · depicting Native and diverse stories with dignity</div>
+        <p class="entry-summary">Camera Operator, 1st AC, SteadiCam Operator &amp; Drone Pilot, and Associate Producer across the studio's documentary slate.</p>
+        <ul class="detail">
+          <li><span class="work-title">Trace the Line</span> <span class="role-tag">1st AC · SteadiCam · Camera Op · Drone</span> — Bravebird's first feature, exploring the complexities of race in America through two young artists in 2020, under cinematographer Greg Hatton.</li>
+          <li><span class="work-title">Bayview Rising, Ep. 1</span> <span class="role-tag">2nd Unit Cinematography</span> — The historical redevelopment of the Bayview apartments, featuring the Corea family's immigration story in Madison, WI.</li>
+          <li><span class="work-title">Decolonizing Dinner</span> <span class="role-tag">2nd Unit Cinematography</span> — Traditional Native cuisines from the kitchens of Ho-Chunk Chef Elena Terry and Mexica Chef Anthony Gallarday.</li>
+          <li><span class="work-title">Dream Big</span> <span class="role-tag">2nd Unit Cinematography</span> — Maydm, a Madison nonprofit preparing girls and underrepresented youth (grades 6–12) for STEM careers.</li>
+          <li><span class="work-title">Musicnotes — Dream</span> <span class="role-tag">Production Assistant</span> — On the importance of big dreams and the people who believe in us.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Geoscience -->
+    <section id="geoscience">
+      <div class="section-label">Experience — Geoscience</div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <span class="entry-role">Graduate Research &amp; Teaching Assistant <span class="at">— UW–Madison, Dept. of Geoscience</span></span>
+          <span class="entry-dates">Aug 2017 – Jan 2024</span>
+        </div>
+        <div class="entry-meta">Madison, WI · Advisors: Dr. Alan Carroll, Dr. Stephen Meyers</div>
+        <ul class="detail">
+          <li>Fluvial–lacustrine coevolution of the Greater Green River Basin during the Early Eocene Climatic Optimum.</li>
+          <li>Eocene sedimentary provenance and dispersal patterns within the western U.S. Laramide foreland.</li>
+          <li>Testing the affective influence of an art-integrated introductory geoscience curriculum.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <span class="entry-role">Earth Science Intern <span class="at">— Chevron Corporation</span></span>
+          <span class="entry-dates">Jun – Aug 2018</span>
+        </div>
+        <div class="entry-meta">Covington, LA</div>
+        <ul class="detail">
+          <li>Analyzed production data for a key producing well in a target area of interest.</li>
+          <li>Interfaced with petroleum engineers, technical specialists, and geologists across groups to execute the project.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <span class="entry-role">Geoscience Intern / Geological Technician <span class="at">— Whiting Petroleum</span></span>
+          <span class="entry-dates">2011 – 2017</span>
+        </div>
+        <div class="entry-meta">Denver, CO · Intern 2011–2015 · Geotech 2015–2017</div>
+        <ul class="detail">
+          <li>Beta-tested Perigon's iPoint photo and core database software and integrated it into Whiting's system.</li>
+          <li>Designed more efficient research workflows for XRF, Schmidt Hammer, and handheld gamma ray instruments, plus in-house core photography and inventory.</li>
+          <li>Designed presentation figures and maps for the Senior VP of Exploration and Development.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Teaching & Outreach -->
+    <section id="teaching">
+      <div class="section-label">Experience — Teaching &amp; Outreach</div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <span class="entry-role">Director of Photography <span class="at">— tadada Scientific Lab</span></span>
+          <span class="entry-dates">Jan 2018 – May 2023</span>
+        </div>
+        <div class="entry-meta">UW–Madison · Contact: Dr. Stephen Meyers</div>
+        <p class="entry-summary">A lab that inspires scientific literacy and cultivates emotional connections to science through interdisciplinary artistic approaches to climate and earth science education.</p>
+        <ul class="detail">
+          <li>Played a vital role in the innovation, development, and execution of tadada projects.</li>
+          <li>Filmed and edited, and helped direct and write, the majority of tadada videos.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <span class="entry-role">Graduate Teaching Assistant <span class="at">— UW–Madison, Dept. of Geoscience</span></span>
+          <span class="entry-dates">2017 – 2023</span>
+        </div>
+        <div class="entry-meta">Teaching philosophy: prioritize affective engagement with the <em>why</em> before the <em>what</em> and <em>how</em> — a balanced cognitive–affective approach to deeper, intrinsically motivated learning.</div>
+        <ul class="detail">
+          <li>Sedimentology &amp; Stratigraphy Lab (Geo 431).</li>
+          <li>Introduction to Geology Lab (Geo 100) — TA rating 4.86 / 5.</li>
+          <li>Geologic Hazards Lab (Geo 140) — TA rating 4.48 / 5.</li>
+          <li>Video/digital support (Geo 100, Geo 140); reader/grader, Energy &amp; the Environment (Geo 411).</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <span class="entry-role">English Teacher (ESL) <span class="at">— Amphawan Wittayalai School</span></span>
+          <span class="entry-dates">May – Oct 2015</span>
+        </div>
+        <div class="entry-meta">Amphawa, Samut Songkhram, Thailand</div>
+        <ul class="detail">
+          <li>Designed and executed an ESL curriculum — weekly lesson plans, midterm, and final exam — for the equivalent of 7th–9th grade.</li>
+          <li>Managed and taught 21 classes of 30–40 students each week.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <div class="section-label">Skills</div>
+
+      <div class="skill-row">
+        <div class="skill-cat">Video / Post</div>
+        <div class="skill-detail">Adobe Premiere Pro, After Effects; field cinematography, editing, color, audio.</div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-cat">Camera / Field</div>
+        <div class="skill-detail">Camera Operator, 1st AC, SteadiCam, drone / UAV piloting.</div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-cat">Design</div>
+        <div class="skill-detail">Adobe Illustrator, Photoshop, InDesign.</div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-cat">Photo</div>
+        <div class="skill-detail">Adobe Lightroom.</div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-cat">Documents</div>
+        <div class="skill-detail">Apple Pages, Numbers, Keynote.</div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-cat">Geoscience Methods</div>
+        <div class="skill-detail">Stratigraphy / sedimentology, detrital zircon geochronology, paleocurrent analysis, provenance, XRF, Schmidt Hammer, handheld gamma ray, core photography / inventory.</div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-cat">Science Comm</div>
+        <div class="skill-detail">Character-driven documentary storytelling; art-integrated geoscience education.</div>
+      </div>
+    </section>
+
+    <!-- Publications -->
+    <section id="publications">
+      <div class="section-label">Peer-Reviewed Publications</div>
+      <ol class="pubs">
+        <li>Parrish, E.C., Libarkin, J., Meyers, S., Cohen, G., 2026. <span class="work-title">Arts-Based Earth Science Instruction Impacts Student Sense of Belonging, Earth Science Interest, and Earth-Related Career Goals.</span> Journal of Geoscience Education <span class="status-tag">In Review</span></li>
+        <li>Villa, A., Hupp, B.N., Roberts, N.M., Callahan, E., Krishnan, A., Parrish, E., Honig, S., 2025. <span class="work-title">Building community: A sustainable framework for DEI working groups in geoscience departments.</span> Earth Science, Systems and Society, v. 0, p. esss2024-011. <a href="https://doi.org/10.1144/esss2024-011">doi.org/10.1144/esss2024-011</a></li>
+        <li>Smith, M.E., Gregorich, H.G., Gipson, L.A., Krueger, R.C., Carroll, A.R., Parrish, E.C., Walters, A.P., Honig, S., Schwaderer, C., Meyers, S., Singer, B.S., Lowenstein, T.K., Arnuk, W.D., 2023. <span class="work-title">High-resolution X-ray fluorescence-based provenance mapping of Eocene fluvial distributary fans that fed ancient Gosiute Lake, Wyoming, USA.</span> GSA Bulletin. <a href="https://doi.org/10.1130/B37207.1">doi.org/10.1130/B37207.1</a></li>
+        <li>Parrish, E.C., Carroll, A.R., Gregorich, H., Smith, M.E., Schwaderer, C., 2023. <span class="work-title">Watershed-scale provenance heterogeneity within Eocene nonmarine basin fill: Southern Greater Green River Basin, western USA.</span> GSA Bulletin. <a href="https://doi.org/10.1130/B36822.1">doi.org/10.1130/B36822.1</a></li>
+        <li>Hammond, A.P., Carroll, A.R., Parrish, E.C., Smith, M.E., Lowenstein, T.K., 2019. <span class="work-title">The Aspen paleoriver: Linking Eocene magmatism to the world's largest Na-carbonate evaporite (Wyoming, USA).</span> Geology, v. 47, p. 1020–1024. <a href="https://doi.org/10/gghxhq">doi.org/10/gghxhq</a></li>
+      </ol>
+    </section>
+
+    <!-- Presentations -->
+    <section id="presentations">
+      <div class="section-label">Conference Presentations</div>
+
+      <div class="subgroup-label">Talks</div>
+      <ul class="pres">
+        <li><span class="venue">GSA 2022</span><span class="pres-title">Watershed-Scale Provenance Heterogeneity Within Nonmarine Basin Fill: Southern Greater Green River Basin, Western US.</span></li>
+        <li><span class="venue">Weeks 2022</span><span class="pres-title">Curriculum-specific film: elevating interest in introductory Geoscience curriculum.</span></li>
+        <li><span class="venue">Weeks 2021</span><span class="pres-title">A Tale of Two Rivers: A Source-to-Sink Comparative Analysis of the Aspen and Idaho Paleoriver Systems.</span></li>
+        <li><span class="venue">M.S. Defense 2019</span><span class="pres-title">Influence of the Paleo-Aspen River on the Sedimentology and Mineralogy of the Green River Formation of the Bridger Basin, WY.</span></li>
+        <li><span class="venue">Chevron Corp.</span><span class="pres-title">Characterization of the M60 Sand at Maddog.</span></li>
+      </ul>
+
+      <div class="subgroup-label">Posters</div>
+      <ul class="pres">
+        <li><span class="venue">GSA 2022</span><span class="pres-title">Curriculum-Specific Film: Elevating Engagement in the Introductory Geoscience Classroom.</span></li>
+        <li><span class="venue">Weeks 2022</span><span class="pres-title">A tale of two rivers: fluvial records of competing moisture sources in a broken Eocene foreland.</span></li>
+        <li><span class="venue">GSA 2021</span><span class="pres-title">A Tale of Two Rivers: Fluvial Records of Competing Moisture Sources in a Broken Eocene Foreland.</span></li>
+        <li><span class="venue">AGU 2019</span><span class="pres-title">Invigorating the geoscience community: Graduate student-led efforts in creating inclusive, equal, and diverse science and community at UW–Madison.</span></li>
+        <li><span class="venue">Weeks 2019</span><span class="pres-title">Influence of the Paleo-Aspen River on the Sedimentology and Mineralogy of the Green River Formation of the Bridger Basin, WY.</span></li>
+        <li><span class="venue">GSA 2018</span><span class="pres-title">Influence of the Aspen Paleo-River on the Sedimentology and Mineralogy of the Eocene Green River Formation, WY.</span></li>
+        <li><span class="venue">Riveredge 2018</span><span class="pres-title">Influence of the Aspen Paleo-River on the Sedimentology and Mineralogy of the Eocene Green River Formation, WY.</span></li>
+      </ul>
+    </section>
+
+    <!-- Honors -->
+    <section id="honors">
+      <div class="section-label">Honors &amp; Achievements</div>
+      <ul class="col-list">
+        <li><span class="yr">2026</span><em>What's in a Name?</em> highlighted in Whitman College's Alumni Magazine.</li>
+        <li><span class="yr">2025</span><em>What's in a Name?</em> official selections — Wisconsin Film Festival, Wyoming International Film Festival (Nominee, Best Wyoming Documentary), Wyoming Film Festival; <em>Death of a Glacier</em> official selection, Madison Film Festival.</li>
+        <li><span class="yr">2023</span>Recipient, S.W. Bailey Distinguished Graduate Student Award.</li>
+        <li><span class="yr">2022</span>Dean L. Morgridge Wisconsin Distinguished Graduate Fellowship; UW TA Innovation in Teaching Award; 6th, Ultimate Frisbee World Championship.</li>
+        <li><span class="yr">2021</span>Robert J. &amp; Ruth A. Weimer Endowment SEPM Student Assistance Grant; Stanley A. Tyler Excellence in Teaching Award; Strabo Field Scholarship; 4th, USA National Ultimate Frisbee Championship.</li>
+        <li><span class="yr">2020</span>Phi Kappa Phi Honor Society; Solien Graduate Research Assistantship; O.B. Shelburne Research Award; Winner, UW Cool Science Image Contest.</li>
+        <li><span class="yr">2019</span>Stanley A. Tyler Excellence in Teaching Award; Communication Arts Showcase — short film <em>Impostor</em>; AAAS Fellow Semifinalist.</li>
+        <li><span class="yr">2018</span>Robert &amp; Carolyn Maby Memorial Grant (AAPG Foundation); Fluvial Sedimentology Award (RMS-SEPM); Winner, UW Graduate School Art Competition — photograph <em>A Resting Place</em>.</li>
+      </ul>
+    </section>
+
+    <!-- Certifications -->
+    <section id="certifications">
+      <div class="section-label">Certifications &amp; Licenses</div>
+      <ul class="col-list">
+        <li><span class="yr">2020 – Present</span>FAA UAV Remote Pilot — License #4395140.</li>
+        <li><span class="yr">2015 – Present</span>PADI Rescue Diver — License #1512AB3889.</li>
+        <li><span class="yr">2015</span>TESOL Teacher — Explore Asia.</li>
+        <li><span class="yr">2014 – 2016</span>Wilderness First Responder — NOLS Wilderness Medicine Institute.</li>
+      </ul>
+    </section>
+
+    <!-- Memberships -->
+    <section id="memberships">
+      <div class="section-label">Professional Memberships</div>
+      <ul class="col-list">
+        <li>Geological Society of America (GSA)</li>
+        <li>American Association of Petroleum Geologists (AAPG)</li>
+        <li>Society of Sedimentary Geology (SEPM)</li>
+        <li>Phi Kappa Phi Honor Society</li>
+      </ul>
+    </section>
+
+    <!-- Service -->
+    <section id="service">
+      <div class="section-label">Volunteer &amp; Community Service</div>
+      <ul class="col-list">
+        <li><span class="yr">2024 – Present</span>Dinner server, Wenatchee Rescue Mission.</li>
+        <li><span class="yr">2020 – 2021</span>Graduate Student Public Relations Rep.</li>
+        <li><span class="yr">2020</span>Front Porch Portraits Initiative.</li>
+        <li><span class="yr">2019 – 2020</span>Blackhawk Church college-age adult leader.</li>
+        <li><span class="yr">2019, 2021, 2022</span>Tyranena Half Marathon Volunteer.</li>
+        <li><span class="yr">2019</span>Tyranena Bike Race Volunteer.</li>
+        <li><span class="yr">2018 – 2019</span>Vice President, UW Student Chapter AAPG.</li>
+        <li><span class="yr">2018</span>Satchel Jazz Festival Volunteer.</li>
+        <li><span class="yr">2016</span>Colorado U16 National Ultimate Frisbee Coach.</li>
+        <li><span class="yr">2015 – 2017</span>High School Ultimate Frisbee Coach.</li>
+        <li><span class="yr">2014 – 2015</span>Venture Crew 613 Scout Advisor.</li>
+        <li><span class="yr">2014</span>Storytime reader, preschool-age children.</li>
+        <li><span class="yr">2009</span>Eagle Scout Project.</li>
+      </ul>
+
+      <div class="colophon">
+        <span>References available on request</span>
+        <span>Whispering River Media · Wenatchee, WA</span>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="controls">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle light or dark theme">Light</button>
+    <button class="print-btn" onclick="window.print()">Download / Print</button>
+  </div>
+
+  <!-- ─── Theme toggle ────────────────────────────── -->
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const btn = document.getElementById('themeToggle');
+      const stored = localStorage.getItem('cv-theme');
+      const initial = stored || 'dark';
+      apply(initial);
+      btn.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        apply(next);
+        localStorage.setItem('cv-theme', next);
+      });
+      function apply(theme) {
+        root.setAttribute('data-theme', theme);
+        btn.textContent = theme === 'light' ? 'Dark' : 'Light';
+      }
+    })();
+  </script>
+
+  <!-- ─── Scroll-spy ──────────────────────────────── -->
+  <script>
+    const links = Array.from(document.querySelectorAll('.nav-link'));
+    const map = new Map(links.map(l => [l.getAttribute('href').slice(1), l]));
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          links.forEach(l => l.classList.remove('active'));
+          const active = map.get(e.target.id);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+    document.querySelectorAll('main section').forEach(s => observer.observe(s));
+  </script>
+
+</body>
+</html>

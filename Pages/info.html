@@ -419,6 +419,36 @@
     }
 
     .send-btn:active { transform: translateY(0); box-shadow: none; }
+    .send-btn:disabled { opacity: 0.6; cursor: default; transform: none; box-shadow: none; }
+
+    .form-error {
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.5;
+      color: #cf9279;
+      margin-bottom: 18px;
+    }
+    .form-success {
+      text-align: center;
+      padding: 12px 0 4px;
+    }
+    .form-success-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 14px;
+    }
+    .form-success p:last-child {
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--stone);
+      max-width: 38ch;
+      margin: 0 auto;
+    }
 
     /* ─── Responsive ──────────────────────────────── */
     @media (max-width: 640px) {
@@ -543,7 +573,7 @@
           </div>
         </div>
 
-        <form action="https://formspree.io/f/your-form-id" method="POST">
+        <form id="contact-form" action="https://formspree.io/f/mzdlpjpj" method="POST">
         <div class="field-group">
           <p class="field-group-label">Name</p>
           <div class="field-row">
@@ -565,7 +595,7 @@
 
         <div class="field-group">
           <label for="subject">Subject <span class="req">(required)</span></label>
-          <input type="text" id="subject" name="subject" required>
+          <input type="text" id="subject" name="_subject" required>
         </div>
 
         <div class="field-group">
@@ -573,8 +603,13 @@
           <textarea id="message" name="message" required></textarea>
         </div>
 
+        <p class="form-error" id="formError" role="alert" hidden></p>
         <button type="submit" class="send-btn">Send</button>
       </form>
+      <div class="form-success" id="formSuccess" hidden>
+        <p class="form-success-title">Message Sent</p>
+        <p>Thanks for reaching out — your message is on its way. I'll be in touch soon.</p>
+      </div>
       </div>
     </section>
   </main>
@@ -601,6 +636,48 @@
         });
       }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
       els.forEach(function (el) { io.observe(el); });
+    })();
+
+    // ── Contact form (Formspree AJAX) ───────────────
+    (function () {
+      var form = document.getElementById('contact-form');
+      if (!form) return;
+      var errorEl = document.getElementById('formError');
+      var successEl = document.getElementById('formSuccess');
+      var btn = form.querySelector('.send-btn');
+      var fallback = 'Something went wrong sending your message. Please try again, or email me directly at ethancparrish@gmail.com.';
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        errorEl.hidden = true;
+        var label = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+
+        fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        }).then(function (res) {
+          if (res.ok) {
+            form.hidden = true;
+            successEl.hidden = false;
+            successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+          }
+          return res.json().then(function (data) {
+            var msg = (data && data.errors && data.errors.length)
+              ? data.errors.map(function (x) { return x.message; }).join(' ')
+              : fallback;
+            throw new Error(msg);
+          });
+        }).catch(function (err) {
+          errorEl.textContent = err.message || fallback;
+          errorEl.hidden = false;
+          btn.disabled = false;
+          btn.textContent = label;
+        });
+      });
     })();
   </script>
 
