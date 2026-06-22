@@ -18,7 +18,7 @@ await page.goto(url, { waitUntil: 'networkidle2' });
 
 // Force-reveal any scroll-triggered animation elements so full-page screenshots capture them
 await page.evaluate(() => {
-  document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+  document.querySelectorAll('.reveal, .fade-up').forEach(el => el.classList.add('in'));
   window.scrollTo(0, 0);
 });
 await new Promise(r => setTimeout(r, 800)); // settle transitions

@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research — Whispering River Media</title>
+  <meta name="description" content="Geoscience research and education — PhD geology, publications, 3D outcrop models, and art-integrated Earth science curriculum.">
+  <link rel="icon" href="brand_assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;300;400&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --parchment: #F2EDE6;
+      --linen:     #FAF8F5;
+      --ash:       #C4BFB8;
+      --stone:     #857F78;
+      --slate:     #44403B;
+      --charcoal:  #1C1A17;
+      --sage:      #7D8C7A;
+      --font-display: 'Josefin Sans', sans-serif;
+      --font-body:    'EB Garamond', serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { overflow-y: scroll; }
+    body {
+      background: #151310;
+      color: var(--parchment);
+      font-family: var(--font-display);
+      -webkit-font-smoothing: antialiased;
+    }
+    a   { color: inherit; text-decoration: none; }
+    img { display: block; }
+
+    /* ─── Grain overlay ───────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 200;
+      opacity: 0.3;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.11 0 0 0 0 0.10 0 0 0 0 0.09 0 0 0 0.045 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      mix-blend-mode: screen;
+    }
+
+    /* ─── Navigation ──────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 36px;
+      background: rgba(21, 19, 16, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(196, 191, 184, 0.12);
+    }
+
+    .nav-brand {
+      font-family: var(--font-display);
+      font-weight: 100;
+      font-size: 13px;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--parchment);
+      transition: opacity 0.3s ease;
+    }
+    .nav-brand:hover { opacity: 0.6; }
+
+    .nav-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 36px;
+    }
+
+    .nav-link {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--stone);
+      transition: color 0.3s ease;
+    }
+    .nav-link:hover { color: var(--parchment); }
+
+    .nav-info {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--stone);
+      transition: color 0.3s ease;
+    }
+    .nav-info:hover { color: var(--parchment); }
+
+    /* ─── Hero (full-bleed) ───────────────────────── */
+    .research-hero {
+      position: relative;
+      width: 100%;
+      height: 72vh;
+      min-height: 480px;
+      overflow: hidden;
+    }
+    .research-hero img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+      filter: contrast(1.05) saturate(1.05);
+    }
+    .research-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(130% 95% at 100% 0%, rgba(21,19,16,0.62) 0%, rgba(21,19,16,0.12) 42%, transparent 60%),
+        linear-gradient(to left, rgba(21,19,16,0.6) 0%, rgba(21,19,16,0.12) 40%, transparent 64%),
+        linear-gradient(to bottom, rgba(21,19,16,0.66) 0%, rgba(21,19,16,0.18) 24%, rgba(21,19,16,0) 48%, rgba(21,19,16,0) 76%, rgba(21,19,16,0.58) 100%);
+    }
+    .research-hero-content {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 2;
+      max-width: 660px;
+      padding: 150px 48px 0;
+      text-align: right;
+    }
+    .eyebrow {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.36em;
+      text-transform: uppercase;
+      color: var(--ash);
+      margin-bottom: 18px;
+    }
+    .research-hero h1 {
+      font-family: var(--font-display);
+      font-weight: 100;
+      font-size: clamp(32px, 4.2vw, 52px);
+      letter-spacing: 0.01em;
+      line-height: 1.2;
+      color: var(--parchment);
+      max-width: 14ch;
+      margin-left: auto;
+      text-wrap: balance;
+      text-shadow: 0 1px 3px rgba(21,19,16,0.55), 0 2px 28px rgba(21,19,16,0.8);
+    }
+
+    /* ─── Body copy ───────────────────────────────── */
+    .research-intro {
+      max-width: 64ch;
+      margin: 0 auto;
+      padding: 76px 48px 0;
+    }
+
+    .body-copy p {
+      font-family: var(--font-body);
+      font-size: 18px;
+      line-height: 1.8;
+      color: var(--stone);
+      margin-bottom: 26px;
+    }
+    .body-copy p:last-child { margin-bottom: 0; }
+
+    .research-intro p:first-child::first-letter {
+      font-family: var(--font-display);
+      font-weight: 100;
+      font-size: 76px;
+      line-height: 0.74;
+      float: left;
+      margin: 6px 16px 0 0;
+      color: var(--parchment);
+    }
+
+    .body-copy a {
+      color: var(--parchment);
+      text-decoration: underline;
+      text-decoration-color: rgba(196, 191, 184, 0.25);
+      text-underline-offset: 3px;
+      transition: text-decoration-color 0.3s ease;
+    }
+    .body-copy a:hover { text-decoration-color: var(--parchment); }
+    .body-copy a:focus-visible { outline: 2px solid var(--sage); outline-offset: 3px; }
+
+    /* ─── Virtual Outcrop CTA ─────────────────────── */
+    .outcrop-cta {
+      max-width: 64ch;
+      margin: 0 auto;
+      padding: 48px 48px 0;
+      text-align: center;
+    }
+    .outcrop-cta p {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--stone);
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      border: 1px solid var(--ash);
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--parchment);
+      background: transparent;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    }
+    .btn:hover {
+      background: rgba(242, 237, 230, 0.1);
+      color: var(--parchment);
+      transform: translateY(-1px);
+    }
+    .btn:focus-visible {
+      outline: 2px solid var(--sage);
+      outline-offset: 3px;
+    }
+    .btn:active { transform: translateY(0); }
+
+    /* ─── Two-column: Publications + Media ─────────── */
+    .pubs-media {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 72px 48px 0;
+      align-items: start;
+    }
+
+    .column-label {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 28px;
+    }
+
+    /* Publications */
+    ol.pubs { list-style: none; padding: 0; margin: 0; counter-reset: pub; }
+    ol.pubs > li {
+      position: relative;
+      padding-left: 34px;
+      margin-bottom: 22px;
+      font-family: var(--font-body);
+      font-size: 15.5px;
+      color: var(--stone);
+      line-height: 1.6;
+    }
+    ol.pubs > li::before {
+      counter-increment: pub;
+      content: counter(pub, decimal-leading-zero);
+      position: absolute;
+      left: 0;
+      top: 2px;
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: rgba(196, 191, 184, 0.35);
+    }
+    ol.pubs .work-title { font-style: italic; color: var(--parchment); }
+    ol.pubs a {
+      color: var(--sage);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.18s ease;
+    }
+    ol.pubs a:hover { border-bottom-color: var(--sage); }
+    ol.pubs a:focus-visible { outline: 2px solid var(--sage); outline-offset: 3px; }
+    .status-tag {
+      font-family: var(--font-display);
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--sage);
+      border: 1px solid rgba(196, 191, 184, 0.2);
+      border-radius: 2px;
+      padding: 1px 6px;
+      margin-left: 4px;
+      white-space: nowrap;
+    }
+
+    /* Video cards */
+    .video-card { margin-bottom: 28px; }
+    .video-card-frame {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      border-radius: 6px;
+      overflow: hidden;
+      background:
+        radial-gradient(120% 120% at 50% 0%, rgba(125,140,122,0.12), transparent 60%),
+        #211e1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 18px 40px -22px rgba(28,26,23,0.5);
+      transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+    }
+    .video-card-frame::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.4;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.96 0 0 0 0 0.93 0 0 0 0 0.90 0 0 0 0.05 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      mix-blend-mode: screen;
+    }
+    .video-card:hover .video-card-frame:not(.is-embed) { transform: translateY(-3px); }
+    .video-card-frame.is-embed { background: #000; }
+    .video-card-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .video-card-play {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 1px solid rgba(196, 191, 184, 0.5);
+      position: relative;
+      z-index: 1;
+      transition: border-color 0.3s ease, transform 0.4s cubic-bezier(0.22,1,0.36,1), background-color 0.3s ease;
+    }
+    .video-card-play::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 53%;
+      transform: translate(-50%, -50%);
+      border-style: solid;
+      border-width: 7px 0 7px 12px;
+      border-color: transparent transparent transparent var(--ash);
+    }
+    .video-card:hover .video-card-play {
+      border-color: var(--parchment);
+      background: rgba(242, 237, 230, 0.06);
+      transform: scale(1.06);
+    }
+    .video-card-tag {
+      position: absolute;
+      bottom: 12px;
+      left: 14px;
+      z-index: 1;
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 8px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--ash);
+      padding: 4px 9px;
+      border: 1px solid rgba(196, 191, 184, 0.22);
+      border-radius: 2px;
+      background: rgba(21, 19, 16, 0.55);
+    }
+    .video-card-label {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 14px;
+      letter-spacing: 0.06em;
+      line-height: 1.4;
+      color: var(--parchment);
+      margin-top: 14px;
+    }
+    .video-card-note {
+      font-family: var(--font-body);
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--stone);
+      margin-top: 6px;
+    }
+
+    /* ─── Section divider ─────────────────────────── */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      padding: 80px 56px 28px;
+    }
+    .divider-rule {
+      flex: 1;
+      height: 1px;
+      background: rgba(196, 191, 184, 0.18);
+    }
+    .divider-content {
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .divider-label {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.36em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 7px;
+    }
+    .divider-sub {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 14px;
+      color: var(--stone);
+      opacity: 0.65;
+    }
+
+    /* ─── Education section ───────────────────────── */
+    .edu-intro {
+      max-width: 64ch;
+      margin: 0 auto;
+      padding: 56px 48px 0;
+    }
+
+    .edu-videos {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 48px 0;
+    }
+    .edu-video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+      margin-top: 18px;
+    }
+
+    /* ─── Teaching Philosophy ──────────────────────── */
+    .teaching-philosophy {
+      max-width: 64ch;
+      margin: 0 auto;
+      padding: 64px 48px 0;
+    }
+    .section-heading {
+      font-family: var(--font-display);
+      font-weight: 100;
+      font-size: clamp(22px, 2.8vw, 32px);
+      letter-spacing: 0.02em;
+      line-height: 1.2;
+      color: var(--parchment);
+      margin-bottom: 28px;
+    }
+    .cv-link {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-size: 16px;
+      color: var(--parchment);
+      margin-top: 8px;
+      padding-bottom: 3px;
+      border-bottom: 1px solid rgba(196, 191, 184, 0.14);
+      transition: border-color 0.3s ease, padding 0.3s ease;
+    }
+    .cv-link:hover { border-color: var(--parchment); padding-left: 6px; }
+    .cv-link:focus-visible { outline: 2px solid var(--sage); outline-offset: 4px; }
+    .cv-link .arrow {
+      font-family: var(--font-display);
+      font-size: 14px;
+      color: var(--sage);
+      transition: transform 0.3s ease;
+    }
+    .cv-link:hover .arrow { transform: translateX(4px); }
+
+    /* ─── Gallery strip ───────────────────────────── */
+    .gallery-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 72px 48px 0;
+    }
+    .gallery-strip {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 16px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(196, 191, 184, 0.2) transparent;
+    }
+    .gallery-strip::-webkit-scrollbar { height: 3px; }
+    .gallery-strip::-webkit-scrollbar-track { background: transparent; }
+    .gallery-strip::-webkit-scrollbar-thumb { background: rgba(196, 191, 184, 0.2); border-radius: 2px; }
+    .gallery-thumb {
+      flex: 0 0 auto;
+      height: 160px;
+      cursor: pointer;
+      overflow: hidden;
+      border-radius: 4px;
+      opacity: 0.82;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .gallery-thumb img {
+      height: 100%;
+      width: auto;
+      display: block;
+      object-fit: cover;
+      filter: grayscale(0.3) sepia(0.06);
+      transition: filter 0.25s ease;
+    }
+    .gallery-thumb:hover { opacity: 1; transform: translateY(-2px); }
+    .gallery-thumb:hover img { filter: grayscale(0) sepia(0); }
+    .gallery-thumb:focus-visible { outline: 2px solid var(--sage); outline-offset: 2px; }
+
+    /* ─── Gallery lightbox ────────────────────────── */
+    .gallery-lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: rgba(21, 19, 16, 0.97);
+      align-items: center;
+      justify-content: center;
+    }
+    .gallery-lightbox.open { display: flex; }
+    .lightbox-img {
+      max-width: 90%;
+      max-height: 85vh;
+      object-fit: contain;
+      display: block;
+      border-radius: 2px;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 24px; right: 28px;
+      background: none;
+      border: none;
+      color: var(--stone);
+      font-family: var(--font-display);
+      font-size: 20px;
+      cursor: pointer;
+      line-height: 1;
+      padding: 8px;
+      transition: color 0.2s ease;
+    }
+    .lightbox-close:hover { color: var(--parchment); }
+    .lightbox-close:focus-visible { outline: 2px solid var(--sage); outline-offset: 3px; }
+    .lightbox-prev,
+    .lightbox-next {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--stone);
+      font-family: var(--font-display);
+      font-size: 36px;
+      cursor: pointer;
+      padding: 16px 20px;
+      line-height: 1;
+      transition: color 0.2s ease;
+    }
+    .lightbox-prev { left: 16px; }
+    .lightbox-next { right: 16px; }
+    .lightbox-prev:hover,
+    .lightbox-next:hover { color: var(--parchment); }
+    .lightbox-prev:focus-visible,
+    .lightbox-next:focus-visible { outline: 2px solid var(--sage); outline-offset: 3px; }
+    .lightbox-counter {
+      position: absolute;
+      bottom: 24px;
+      left: 50%; transform: translateX(-50%);
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      color: var(--stone);
+    }
+
+    /* ─── Scroll reveal ───────────────────────────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1);
+    }
+    .fade-up.in { opacity: 1; transform: none; }
+
+    /* ─── Reveal animation ────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .reveal-1 { animation-delay: 0.05s; }
+    .reveal-2 { animation-delay: 0.18s; }
+    .reveal-3 { animation-delay: 0.32s; }
+
+    @keyframes rise {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── Footer ──────────────────────────────────── */
+    footer {
+      margin-top: 96px;
+      background: #0d0b09;
+      padding: 36px 48px;
+      text-align: center;
+    }
+    .footer-links {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ash);
+    }
+    .footer-links a { transition: color 0.3s ease; }
+    .footer-links a:hover { color: var(--parchment); }
+    .footer-divider {
+      margin: 0 14px;
+      color: var(--stone);
+    }
+
+    /* ─── Responsive ──────────────────────────────── */
+    @media (max-width: 820px) {
+      .research-hero { height: 60vh; min-height: 400px; }
+      .research-hero-content { padding: 116px 24px 0; max-width: 100%; }
+      .research-intro { padding: 56px 24px 0; }
+      .outcrop-cta { padding: 36px 24px 0; }
+      .pubs-media {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        padding: 56px 24px 0;
+      }
+      .section-divider { padding: 56px 24px 20px; gap: 16px; }
+      .edu-intro { padding: 40px 24px 0; }
+      .edu-videos { padding: 36px 24px 0; }
+      .edu-video-grid { grid-template-columns: 1fr; }
+      .teaching-philosophy { padding: 48px 24px 0; }
+      .gallery-section { padding: 56px 24px 0; }
+      .gallery-thumb { height: 100px; }
+      footer { padding: 36px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-brand">WRM</a>
+    <div class="nav-center">
+      <a href="film.html" class="nav-link">Film</a>
+      <a href="photo-temp.html" class="nav-link">Photo</a>
+    </div>
+    <a href="info.html" class="nav-info">Info</a>
+  </nav>
+
+  <!-- Hero -->
+  <header class="research-hero">
+    <img src="https://placehold.co/1920x1080/44403B/44403B" alt="Fieldwork in the Wyoming badlands">
+    <div class="research-hero-content fade-up">
+      <p class="eyebrow">Geoscience</p>
+      <h1>Research</h1>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Research intro -->
+    <section class="research-intro body-copy fade-up">
+      <p>In 2024, I earned a Ph.D. in Geology from the University of Wisconsin–Madison, where my research focused on reading the sedimentary record to understand how rivers and lakes coevolved in southwestern Wyoming during a period punctuated by extreme global warming episodes called &ldquo;hyperthermal events&rdquo; between 50 and 60 million years ago. By tracing ancient watersheds at high resolution, my work offers a window into how Earth's hydrologic systems respond to climate change — and what those responses might tell us about our own future. As part of my research, I discovered an ancient river preserved in the rock record and worked to name it in collaboration with the Eastern Shoshone Heritage Center, honoring the ancestral keepers of the land.</p>
+    </section>
+
+    <!-- Virtual Outcrop CTA -->
+    <section class="outcrop-cta fade-up">
+      <p>Step into the boots of a field geologist and explore the quintessential research outcrop of Firehole Canyon in southwest Wyoming — no hiking required.</p>
+      <a href="#" class="btn">Visit a Virtual Outcrop</a>
+    </section>
+
+    <!-- Publications + Media -->
+    <section class="pubs-media">
+      <div class="fade-up">
+        <p class="column-label">Publications</p>
+        <ol class="pubs">
+          <li>Smith, M.E., Gregorich, H.G., Gipson, L.A., Krueger, R.C., Carroll, A.R., <strong>Parrish, E.C.</strong>, Walters, A.P., Honig, S., Schwaderer, C., Meyers, S., Singer, B.S., Lowenstein, T.K., Arnuk, W.D., 2024. <span class="work-title">High-resolution X-ray fluorescence-based provenance mapping of Eocene fluvial distributary fans that fed ancient Gosiute Lake, Wyoming, USA.</span> GSA Bulletin, v. 136(7-8), p. 2831–2844. <a href="https://doi.org/10.1130/B37207.1">doi.org/10.1130/B37207.1</a></li>
+          <li><strong>Parrish, E.C.</strong>, Carroll, A.R., Gregorich, H., Smith, M.E., Schwaderer, C., 2024. <span class="work-title">Watershed-scale provenance heterogeneity within Eocene nonmarine basin fill: Southern Greater Green River Basin, western USA.</span> GSA Bulletin, v. 136(5-6), p. 1787–1807. <a href="https://doi.org/10.1130/B36822.1">doi.org/10.1130/B36822.1</a></li>
+          <li>Hammond, A.P., Carroll, A.R., <strong>Parrish, E.C.</strong>, Smith, M.E., Lowenstein, T.K., 2019. <span class="work-title">The Aspen paleoriver: Linking Eocene magmatism to the world's largest Na-carbonate evaporite (Wyoming, USA).</span> Geology, v. 47, p. 1020–1024. <a href="https://doi.org/10/gghxhq">doi.org/10/gghxhq</a></li>
+        </ol>
+      </div>
+
+      <div class="fade-up">
+        <p class="column-label">Media</p>
+        <!-- PhD defense recording — URL placeholder -->
+        <div class="video-card">
+          <div class="video-card-frame">
+            <span class="video-card-play" aria-hidden="true"></span>
+            <span class="video-card-tag">Coming soon</span>
+          </div>
+          <p class="video-card-label">Ph.D. Defense Recording</p>
+          <p class="video-card-note">Public defense of my doctoral dissertation on Eocene watersheds and geoscience education.</p>
+        </div>
+        <!-- Elevator pitch — URL placeholder -->
+        <div class="video-card">
+          <div class="video-card-frame">
+            <span class="video-card-play" aria-hidden="true"></span>
+            <span class="video-card-tag">Coming soon</span>
+          </div>
+          <p class="video-card-label">Research Elevator Pitch</p>
+          <p class="video-card-note">A brief overview of my geoscience research for a general audience.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section divider -->
+    <div class="section-divider fade-up">
+      <div class="divider-rule"></div>
+      <div class="divider-content">
+        <p class="divider-label">Geoscience Education</p>
+        <p class="divider-sub">Art-integrated Earth science curriculum</p>
+      </div>
+      <div class="divider-rule"></div>
+    </div>
+
+    <!-- Education intro -->
+    <section class="edu-intro body-copy fade-up">
+      <p>I'm interested in the use of film and other art forms as tools for deepening students' emotional connections to Earth science. During my Ph.D., I collaborated with the tadada Scientific Lab at UW–Madison to create curriculum-specific films for introductory geoscience courses — short educational videos designed not merely to convey information, but to inspire wonder and a sense of belonging in the discipline.</p>
+      <p>I found that the incorporation of art into introductory geoscience curricula had a measurable impact on students' sense of belonging, their sense of place, their interest in Earth science, and the recognition of their connectedness to the world around them. These findings suggest that the affective domain — the realm of emotions, values, and motivation — deserves far more attention in how we teach science.</p>
+    </section>
+
+    <!-- Educational videos -->
+    <section class="edu-videos fade-up">
+      <p class="column-label">Educational Videos</p>
+      <div class="edu-video-grid">
+        <!-- Sedimentary Rocks 101 — URL placeholder -->
+        <div class="video-card">
+          <div class="video-card-frame">
+            <span class="video-card-play" aria-hidden="true"></span>
+            <span class="video-card-tag">Coming soon</span>
+          </div>
+          <p class="video-card-label">Sedimentary Rocks 101</p>
+          <p class="video-card-note">An art-integrated introduction to sedimentary rocks for introductory geoscience courses.</p>
+        </div>
+        <!-- Igneous Rocks 101 — URL placeholder -->
+        <div class="video-card">
+          <div class="video-card-frame">
+            <span class="video-card-play" aria-hidden="true"></span>
+            <span class="video-card-tag">Coming soon</span>
+          </div>
+          <p class="video-card-label">Igneous Rocks 101 (Part 1)</p>
+          <p class="video-card-note">An art-integrated introduction to igneous rocks for introductory geoscience courses.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Teaching Philosophy -->
+    <section class="teaching-philosophy body-copy fade-up">
+      <h2 class="section-heading">Teaching Philosophy</h2>
+      <p>My teaching philosophy centers on a simple conviction: students learn science more deeply when they first care about what they're learning. Too often, introductory courses front-load the <em>what</em> and <em>how</em> of science before students have any reason to find it meaningful. I prioritize the <em>why</em> — the wonder, the awe, the interconnectedness of our lives with the places we inhabit — because emotional engagement opens the door to lasting cognitive learning.</p>
+      <p>In practice, this means designing curricula that weave art, storytelling, and place-based experience into the fabric of geoscience instruction. Whether through short films that bring outcrop localities to life or classroom exercises that ask students to see geological processes through an artist's eye, my goal is to cultivate an affective connection to the material that carries students beyond the semester.</p>
+      <a href="cv.html" class="cv-link">Full teaching philosophy in CV <span class="arrow">&rarr;</span></a>
+    </section>
+
+    <!-- Field-photo gallery -->
+    <section class="gallery-section fade-up">
+      <p class="column-label">Field Gallery</p>
+      <div class="gallery-strip" id="galleryStrip">
+        <div class="gallery-thumb" tabindex="0" data-index="0">
+          <img src="https://placehold.co/280x160/44403B/857F78?text=Field+1" alt="Field photo 1">
+        </div>
+        <div class="gallery-thumb" tabindex="0" data-index="1">
+          <img src="https://placehold.co/280x160/44403B/857F78?text=Field+2" alt="Field photo 2">
+        </div>
+        <div class="gallery-thumb" tabindex="0" data-index="2">
+          <img src="https://placehold.co/280x160/44403B/857F78?text=Field+3" alt="Field photo 3">
+        </div>
+        <div class="gallery-thumb" tabindex="0" data-index="3">
+          <img src="https://placehold.co/280x160/44403B/857F78?text=Field+4" alt="Field photo 4">
+        </div>
+        <div class="gallery-thumb" tabindex="0" data-index="4">
+          <img src="https://placehold.co/280x160/44403B/857F78?text=Field+5" alt="Field photo 5">
+        </div>
+        <div class="gallery-thumb" tabindex="0" data-index="5">
+          <img src="https://placehold.co/280x160/44403B/857F78?text=Field+6" alt="Field photo 6">
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Lightbox -->
+  <div class="gallery-lightbox" id="galleryLightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">&#x2715;</button>
+    <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous">&#x2039;</button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="">
+    <button class="lightbox-next" id="lightboxNext" aria-label="Next">&#x203a;</button>
+    <span class="lightbox-counter" id="lightboxCounter"></span>
+  </div>
+
+  <footer class="reveal reveal-3">
+    <p class="footer-links">
+      <a href="https://www.instagram.com/ethancparrish/" target="_blank" rel="noopener">Instagram</a><span class="footer-divider">|</span><a href="https://www.youtube.com/@ethancparrish" target="_blank" rel="noopener">Youtube</a><span class="footer-divider">|</span><a href="https://www.linkedin.com/in/ethancparrish/" target="_blank" rel="noopener">LinkedIn</a>
+    </p>
+  </footer>
+
+  <script>
+    (function () {
+      /* ── Scroll reveal ────────────────────────────── */
+      var els = document.querySelectorAll('.fade-up');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function (el) { el.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+      els.forEach(function (el) { io.observe(el); });
+
+      /* ── Gallery lightbox ─────────────────────────── */
+      var thumbs     = document.querySelectorAll('.gallery-thumb');
+      var lightbox   = document.getElementById('galleryLightbox');
+      var lbImg      = document.getElementById('lightboxImg');
+      var lbClose    = document.getElementById('lightboxClose');
+      var lbPrev     = document.getElementById('lightboxPrev');
+      var lbNext     = document.getElementById('lightboxNext');
+      var lbCounter  = document.getElementById('lightboxCounter');
+      var images     = [];
+      var currentIdx = 0;
+
+      thumbs.forEach(function (thumb) {
+        var img = thumb.querySelector('img');
+        images.push(img.src);
+      });
+
+      function openLightbox(idx) {
+        currentIdx = idx;
+        lbImg.src = images[idx];
+        lbImg.alt = 'Field photo ' + (idx + 1);
+        lbCounter.textContent = (idx + 1) + ' / ' + images.length;
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        lbClose.focus();
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('open');
+        lbImg.src = '';
+        document.body.style.overflow = '';
+      }
+
+      thumbs.forEach(function (thumb, i) {
+        thumb.addEventListener('click', function () { openLightbox(i); });
+        thumb.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(i); }
+        });
+      });
+
+      lbClose.addEventListener('click', closeLightbox);
+      lbPrev.addEventListener('click', function () {
+        openLightbox((currentIdx - 1 + images.length) % images.length);
+      });
+      lbNext.addEventListener('click', function () {
+        openLightbox((currentIdx + 1) % images.length);
+      });
+      lightbox.addEventListener('click', function (e) {
+        if (e.target === lightbox) closeLightbox();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (!lightbox.classList.contains('open')) return;
+        if (e.key === 'Escape')     closeLightbox();
+        if (e.key === 'ArrowLeft')  lbPrev.click();
+        if (e.key === 'ArrowRight') lbNext.click();
+      });
+    })();
+  </script>
+
+</body>
+</html>
