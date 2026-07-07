@@ -86,16 +86,42 @@
     }
     .nav-link:hover  { color: var(--parchment); }
     .nav-link.active { color: var(--parchment); }
-    .nav-info {
-      font-family: var(--font-display);
-      font-weight: 300;
-      font-size: 11px;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: var(--stone);
-      transition: color 0.3s ease;
+    /* ─── Info Dropdown ────────────────────────────── */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-trigger {
+      background: none; border: none; padding: 0; cursor: pointer;
+      font-family: var(--font-display); font-weight: 300; font-size: 11px;
+      letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--stone); transition: color 0.3s ease; position: relative;
     }
-    .nav-info:hover { color: var(--parchment); }
+    .nav-dropdown-trigger:hover { color: var(--parchment); }
+    .nav-dropdown-trigger:focus-visible { outline: 1px solid var(--sage); outline-offset: 4px; }
+    .nav-dropdown-trigger::after {
+      content: ''; position: absolute; bottom: -6px; left: 50%;
+      transform: translateX(-50%) scaleX(0); width: 16px; height: 1px;
+      background: var(--parchment); opacity: 0.3;
+      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .nav-dropdown.open .nav-dropdown-trigger::after { transform: translateX(-50%) scaleX(1); }
+    .nav-dropdown-menu {
+      position: absolute; top: calc(100% + 14px); right: 0;
+      min-width: 140px; padding: 14px 0; display: flex; flex-direction: column; align-items: center;
+      background: rgba(21, 19, 16, 0.95); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(196, 191, 184, 0.08); border-radius: 6px;
+      box-shadow: 0 12px 40px -16px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.2);
+      opacity: 0; visibility: hidden; transform: translateY(-6px);
+      transition: opacity 0.25s cubic-bezier(0.22,1,0.36,1), transform 0.25s cubic-bezier(0.22,1,0.36,1), visibility 0.25s;
+      pointer-events: none;
+    }
+    .nav-dropdown.open .nav-dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
+    .nav-dropdown-item {
+      display: block; width: 100%; padding: 10px 28px; text-align: center;
+      font-family: var(--font-display); font-weight: 300; font-size: 11px;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--parchment);
+      opacity: 0.55; transition: opacity 0.3s ease; white-space: nowrap;
+    }
+    .nav-dropdown-item:hover, .nav-dropdown-item:focus-visible { opacity: 1; }
+    .nav-dropdown-item:focus-visible { outline: 1px solid var(--sage); outline-offset: -2px; }
 
     /* ─── Intro ───────────────────────────────────── */
     .intro {
@@ -492,7 +518,14 @@
       <a href="film.html" class="nav-link">Film</a>
       <a href="photo.html" class="nav-link active">Photo</a>
     </div>
-    <a href="info.html" class="nav-info">Info</a>
+    <div class="nav-dropdown" id="infoDropdown">
+      <button class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="infoMenu">Info</button>
+      <div class="nav-dropdown-menu" id="infoMenu" role="menu">
+        <a href="WRMinfo.html" class="nav-dropdown-item" role="menuitem">WRM Info</a>
+        <a href="about.html" class="nav-dropdown-item" role="menuitem">About Me</a>
+        <a href="WRMinfo.html#contact" class="nav-dropdown-item" role="menuitem">Get in Touch</a>
+      </div>
+    </div>
   </nav>
 
   <header class="intro">
@@ -774,6 +807,27 @@
           if (e.key === 'Escape') closeAlbum();
         });
       }
+    })();
+  </script>
+
+  <script>
+    (function () {
+      var dropdown = document.getElementById('infoDropdown');
+      var trigger = dropdown.querySelector('.nav-dropdown-trigger');
+      var menu = document.getElementById('infoMenu');
+      function open() { dropdown.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      function close() { dropdown.classList.remove('open'); trigger.setAttribute('aria-expanded', 'false'); }
+      trigger.addEventListener('click', function (e) { e.stopPropagation(); dropdown.classList.contains('open') ? close() : open(); });
+      document.addEventListener('click', function (e) { if (!dropdown.contains(e.target)) close(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+      menu.addEventListener('keydown', function (e) {
+        var items = menu.querySelectorAll('.nav-dropdown-item');
+        var cur = Array.prototype.indexOf.call(items, document.activeElement);
+        if (e.key === 'ArrowDown') { e.preventDefault(); items[(cur + 1) % items.length].focus(); }
+        else if (e.key === 'ArrowUp') { e.preventDefault(); items[(cur - 1 + items.length) % items.length].focus(); }
+      });
+      trigger.addEventListener('keydown', function (e) { if (e.key === 'ArrowDown' && !dropdown.classList.contains('open')) { e.preventDefault(); open(); menu.querySelector('.nav-dropdown-item').focus(); } });
+      dropdown.addEventListener('focusout', function () { setTimeout(function () { if (!dropdown.contains(document.activeElement)) close(); }, 0); });
     })();
   </script>
 

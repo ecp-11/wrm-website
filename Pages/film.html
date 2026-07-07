@@ -86,7 +86,14 @@
     }
     .nav-link:hover  { color: var(--parchment); }
     .nav-link.active { color: var(--parchment); }
-    .nav-info {
+    /* ─── Info Dropdown ────────────────────────────── */
+    .nav-dropdown { position: relative; }
+
+    .nav-dropdown-trigger {
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
       font-family: var(--font-display);
       font-weight: 300;
       font-size: 11px;
@@ -94,8 +101,82 @@
       text-transform: uppercase;
       color: var(--stone);
       transition: color 0.3s ease;
+      position: relative;
     }
-    .nav-info:hover { color: var(--parchment); }
+    .nav-dropdown-trigger:hover { color: var(--parchment); }
+    .nav-dropdown-trigger:focus-visible {
+      outline: 1px solid var(--sage);
+      outline-offset: 4px;
+    }
+    .nav-dropdown-trigger::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%) scaleX(0);
+      width: 16px;
+      height: 1px;
+      background: var(--parchment);
+      opacity: 0.3;
+      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .nav-dropdown.open .nav-dropdown-trigger::after {
+      transform: translateX(-50%) scaleX(1);
+    }
+
+    .nav-dropdown-menu {
+      position: absolute;
+      top: calc(100% + 14px);
+      right: 0;
+      min-width: 140px;
+      padding: 14px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(21, 19, 16, 0.95);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(196, 191, 184, 0.08);
+      border-radius: 6px;
+      box-shadow:
+        0 12px 40px -16px rgba(0, 0, 0, 0.5),
+        0 2px 8px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-6px);
+      transition: opacity 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+                  visibility 0.25s;
+      pointer-events: none;
+    }
+    .nav-dropdown.open .nav-dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .nav-dropdown-item {
+      display: block;
+      width: 100%;
+      padding: 10px 28px;
+      text-align: center;
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--parchment);
+      opacity: 0.55;
+      transition: opacity 0.3s ease;
+      white-space: nowrap;
+    }
+    .nav-dropdown-item:hover,
+    .nav-dropdown-item:focus-visible { opacity: 1; }
+    .nav-dropdown-item:focus-visible {
+      outline: 1px solid var(--sage);
+      outline-offset: -2px;
+    }
 
     /* ─── Intro ───────────────────────────────────── */
     .intro {
@@ -986,6 +1067,44 @@
       filter: contrast(1.02) saturate(0.98);
     }
 
+    /* ─── EPK download (detail) ───────────────────── */
+    .epk-download {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 15px 24px;
+      border: 1px solid var(--ash);
+      border-radius: 8px;
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--parchment);
+      background: transparent;
+      text-decoration: none;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.26s,
+                  transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.26s,
+                  background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .project-cover.revealed ~ .epk-download { opacity: 1; transform: translateY(0); }
+    .epk-download-arrow {
+      font-size: 14px;
+      line-height: 1;
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .epk-download:hover {
+      background: rgba(242, 237, 230, 0.1);
+      border-color: var(--parchment);
+      box-shadow: 0 14px 28px -12px rgba(28,26,23,0.45);
+    }
+    .epk-download:hover .epk-download-arrow { transform: translateY(3px); }
+    .epk-download:focus-visible { outline: 2px solid var(--sage); outline-offset: 3px; }
+    .epk-download:active { box-shadow: none; }
+
     /* ─── Cover video placeholder ─────────────────── */
     .project-cover { position: relative; }
     .cover-play {
@@ -1258,7 +1377,14 @@
       <a href="film.html" class="nav-link active">Film</a>
       <a href="photo-temp.html" class="nav-link">Photo</a>
     </div>
-    <a href="info.html" class="nav-info">Info</a>
+    <div class="nav-dropdown" id="infoDropdown">
+      <button class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="infoMenu">Info</button>
+      <div class="nav-dropdown-menu" id="infoMenu" role="menu">
+        <a href="WRMinfo.html" class="nav-dropdown-item" role="menuitem">WRM Info</a>
+        <a href="about.html" class="nav-dropdown-item" role="menuitem">About Me</a>
+        <a href="WRMinfo.html#contact" class="nav-dropdown-item" role="menuitem">Get in Touch</a>
+      </div>
+    </div>
   </nav>
 
   <header class="intro">
@@ -1338,6 +1464,10 @@
           <figure class="cover-poster" id="coverPoster" style="display:none;">
             <img id="coverPosterImg" src="" alt="">
           </figure>
+          <a class="epk-download" id="epkBtn" href="#" download style="display:none;">
+            <span class="epk-download-label">Download EPK</span>
+            <span class="epk-download-arrow" aria-hidden="true">&#8595;</span>
+          </a>
         </div>
         <div class="project-details" id="projectDetails">
           <p class="detail-tagline" id="detailTagline" style="display:none;"></p>
@@ -1380,6 +1510,14 @@
     (function () {
 
       var projects = [
+        { title: 'Death of a Glacier',            year: 'Expected fall 2026', type: 'Documentary', client: 'Whispering River Media', role: 'Director · Producer · Cinematographer · Editor', image: 'images/film/doag-bolivia/still011.jpg', imagePosition: 'center', poster: 'images/film/doag-bolivia-epk-cover-1.png', epk: 'files/death-of-a-glacier-epk.pdf', coverVideo: 'Trailer',
+          gallery: ['images/film/doag-bolivia/still013.jpg','images/film/doag-bolivia/still003.jpg','images/film/doag-bolivia/still008.jpg','images/film/doag-bolivia/still007.jpg','images/film/doag-bolivia/still004.jpg','images/film/doag-bolivia/still014.jpg','images/film/doag-bolivia/still006.jpg','images/film/doag-bolivia/still005.jpg','images/film/doag-bolivia/still009.jpg','images/film/doag-bolivia/still010.jpg','images/film/doag-bolivia/still011.jpg','images/film/doag-bolivia/still012.jpg','images/film/doag-bolivia/still015.jpg'],
+          credits: [
+            { label: 'Director · Producer · DP · Editor', name: 'Ethan C. Parrish, Ph.D.' },
+            { label: 'Producers', name: 'Whispering River Media · Andrew Jones · Shaun Marcott' },
+            { label: 'Subjects', name: 'Andrew Jones · Álvaro Soruco · Yasmeen Orellana-Salazar · Matías Romero · Domitila Alaña Llusco · Adrián Vargas Quispe' },
+            { label: 'Research Support', name: 'UW–Madison Proglacial Research Lab', url: 'https://proglacial.geoscience.wisc.edu/' }
+          ] },
         { title: "What's in a Name?",           year: 2024, type: 'Documentary', client: 'Whispering River Media', role: 'Director · Producer · Cinematographer · Editor', tagline: 'Decolonizing Paleontology', watchUrl: 'https://youtu.be/yxPXtBFZWEo', embedUrl: 'https://www.youtube.com/embed/yxPXtBFZWEo', poster: 'images/film/wian-poster.jpg', image: 'images/film/wian-cover.jpg', imagePosition: 'center',
           epigraph: {
             text: "For more than 250 years, new taxa—be they fossil or still living animals—have traditionally been given a formal binomial name in Latin or Greek (e.g., dogs = Canis familiaris). However, very few scientific names use aboriginal place names, honor Indigenous peoples, or use Native languages, despite discoveries being made on the land they call home. This tradition perpetuates the impact colonial history has on scientific practices.",
@@ -1437,12 +1575,14 @@
       // ── WRM feature row descriptions ─────────────
       var wrmDesc = {
         "What's in a Name?":           "On the Wind River Reservation in central Wyoming, a paleontologist works alongside Eastern Shoshone Elders and students to name newly discovered fossils — a multi-generational collaboration that asks Western science to honor the Indigenous land and language it has long overlooked.",
+        "Death of a Glacier":          "High in the Bolivian Andes, the scientists who study the disappearing glaciers and the communities whose water depends on them confront what is being lost — and the question of what can still be saved.",
         "Death of a Glacier - Iceland": "At the edge of a retreating glacier, two Earth scientists and a concert violinist attempt what data alone cannot — inviting you to grieve what ice remembers.",
         "Love Like a River":            "Whispers from a river: A poetic exploration of what rivers have to teach about love."
       };
 
       var detailDescs = {
         "What's in a Name?":            "\"What's in a Name?\" highlights the development of a partnership between paleontologist Dr. Dave Lovelace and the Wind River Reservation community that led to the naming of three new paleontological taxa via multi-generational collaboration between tribal Elders and students. It is a journey that calls for a change in well-entrenched colonial practices throughout the sciences, and specifically to the process of how taxa are commonly named within the science of paleontology.",
+        "Death of a Glacier":           "In the Bolivian Andes, the glaciers are vanishing — and with them, the water that sustains the communities below. Death of a Glacier follows a team of climate scientists and the residents of the Zongo Valley as they confront the retreat of ice that has crowned these mountains for millennia. For the families living at the foot of Huayna Potosí, the glacier is drinking water, electricity, livelihood, and memory. For the scientists, it is a record — one that now shows the ice has shrunk past its smallest size in nearly twelve thousand years. Told largely in Spanish by the people closest to the loss, the film moves from why glaciers matter, to what the science reveals, to the harder question of what remains possible. It refuses both denial and despair, insisting that what we still do counts.",
         "Death of a Glacier - Iceland": "Death of a Glacier - Iceland originated as a collaboration between two Earth scientists (Dr. Ethan C. Parrish and Dr. Andrew Jones) and a concert violinist (Sahada Buckley). The goal of the project was twofold: first, the film was created as means of processing and lamenting the inescapably concerning data about our warming planet that geoscientists deal with every day. Second, in contrast to the endless firehose of climate change data unrelentingly sprayed at the public, this film offers an alternative way to hear and hopefully feel the tragic reality of climate change.",
         "Love Like a River":            "Created for a \"Liturgy of the Land\" event held at Upper House in Madison, WI, in the spring of 2023, Love Like a River offers a poetic exploration of the wisdom rivers have to offer on \"love\"."
       };
@@ -1541,6 +1681,7 @@
       var coverPlayLabel = document.getElementById('coverPlayLabel');
       var coverPoster    = document.getElementById('coverPoster');
       var coverPosterImg = document.getElementById('coverPosterImg');
+      var epkBtn         = document.getElementById('epkBtn');
       var detailTagline  = document.getElementById('detailTagline');
       var detailEpigraph = document.getElementById('detailEpigraph');
       var epigraphText   = document.getElementById('epigraphText');
@@ -1748,6 +1889,14 @@
           coverPoster.style.display = 'none';
         }
 
+        if (proj.epk) {
+          epkBtn.href = proj.epk;
+          epkBtn.setAttribute('download', '');
+          epkBtn.style.display = 'flex';
+        } else {
+          epkBtn.style.display = 'none';
+        }
+
         if (proj.tagline) {
           detailTagline.textContent = proj.tagline;
           detailTagline.style.display = 'block';
@@ -1934,6 +2083,27 @@
         }
         if (e.key === 'Escape') closeProject();
       });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      var dropdown = document.getElementById('infoDropdown');
+      var trigger = dropdown.querySelector('.nav-dropdown-trigger');
+      var menu = document.getElementById('infoMenu');
+      function open() { dropdown.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
+      function close() { dropdown.classList.remove('open'); trigger.setAttribute('aria-expanded', 'false'); }
+      trigger.addEventListener('click', function (e) { e.stopPropagation(); dropdown.classList.contains('open') ? close() : open(); });
+      document.addEventListener('click', function (e) { if (!dropdown.contains(e.target)) close(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+      menu.addEventListener('keydown', function (e) {
+        var items = menu.querySelectorAll('.nav-dropdown-item');
+        var cur = Array.prototype.indexOf.call(items, document.activeElement);
+        if (e.key === 'ArrowDown') { e.preventDefault(); items[(cur + 1) % items.length].focus(); }
+        else if (e.key === 'ArrowUp') { e.preventDefault(); items[(cur - 1 + items.length) % items.length].focus(); }
+      });
+      trigger.addEventListener('keydown', function (e) { if (e.key === 'ArrowDown' && !dropdown.classList.contains('open')) { e.preventDefault(); open(); menu.querySelector('.nav-dropdown-item').focus(); } });
+      dropdown.addEventListener('focusout', function () { setTimeout(function () { if (!dropdown.contains(document.activeElement)) close(); }, 0); });
     })();
   </script>
 

@@ -26,7 +26,7 @@ jobs:
           # HTML pages live in Pages/ -> publish at site root
           cp Pages/*.html _site/
           # Shared assets live in the repo root
-          cp -R images brand_assets img _site/
+          cp -R images brand_assets img files _site/
           cp albums.json _site/
           # Custom domain — keep in sync with the Pages custom domain setting
           echo "www.whisperingrivermedia.com" > _site/CNAME
