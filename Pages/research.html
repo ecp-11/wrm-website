@@ -70,6 +70,21 @@
 
     .nav-link:hover { opacity: 1; }
     .nav-link.nav-primary { font-size: 13px; }
+    .nav-brand {
+      position: absolute;
+      left: 36px;
+      top: 28px;
+      font-family: var(--font-display);
+      font-weight: 100;
+      font-size: 13px;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--parchment);
+      opacity: 0.72;
+      transition: opacity 0.4s ease;
+    }
+    .nav-brand:hover { opacity: 1; }
+
 
     /* ─── Info Dropdown ────────────────────────────── */
     .nav-dropdown { position: relative; }
@@ -712,6 +727,7 @@
 <body>
 
   <nav>
+    <a href="index.html" class="nav-brand">WRM</a>
     <a href="film.html" class="nav-link nav-primary">Film</a>
     <div class="nav-dropdown" id="infoDropdown">
       <button class="nav-dropdown-trigger nav-center"
