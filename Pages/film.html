@@ -50,42 +50,26 @@
       top: 0; left: 0; right: 0;
       z-index: 100;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 24px 36px;
-      background: rgba(21, 19, 16, 0.92);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(196, 191, 184, 0.12);
+      justify-content: center;
+      align-items: flex-start;
+      gap: 48px;
+      padding: 28px 36px;
     }
-    .nav-brand {
-      font-family: var(--font-display);
-      font-weight: 100;
-      font-size: 13px;
-      letter-spacing: 0.38em;
-      text-transform: uppercase;
-      color: var(--parchment);
-      transition: opacity 0.3s ease;
-    }
-    .nav-brand:hover { opacity: 0.6; }
-    .nav-center {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 36px;
-    }
+
     .nav-link {
       font-family: var(--font-display);
       font-weight: 300;
       font-size: 11px;
       letter-spacing: 0.24em;
       text-transform: uppercase;
-      color: var(--stone);
-      transition: color 0.3s ease;
+      color: var(--parchment);
+      opacity: 0.72;
+      transition: opacity 0.4s ease;
     }
-    .nav-link:hover  { color: var(--parchment); }
-    .nav-link.active { color: var(--parchment); }
+
+    .nav-link:hover { opacity: 1; }
+    .nav-link.nav-primary { font-size: 13px; }
+
     /* ─── Info Dropdown ────────────────────────────── */
     .nav-dropdown { position: relative; }
 
@@ -99,15 +83,15 @@
       font-size: 11px;
       letter-spacing: 0.24em;
       text-transform: uppercase;
-      color: var(--stone);
-      transition: color 0.3s ease;
+      color: var(--parchment);
+      opacity: 0.72;
+      transition: opacity 0.4s ease;
       position: relative;
     }
-    .nav-dropdown-trigger:hover { color: var(--parchment); }
-    .nav-dropdown-trigger:focus-visible {
-      outline: 1px solid var(--sage);
-      outline-offset: 4px;
-    }
+
+    .nav-dropdown-trigger:hover { opacity: 1; }
+    .nav-dropdown-trigger:focus-visible { outline: 1px solid var(--sage); outline-offset: 4px; }
+
     .nav-dropdown-trigger::after {
       content: '';
       position: absolute;
@@ -120,20 +104,20 @@
       opacity: 0.3;
       transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .nav-dropdown.open .nav-dropdown-trigger::after {
-      transform: translateX(-50%) scaleX(1);
-    }
+
+    .nav-dropdown.open .nav-dropdown-trigger::after { transform: translateX(-50%) scaleX(1); }
 
     .nav-dropdown-menu {
       position: absolute;
       top: calc(100% + 14px);
-      right: 0;
+      left: 50%;
+      transform: translateX(-50%) translateY(-6px);
       min-width: 140px;
       padding: 14px 0;
       display: flex;
       flex-direction: column;
       align-items: center;
-      background: rgba(21, 19, 16, 0.95);
+      background: rgba(5, 4, 3, 0.85);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       border: 1px solid rgba(196, 191, 184, 0.08);
@@ -143,16 +127,16 @@
         0 2px 8px rgba(0, 0, 0, 0.2);
       opacity: 0;
       visibility: hidden;
-      transform: translateY(-6px);
       transition: opacity 0.25s cubic-bezier(0.22, 1, 0.36, 1),
                   transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
                   visibility 0.25s;
       pointer-events: none;
     }
+
     .nav-dropdown.open .nav-dropdown-menu {
       opacity: 1;
       visibility: visible;
-      transform: translateY(0);
+      transform: translateX(-50%) translateY(0);
       pointer-events: auto;
     }
 
@@ -171,8 +155,10 @@
       transition: opacity 0.3s ease;
       white-space: nowrap;
     }
+
     .nav-dropdown-item:hover,
     .nav-dropdown-item:focus-visible { opacity: 1; }
+    .nav-dropdown-item:focus-visible { outline: 1px solid var(--sage); outline-offset: -2px; }
     .nav-dropdown-item:focus-visible {
       outline: 1px solid var(--sage);
       outline-offset: -2px;
@@ -1372,19 +1358,19 @@
 <body>
 
   <nav>
-    <a href="index.html" class="nav-brand">WRM</a>
-    <div class="nav-center">
-      <a href="film.html" class="nav-link active">Film</a>
-      <a href="photo-temp.html" class="nav-link">Photo</a>
-    </div>
+    <a href="film.html" class="nav-link nav-primary">Film</a>
     <div class="nav-dropdown" id="infoDropdown">
-      <button class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="infoMenu">Info</button>
+      <button class="nav-dropdown-trigger nav-center"
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-controls="infoMenu">Info</button>
       <div class="nav-dropdown-menu" id="infoMenu" role="menu">
         <a href="WRMinfo.html" class="nav-dropdown-item" role="menuitem">WRM Info</a>
         <a href="about.html" class="nav-dropdown-item" role="menuitem">About Me</a>
         <a href="WRMinfo.html#contact" class="nav-dropdown-item" role="menuitem">Get in Touch</a>
       </div>
     </div>
+    <a href="photo-temp.html" class="nav-link nav-primary">Photo</a>
   </nav>
 
   <header class="intro">
