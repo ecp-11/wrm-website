@@ -15,6 +15,8 @@
       poster: '/images/film/doag-bolivia-epk-cover-1.png',
       epk: '/files/death-of-a-glacier-epk.pdf',
       coverVideo: 'Trailer',
+      watchUrl: 'https://youtu.be/6tTGcmylmxE',
+      embedUrl: 'https://www.youtube.com/embed/6tTGcmylmxE',
       gallery: [
         '/images/film/doag-bolivia/still013.jpg',
         '/images/film/doag-bolivia/still003.jpg',
