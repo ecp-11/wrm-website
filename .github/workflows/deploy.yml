@@ -23,8 +23,9 @@ jobs:
       - name: Assemble site
         run: |
           mkdir -p _site
-          # HTML pages live in Pages/ -> publish at site root
-          cp Pages/*.html _site/
+          # Everything under Pages/ -> publish at site root
+          # (HTML pages, films-data.js, and the films/ detail-page subdirectory)
+          cp -R Pages/. _site/
           # Shared assets live in the repo root
           cp -R images brand_assets img files _site/
           cp albums.json _site/
