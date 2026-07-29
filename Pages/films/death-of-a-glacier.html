@@ -800,6 +800,7 @@
       if (proj.watchUrl && proj.watchUrl !== '#') {
         var watchBtn = document.getElementById('watchBtn');
         watchBtn.href = proj.watchUrl;
+        watchBtn.textContent = proj.watchLabel || 'Watch';
         watchBtn.style.display = 'inline-block';
       }
 

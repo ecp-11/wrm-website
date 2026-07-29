@@ -16,6 +16,7 @@
       epk: '/files/death-of-a-glacier-epk.pdf',
       coverVideo: 'Trailer',
       watchUrl: 'https://youtu.be/6tTGcmylmxE',
+      watchLabel: 'Watch Trailer',
       embedUrl: 'https://www.youtube.com/embed/6tTGcmylmxE',
       gallery: [
         '/images/film/doag-bolivia/still013.jpg',

@@ -1113,6 +1113,16 @@
 
     /* ─── Responsive ──────────────────────────────── */
     @media (max-width: 768px) {
+      /* Brand is absolutely positioned on desktop; on narrow screens the
+         centered Film/Info/Photo cluster slides left into it and overlaps.
+         Let it flow inline as the first nav item instead. */
+      nav { gap: 20px; padding: 22px 18px; flex-wrap: wrap; }
+      .nav-brand { position: static; left: auto; top: auto; }
+
+      /* Rows are locked to 39vh with overflow hidden on desktop, which clips
+         the stacked image + text on mobile. Let them grow to fit content. */
+      .feature-row,
+      .feature-row.compact { height: auto; overflow: visible; }
       .feature-row          { flex-direction: column !important; min-height: auto; }
       .feature-row:nth-child(odd)  .feature-img-col  { transform: translateY(20px); }
       .feature-row:nth-child(even) .feature-img-col  { transform: translateY(20px); }
@@ -1290,7 +1300,7 @@
           '<p class="feature-role">' + proj.year + (proj.client ? ' · ' + proj.client : '') + '</p>' +
           (desc ? '<p class="feature-description">' + desc + '</p>' : '') +
           '<div class="feature-actions">' +
-            (hasWatch ? '<a href="' + proj.watchUrl + '" class="feature-watch-btn" target="_blank" rel="noopener">Watch</a>' : '') +
+            (hasWatch ? '<a href="' + proj.watchUrl + '" class="feature-watch-btn" target="_blank" rel="noopener">' + (proj.watchLabel || 'Watch') + '</a>' : '') +
             (proj.detailPage
               ? '<a href="' + proj.detailPage + '" class="feature-details-btn">Details &#8594;</a>'
               : '<button class="feature-details-btn">Details &#8594;</button>') +
@@ -1463,6 +1473,7 @@
 
         if (proj.watchUrl && proj.watchUrl !== '#') {
           watchBtn.href = proj.watchUrl;
+          watchBtn.textContent = proj.watchLabel || 'Watch';
           watchBtn.style.display = 'inline-block';
         } else {
           watchBtn.style.display = 'none';
