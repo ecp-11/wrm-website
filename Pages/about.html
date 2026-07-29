@@ -387,6 +387,15 @@
       .about-links { padding: 20px 24px 72px; }
     }
 
+    /* Phone: the right-aligned hero heading overflows off-screen; left-align it. */
+    @media (max-width: 600px) {
+      .about-hero { height: auto; min-height: 68vh; }
+      .about-hero-content { padding: 104px 22px 40px; text-align: left; }
+      .about-hero h1 { max-width: 100%; margin-left: 0; }
+      .about-intro { padding: 48px 22px 0; }
+      .about-intro p:first-child::first-letter { font-size: 62px; margin: 4px 12px 0 0; }
+    }
+
     /* ─── Footer ──────────────────────────────────── */
     footer {
       background: #0d0b09;

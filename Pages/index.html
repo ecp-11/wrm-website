@@ -293,6 +293,10 @@
     @media (max-width: 600px) {
       nav { gap: 28px; padding: 22px 20px; }
 
+      /* Desktop uses a 145%-wide crop; on a tall phone that leaves a black
+         void below the landscape photo, so fill the viewport instead. */
+      .hero-photo { background-size: cover; background-position: center center; }
+
       .hero-title-line {
         white-space: normal;
         font-size: clamp(34px, 11vw, 60px);
