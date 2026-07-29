@@ -84,6 +84,14 @@
     }
     .nav-brand:hover { opacity: 1; }
 
+    /* Mobile: keep WRM in the upper-left corner and the Film/Info/Photo
+       trio centered; tighten the trio so it clears the brand on narrow
+       screens instead of overlapping it. */
+    @media (max-width: 768px) {
+      nav { gap: 22px; padding: 24px 16px; }
+      .nav-brand { left: 16px; top: 24px; letter-spacing: 0.26em; }
+    }
+
 
     /* ─── Info Dropdown ────────────────────────────── */
     .nav-dropdown { position: relative; }

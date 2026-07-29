@@ -1113,11 +1113,11 @@
 
     /* ─── Responsive ──────────────────────────────── */
     @media (max-width: 768px) {
-      /* Brand is absolutely positioned on desktop; on narrow screens the
-         centered Film/Info/Photo cluster slides left into it and overlaps.
-         Let it flow inline as the first nav item instead. */
-      nav { gap: 20px; padding: 22px 18px; flex-wrap: wrap; }
-      .nav-brand { position: static; left: auto; top: auto; }
+      /* Keep WRM in the upper-left corner and the Film/Info/Photo trio
+         centered; shrink the trio's gap so it no longer slides left far
+         enough to overlap the brand on narrow screens. */
+      nav { gap: 22px; padding: 24px 16px; }
+      .nav-brand { left: 16px; top: 24px; letter-spacing: 0.26em; }
 
       /* Rows are locked to 39vh with overflow hidden on desktop, which clips
          the stacked image + text on mobile. Let them grow to fit content. */
