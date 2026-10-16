@@ -19,7 +19,6 @@
       watchLabel: 'Watch Trailer',
       embedUrl: 'https://www.youtube.com/embed/6tTGcmylmxE',
       gallery: [
-        '/images/film/doag-bolivia/still013.jpg',
         '/images/film/doag-bolivia/still003.jpg',
         '/images/film/doag-bolivia/still008.jpg',
         '/images/film/doag-bolivia/still007.jpg',
