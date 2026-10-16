@@ -6,7 +6,7 @@
       slug: 'death-of-a-glacier',
       detailPage: 'films/death-of-a-glacier.html',
       title: 'Death of a Glacier',
-      year: 'Expected fall 2026',
+      year: '2026',
       type: 'Documentary',
       client: 'Whispering River Media',
       role: 'Director · Producer · Cinematographer · Editor',
