@@ -12,7 +12,7 @@
       role: 'Director · Producer · Cinematographer · Editor',
       image: '/images/film/doag-bolivia/still011.jpg',
       imagePosition: 'center',
-      poster: '/images/film/doag-bolivia-epk-cover-1.png',
+      poster: '/images/film/doag-poster.jpg',
       epk: '/files/death-of-a-glacier-epk.pdf',
       coverVideo: 'Trailer',
       watchUrl: 'https://youtu.be/6tTGcmylmxE',
