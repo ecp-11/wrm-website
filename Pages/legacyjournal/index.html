@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<!-- Generated from personal-assistant/projects/legacy-journal/portal/Page.html by build-web.mjs. Do not edit. -->
+<html>
+<head>
+<base target="_top">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Legacy Journal</title>
+<style>
+  :root { --ink:#2b2723; --muted:#857f78; --rule:#c4bfb8; --bg:#fbfaf7; --accent:#5b6b55; --tint:#eef0ea; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+         font:17px/1.55 "Hoefler Text", Georgia, "Times New Roman", serif; }
+  main { max-width:620px; margin:0 auto; padding:28px 16px 48px; }
+  h1 { font-size:26px; line-height:1.2; margin:4px 0 14px; }
+  h2 { font-size:20px; margin:34px 0 10px; padding-top:18px; border-top:1px solid var(--rule); }
+  .kicker { color:var(--muted); font-size:13px; letter-spacing:.12em; text-transform:uppercase; }
+  ul { padding-left:20px; } li { margin:6px 0; }
+  .note { color:var(--muted); font-style:italic; }
+  .hint { color:var(--muted); font-size:15px; margin:4px 0 8px; }
+  input, button, textarea { font:inherit; font-size:18px; }
+  input[type=password], input[type=text], textarea { width:100%; padding:12px; border:1px solid var(--rule); border-radius:8px; background:#fff; }
+  textarea { min-height:180px; line-height:1.5; }
+  button, .btn { display:inline-block; margin-top:12px; padding:12px 18px; border:0; border-radius:8px;
+                 background:var(--accent); color:#fff; cursor:pointer; text-align:center; }
+  button:disabled { opacity:.45; }
+  button:hover:not(:disabled), .btn:hover { filter:brightness(1.1); }
+  button:active:not(:disabled), .btn:active { transform:translateY(1px); }
+  button:focus-visible, .btn:focus-within, input:focus-visible, textarea:focus-visible {
+    outline:2px solid var(--accent); outline-offset:2px; }
+  button.link { background:none; color:var(--accent); padding:8px 0; text-decoration:underline; margin-top:0; }
+  .adds { display:grid; gap:10px; }
+  .adds .btn { margin:0; width:100%; }
+  .adds input[type=file] { display:none; }
+  .err { color:#9a3b2e; min-height:1.5em; margin-top:10px; }
+  .ok { color:var(--accent); }
+  nav { display:flex; justify-content:space-between; gap:12px; margin-top:28px;
+        border-top:1px solid var(--rule); padding-top:10px; }
+  .q { margin:18px 0 4px; color:var(--muted); font-size:14px; }
+  .item { margin:12px 0; padding:12px; background:var(--tint); border-radius:8px; display:flex; gap:12px; align-items:flex-start; }
+  .item .body { flex:1; min-width:0; }
+  .item .name { overflow-wrap:anywhere; }
+  .item .thumb + .body .name { color:var(--muted); font-size:14px; }
+  .thumb { flex:none; width:88px; height:88px; object-fit:cover; border-radius:6px; background:#fff; }
+  .bar { height:8px; margin-top:8px; background:#fff; border-radius:4px; overflow:hidden; }
+  .bar i { display:block; height:100%; width:0; background:var(--accent); transition:width .3s; }
+  .item input[type=text] { margin-top:8px; font-size:16px; }
+  .entry { display:flex; justify-content:space-between; gap:12px; align-items:baseline;
+           padding:10px 0; border-bottom:1px solid var(--rule); }
+  .entry .what { overflow-wrap:anywhere; }
+  .entry .when { color:var(--muted); font-size:14px; }
+  .entry .text { color:var(--muted); font-size:15px; font-style:italic; }
+  .count { color:var(--muted); font-size:15px; }
+  [hidden] { display:none !important; }
+</style>
+</head>
+<body>
+<main>
+  <section id="login" hidden>
+    <div class="kicker">Legacy Journal</div>
+    <h1>Welcome, Dad</h1>
+    <p>Type your passcode. This phone will remember it.</p>
+    <form id="lf">
+      <input id="pc" type="password" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Passcode">
+      <button type="submit">Open</button>
+    </form>
+    <div class="err" id="lerr"></div>
+  </section>
+
+  <section id="week" hidden>
+    <div class="kicker" id="wk"></div>
+    <h1 id="wt"></h1>
+    <p id="wp"></p>
+    <ul id="wn"></ul>
+    <p class="note" id="wnote"></p>
+
+    <h2>Add to this week</h2>
+    <div class="adds">
+      <label class="btn">Photo of your page<input type="file" accept="image/*" multiple data-kind="page"></label>
+      <label class="btn">Old photographs<input type="file" accept="image/*" multiple data-kind="photo"></label>
+      <label class="btn">A document or voice memo<input type="file" multiple data-kind="file"></label>
+    </div>
+    <div id="queue"></div>
+
+    <h2>Type or dictate</h2>
+    <p class="hint">To speak instead of type, tap the microphone on your keyboard.</p>
+    <textarea id="tx" aria-label="Your answer"></textarea>
+    <button id="txsave">Save</button>
+    <div class="err" id="txmsg"></div>
+
+    <h2>Already added</h2>
+    <div id="entries"><p class="hint">Nothing yet.</p></div>
+
+    <nav>
+      <button class="link" id="prev">&larr; Previous</button>
+      <button class="link" id="all">All weeks</button>
+      <button class="link" id="next">Next &rarr;</button>
+    </nav>
+  </section>
+
+  <section id="index" hidden>
+    <div class="kicker">Legacy Journal</div>
+    <h1>All fifty-two weeks</h1>
+    <div id="list"></div>
+  </section>
+
+  <p class="err" id="gerr"></p>
+</main>
+<script>
+
+  // ── link and backend (generated by build-web.mjs; edit Page.html, not this file) ──
+  var LINK_KEY = 'lj-link';
+  var link = (function () {
+    var parts = location.hash.replace(/^#/, '').split('.');
+    var ok = /^[A-Za-z0-9_-]{20,}$/.test(parts[0] || '') && /^[0-9a-f]{32,}$/.test(parts[1] || '');
+    try {
+      if (ok) localStorage.setItem(LINK_KEY, parts[0] + '.' + parts[1]);
+      else parts = (localStorage.getItem(LINK_KEY) || '').split('.').concat(['']);
+    } catch (e) {}
+    return { d: parts[0] || '', k: parts[1] || '', w: ok ? parseInt(parts[2], 10) || 0 : 0 };
+  })();
+  var TOKEN = link.k;
+  var START = link.w;
+  var EXEC = 'https://script.google.com/macros/s/' + link.d + '/exec';
+
+  function api(fn, args) {
+    return fetch(EXEC, { method: 'POST', credentials: 'omit', cache: 'no-store', redirect: 'follow',
+                         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                         body: JSON.stringify({ fn: fn, args: args }) })
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
+  }
+  // Same shape as Apps Script's google.script.run, so the page code below is unchanged.
+  var google = { script: { get run() {
+    var ok = function () {}, bad = function () {}, r = {
+      withSuccessHandler: function (f) { ok = f; return r; },
+      withFailureHandler: function (f) { bad = f; return r; } };
+    ["login","getWeek","getIndex","startUpload","putChunk","uploadStatus","saveText","listEntries","removeEntry"].forEach(function (fn) {
+      r[fn] = function () { api(fn, Array.prototype.slice.call(arguments)).then(function (x) { ok(x); }, function (e) { bad(e); }); };
+    });
+    return r;
+  } } };
+  var KEY = 'lj-session';
+  var cur = 0;
+  var busy = 0;
+
+  function load(k) { try { return localStorage.getItem(k) || ''; } catch (e) { return ''; } }
+  function save(k, v) { try { v ? localStorage.setItem(k, v) : localStorage.removeItem(k); } catch (e) {} }
+  var session = load(KEY);
+  function $(id) { return document.getElementById(id); }
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+
+  function show(id) {
+    ['login', 'week', 'index'].forEach(function (s) { $(s).hidden = s !== id; });
+    window.scrollTo(0, 0);
+  }
+  function fail(e) { $('gerr').textContent = 'Something went wrong. Try again in a minute.'; }
+  function signedOut() { session = ''; save(KEY, ''); show('login'); }
+  function call(fn, args, ok) {
+    var r = google.script.run.withSuccessHandler(function (res) {
+      if (res && res.error === 'auth') return signedOut();
+      ok(res);
+    }).withFailureHandler(fail);
+    r[fn].apply(r, args);
+  }
+  // Promise form, for the upload loop: rejects on a network or server failure.
+  function run(fn, args) {
+    return new Promise(function (resolve, reject) {
+      var r = google.script.run.withSuccessHandler(resolve).withFailureHandler(reject);
+      r[fn].apply(r, args);
+    });
+  }
+  function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+  function uuid() {
+    if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      var r = Math.random() * 16 | 0; return (c === 'x' ? r : (r & 3 | 8)).toString(16);
+    });
+  }
+
+  // ── week view ──────────────────────────────────────────────────────────────
+  function openWeek(n) {
+    call('getWeek', [TOKEN, session, n], function (w) {
+      if (w.error) return openIndex();
+      cur = w.week;
+      $('wk').textContent = 'Week ' + w.week + ' · ' + w.quarter;
+      $('wt').textContent = w.title;
+      $('wp').textContent = w.prompt;
+      var ul = $('wn'); ul.textContent = '';
+      w.nudges.forEach(function (t) { ul.appendChild(el('li', '', t)); });
+      $('wnote').textContent = w.note;
+      $('prev').disabled = w.week <= 1;
+      $('next').disabled = w.week >= w.total;
+      $('tx').value = load('lj-draft-' + w.week);
+      $('txmsg').textContent = '';
+      showQueue();
+      loadEntries();
+      show('week');
+    });
+  }
+
+  function when(iso) {
+    var d = new Date(iso);
+    return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+  }
+
+  function loadEntries() {
+    var week = cur;
+    call('listEntries', [TOKEN, session, week], function (res) {
+      if (week !== cur || !res.entries) return;
+      var box = $('entries'); box.textContent = '';
+      if (!res.entries.length) return box.appendChild(el('p', 'hint', 'Nothing yet.'));
+      res.entries.forEach(function (e) {
+        var row = el('div', 'entry'), left = el('div', 'what');
+        left.appendChild(el('div', '', e.label + (e.kind === 'text' ? '' : ': ' + e.name)));
+        if (e.text) left.appendChild(el('div', 'text', e.text.length >= 280 ? e.text + '…' : e.text));
+        left.appendChild(el('div', 'when', when(e.when)));
+        var rm = el('button', 'link', 'Remove');
+        rm.onclick = function () {
+          if (!confirm('Remove this from the list?')) return;
+          rm.disabled = true;
+          call('removeEntry', [TOKEN, session, e.id], function () { loadEntries(); });
+        };
+        row.appendChild(left); row.appendChild(rm); box.appendChild(row);
+      });
+    });
+  }
+
+  // ── uploads ────────────────────────────────────────────────────────────────
+  var queue = [];    // {file, kind, week, caption, state: 'wait'|'ready'|'up'|'done'|'err', pct, msg}
+  var chain = Promise.resolve();
+
+  Array.prototype.forEach.call(document.querySelectorAll('.adds input[type=file]'), function (inp) {
+    inp.onchange = function () {
+      var kind = inp.dataset.kind, files = Array.prototype.slice.call(inp.files);
+      inp.value = '';
+      var batch = files.map(function (f) {
+        // A local preview, so he can see which photo he's captioning. Nothing extra is uploaded.
+        var url = /^image\//.test(f.type) && window.URL ? URL.createObjectURL(f) : '';
+        return { file: f, kind: kind, week: cur, caption: '', pct: 0, msg: '', url: url,
+                 state: kind === 'photo' ? 'wait' : 'ready' };
+      });
+      queue = queue.concat(batch);
+      if (kind !== 'photo') send(batch);
+      showQueue();
+    };
+  });
+
+  function send(items) {
+    items.forEach(function (it) {
+      it.state = 'ready';
+      chain = chain.then(function () { return upload(it); });
+    });
+  }
+
+  // Rebuilding the queue while he types a caption would close his keyboard, so wait until he's done.
+  var redrawLater = false;
+  function typingCaption() {
+    var a = document.activeElement;
+    return !!(a && a.classList && a.classList.contains('caption') && $('queue').contains(a));
+  }
+
+  function showQueue() {
+    if (typingCaption()) { redrawLater = true; return; }
+    redrawLater = false;
+    var box = $('queue'); box.textContent = '';
+    var mine = queue.filter(function (it) { return it.week === cur && it.state !== 'done'; });
+    var waiting = mine.filter(function (it) { return it.state === 'wait'; });
+    mine.forEach(function (it) {
+      var row = el('div', 'item'), d = el('div', 'body');
+      if (it.url) {
+        var img = el('img', 'thumb'); img.alt = ''; img.src = it.url;
+        img.onerror = function () { it.url = ''; img.remove(); };   // e.g. HEIC on an older iPhone
+        row.appendChild(img);
+      }
+      row.appendChild(d);
+      d.appendChild(el('div', 'name', it.file.name));
+      if (it.state === 'wait') {
+        var c = el('input', 'caption'); c.type = 'text'; c.placeholder = 'Who, where, when? (optional)'; c.value = it.caption;
+        c.oninput = function () { it.caption = c.value; };
+        // The delay lets a tap on "Upload" land before the queue is rebuilt under his finger.
+        c.onblur = function () { setTimeout(function () { if (redrawLater) showQueue(); }, 400); };
+        d.appendChild(c);
+      } else {
+        var bar = el('div', 'bar'), fill = el('i'); fill.style.width = it.pct + '%'; bar.appendChild(fill); d.appendChild(bar);
+        var m = el('div', it.state === 'err' ? 'err' : 'hint',
+          it.msg || (it.state === 'ready' ? 'Waiting…' : 'Sending… ' + it.pct + '%'));
+        d.appendChild(m);
+        it.fill = fill; it.msgEl = m;
+        if (it.state === 'err') {
+          var again = el('button', '', 'Try again');
+          again.onclick = function () { it.msg = ''; it.pct = 0; send([it]); showQueue(); };
+          d.appendChild(again);
+        }
+      }
+      box.appendChild(row);
+    });
+    if (waiting.length) {
+      var go = el('button', '', waiting.length === 1 ? 'Upload this photo' : 'Upload these ' + waiting.length + ' photos');
+      go.onclick = function () { send(waiting); showQueue(); };
+      box.appendChild(go);
+    }
+  }
+
+  /** Progress ticks touch only this item's bar and label, never the rest of the queue. */
+  function progress(it) {
+    if (!it.fill || !document.body.contains(it.fill)) return;
+    it.fill.style.width = it.pct + '%';
+    it.msgEl.textContent = 'Sending… ' + it.pct + '%';
+  }
+
+  function readChunk(file, start, end) {
+    return new Promise(function (resolve, reject) {
+      var r = new FileReader();
+      r.onload = function () { resolve(String(r.result).split(',')[1] || ''); };
+      r.onerror = function () { reject(r.error); };
+      r.readAsDataURL(file.slice(start, end));
+    });
+  }
+
+  async function upload(it) {
+    busy++;
+    it.state = 'up'; showQueue();
+    try {
+      var f = it.file;
+      if (!f.size) throw new Error('This file is empty.');
+      var s = await run('startUpload', [TOKEN, session, { week: it.week, kind: it.kind, name: f.name,
+                                         mime: f.type, size: f.size, caption: it.caption }]);
+      if (s.error === 'auth') return signedOut();
+      if (s.error) throw new Error(s.error === 'size' ? 'This file is too large.' : 'Drive refused the file.');
+      var off = 0, tries = 0, r;
+      while (off < f.size) {
+        try {
+          var b64 = await readChunk(f, off, Math.min(off + s.chunk, f.size));
+          r = await run('putChunk', [TOKEN, session, s.id, off, b64]);
+          tries = 0;
+        } catch (e) {
+          // Dropped connection: wait, ask Drive how much arrived, and carry on from there.
+          if (++tries > 4) throw new Error('The connection keeps dropping. Try again on Wi-Fi.');
+          await wait(2000 * tries);
+          r = await run('uploadStatus', [TOKEN, session, s.id]).catch(function () { return { next: off }; });
+        }
+        if (r.error === 'auth') return signedOut();
+        if (r.error) throw new Error('Drive refused the file.');
+        off = r.done ? f.size : r.next;
+        it.pct = Math.round(100 * off / f.size); progress(it);
+      }
+      it.state = 'done';
+      if (it.url) { URL.revokeObjectURL(it.url); it.url = ''; }
+      showQueue();
+      if (it.week === cur) loadEntries();
+    } catch (e) {
+      it.state = 'err'; it.msg = (e && e.message) || 'That didn’t go through.'; showQueue();
+    } finally { busy--; }
+  }
+
+  window.addEventListener('beforeunload', function (ev) {
+    if (busy) { ev.preventDefault(); ev.returnValue = ''; }
+  });
+
+  // ── typed answer ───────────────────────────────────────────────────────────
+  $('tx').oninput = function () { save('lj-draft-' + cur, $('tx').value); };
+  $('txsave').onclick = function () {
+    var text = $('tx').value.trim(), week = cur, msg = $('txmsg');
+    if (!text) return;
+    var id = load('lj-draft-id-' + week) || uuid();
+    save('lj-draft-id-' + week, id);
+    $('txsave').disabled = true; msg.className = 'hint'; msg.textContent = 'Saving…';
+    google.script.run.withSuccessHandler(function (res) {
+      $('txsave').disabled = false;
+      if (res && res.error === 'auth') return signedOut();
+      if (!res || !res.done) { msg.className = 'err'; msg.textContent = 'That didn’t save. Your words are still here; try again.'; return; }
+      save('lj-draft-' + week, ''); save('lj-draft-id-' + week, '');
+      if (week === cur) { $('tx').value = ''; msg.className = 'ok'; msg.textContent = 'Saved.'; loadEntries(); }
+    }).withFailureHandler(function () {
+      $('txsave').disabled = false; msg.className = 'err';
+      msg.textContent = 'That didn’t save. Your words are still here; try again.';
+    }).saveText(TOKEN, session, week, text, id);
+  };
+
+  // ── index ──────────────────────────────────────────────────────────────────
+  function openIndex() {
+    call('getIndex', [TOKEN, session], function (res) {
+      var list = $('list'); list.textContent = '';
+      var q = '';
+      res.weeks.forEach(function (w) {
+        if (w.quarter !== q) { q = w.quarter; list.appendChild(el('div', 'q', q)); }
+        var b = el('button', 'link', w.week + '. ' + w.title);
+        b.onclick = function () { openWeek(w.week); };
+        list.appendChild(b);
+        if (w.count) list.appendChild(el('span', 'count', '  · ' + w.count + ' added'));
+        list.appendChild(document.createElement('br'));
+      });
+      show('index');
+    });
+  }
+
+  function enter() { START ? openWeek(START) : openIndex(); }
+
+  $('lf').onsubmit = function (ev) {
+    ev.preventDefault();
+    var err = $('lerr'); err.textContent = '';
+    google.script.run.withSuccessHandler(function (res) {
+      if (res.session) { session = res.session; save(KEY, session); $('pc').value = ''; return enter(); }
+      err.textContent = res.error === 'locked'
+        ? 'Too many tries. Wait fifteen minutes, then try again.'
+        : 'That passcode didn’t match. Try again.';
+    }).withFailureHandler(fail).login(TOKEN, $('pc').value);
+  };
+  $('prev').onclick = function () { openWeek(cur - 1); };
+  $('next').onclick = function () { openWeek(cur + 1); };
+  $('all').onclick = openIndex;
+
+  if (!link.d || !TOKEN) document.body.textContent = 'Not found';
+  else session ? enter() : show('login');
+</script>
+</body>
+</html>
